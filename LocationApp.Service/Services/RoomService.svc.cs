@@ -11,9 +11,7 @@ using System.Text;
 
 namespace LocationApp.Service.Services
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "RoomService" in code, svc and config file together.
-    // NOTE: In order to launch WCF Test Client for testing this service, please select RoomService.svc or RoomService.svc.cs at the Solution Explorer and start debugging.
-    public class RoomService : IRoomService
+     public class RoomService : IRoomService
     {
         private RoomLogic roomLogic = new RoomLogic();
         public string AddRoom(int roomID,int floorID,string name,int roomTypeID,string map)

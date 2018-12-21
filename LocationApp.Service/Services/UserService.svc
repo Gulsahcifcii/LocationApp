@@ -1,1 +1,1 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="LocationApp.Service.Interfaces.UserService" CodeBehind="UserService.svc.cs" %>
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="LocationApp.Service.Services.Interfaces.UserService" CodeBehind="UserService.svc.cs" %>

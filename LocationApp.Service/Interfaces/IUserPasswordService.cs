@@ -13,7 +13,7 @@ namespace LocationApp.Service.Interfaces
     {
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/AddUserPassword?UserPasswordID={titleId}&Password={Password}&UserID={UserID}")]
-        string AddUserPassword(int UserPasswordID, string Password,int UserID);
+        string AddUserPassword(int UserPasswordID, string Password, int UserID);
 
         [OperationContract]
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/SetUserPassword?UserPasswordID={titleId}&Password={Password}&UserID={UserID}")]

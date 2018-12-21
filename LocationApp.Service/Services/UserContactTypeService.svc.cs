@@ -10,10 +10,8 @@ using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
 
-namespace LocationApp.Service
+namespace LocationApp.Service.Services
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "UserContactTypeService" in code, svc and config file together.
-    // NOTE: In order to launch WCF Test Client for testing this service, please select UserContactTypeService.svc or UserContactTypeService.svc.cs at the Solution Explorer and start debugging.
     public class UserContactTypeService : IUserContactTypeService
     {
         private UserContactTypeLogic userContactTypeLogic = new UserContactTypeLogic();
@@ -27,19 +25,16 @@ namespace LocationApp.Service
 
             return JsonConvert.SerializeObject(result);
         }
-
         public string DelUserContactType(int userContactTypeID)
         {
             var result = userContactTypeLogic.DelUserContactType(userContactTypeID);
             return JsonConvert.SerializeObject(result);
         }
-
         public string GetUserContactType(int userContactTypeID)
         {
             var result = userContactTypeLogic.GetUserContactType(userContactTypeID);
             return JsonConvert.SerializeObject(result);
         }
-
         public string SetUserContactType(int userContactTypeID, string typeName, string description)
         {
             var result = userContactTypeLogic.SetUserContactType(new UserContactTypeDto

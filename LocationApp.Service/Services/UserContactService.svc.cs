@@ -15,7 +15,6 @@ namespace LocationApp.Service.Services
     public class UserContactService : IUserContactService
     {
         private UserContactLogic userContactLogic = new UserContactLogic();
-
         public string AddUserContact(int UserContactID, string Contact, int UserID, int UserContactTypeID)
         {
             var result = userContactLogic.AddUserContact(new UserContactDto

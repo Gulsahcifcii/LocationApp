@@ -14,7 +14,6 @@ namespace LocationApp.Service.Services
     public class RoomTypeService : IRoomTypeService
     {
         private RoomTypeLogic roomTypeLogic = new RoomTypeLogic();
-
         public string AddRoomType(int RoomTypeID, string Name, string Description)
         {
             var result = roomTypeLogic.AddRoomType(new Data.Dto.RoomTypeDto

@@ -1,0 +1,56 @@
+C:\Users\ASUS\source\repos\LocationApp\LocationApp.Web\bin\Debug\netcoreapp2.1\LocationApp.Web.deps.json
+C:\Users\ASUS\source\repos\LocationApp\LocationApp.Web\bin\Debug\netcoreapp2.1\LocationApp.Web.runtimeconfig.json
+C:\Users\ASUS\source\repos\LocationApp\LocationApp.Web\bin\Debug\netcoreapp2.1\LocationApp.Web.runtimeconfig.dev.json
+C:\Users\ASUS\source\repos\LocationApp\LocationApp.Web\bin\Debug\netcoreapp2.1\LocationApp.Web.dll
+C:\Users\ASUS\source\repos\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\LocationApp.Web.csprojAssemblyReference.cache
+C:\Users\ASUS\source\repos\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\LocationApp.Web.csproj.CoreCompileInputs.cache
+C:\Users\ASUS\source\repos\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\LocationApp.Web.RazorAssemblyInfo.cache
+C:\Users\ASUS\source\repos\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\LocationApp.Web.RazorAssemblyInfo.cs
+C:\Users\ASUS\source\repos\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\LocationApp.Web.AssemblyInfoInputs.cache
+C:\Users\ASUS\source\repos\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\LocationApp.Web.AssemblyInfo.cs
+C:\Users\ASUS\source\repos\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\LocationApp.Web.RazorTargetAssemblyInfo.cache
+C:\Users\ASUS\source\repos\LocationApp\LocationApp.Web\bin\Debug\netcoreapp2.1\LocationApp.Web.pdb
+C:\Users\ASUS\source\repos\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\LocationApp.Web.dll
+C:\Users\ASUS\source\repos\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\LocationApp.Web.pdb
+E:\LocationApp\LocationApp.Web\bin\Debug\netcoreapp2.1\LocationApp.Web.deps.json
+E:\LocationApp\LocationApp.Web\bin\Debug\netcoreapp2.1\LocationApp.Web.runtimeconfig.json
+E:\LocationApp\LocationApp.Web\bin\Debug\netcoreapp2.1\LocationApp.Web.runtimeconfig.dev.json
+E:\LocationApp\LocationApp.Web\bin\Debug\netcoreapp2.1\LocationApp.Web.dll
+E:\LocationApp\LocationApp.Web\bin\Debug\netcoreapp2.1\LocationApp.Web.pdb
+E:\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\LocationApp.Web.csprojAssemblyReference.cache
+E:\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\LocationApp.Web.csproj.CoreCompileInputs.cache
+E:\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\LocationApp.Web.RazorAssemblyInfo.cache
+E:\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\LocationApp.Web.RazorAssemblyInfo.cs
+E:\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\LocationApp.Web.AssemblyInfoInputs.cache
+E:\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\LocationApp.Web.AssemblyInfo.cs
+E:\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\LocationApp.Web.RazorTargetAssemblyInfo.cache
+E:\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\LocationApp.Web.dll
+E:\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\LocationApp.Web.pdb
+C:\Users\Samet Öz\Desktop\son\LocationApp\LocationApp.Web\bin\Debug\netcoreapp2.1\LocationApp.Web.deps.json
+C:\Users\Samet Öz\Desktop\son\LocationApp\LocationApp.Web\bin\Debug\netcoreapp2.1\LocationApp.Web.runtimeconfig.json
+C:\Users\Samet Öz\Desktop\son\LocationApp\LocationApp.Web\bin\Debug\netcoreapp2.1\LocationApp.Web.runtimeconfig.dev.json
+C:\Users\Samet Öz\Desktop\son\LocationApp\LocationApp.Web\bin\Debug\netcoreapp2.1\LocationApp.Web.dll
+C:\Users\Samet Öz\Desktop\son\LocationApp\LocationApp.Web\bin\Debug\netcoreapp2.1\LocationApp.Web.pdb
+C:\Users\Samet Öz\Desktop\son\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\LocationApp.Web.csprojAssemblyReference.cache
+C:\Users\Samet Öz\Desktop\son\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\LocationApp.Web.csproj.CoreCompileInputs.cache
+C:\Users\Samet Öz\Desktop\son\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\LocationApp.Web.RazorAssemblyInfo.cache
+C:\Users\Samet Öz\Desktop\son\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\LocationApp.Web.RazorAssemblyInfo.cs
+C:\Users\Samet Öz\Desktop\son\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\LocationApp.Web.AssemblyInfoInputs.cache
+C:\Users\Samet Öz\Desktop\son\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\LocationApp.Web.AssemblyInfo.cs
+C:\Users\Samet Öz\Desktop\son\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\LocationApp.Web.RazorTargetAssemblyInfo.cache
+C:\Users\Samet Öz\Desktop\son\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\LocationApp.Web.dll
+C:\Users\Samet Öz\Desktop\son\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\LocationApp.Web.pdb
+E:\Developers\Repository\LocationApp\LocationApp.Web\bin\Debug\netcoreapp2.1\LocationApp.Web.deps.json
+E:\Developers\Repository\LocationApp\LocationApp.Web\bin\Debug\netcoreapp2.1\LocationApp.Web.runtimeconfig.json
+E:\Developers\Repository\LocationApp\LocationApp.Web\bin\Debug\netcoreapp2.1\LocationApp.Web.runtimeconfig.dev.json
+E:\Developers\Repository\LocationApp\LocationApp.Web\bin\Debug\netcoreapp2.1\LocationApp.Web.dll
+E:\Developers\Repository\LocationApp\LocationApp.Web\bin\Debug\netcoreapp2.1\LocationApp.Web.pdb
+E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\LocationApp.Web.csprojAssemblyReference.cache
+E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\LocationApp.Web.csproj.CoreCompileInputs.cache
+E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\LocationApp.Web.RazorAssemblyInfo.cache
+E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\LocationApp.Web.RazorAssemblyInfo.cs
+E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\LocationApp.Web.AssemblyInfoInputs.cache
+E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\LocationApp.Web.AssemblyInfo.cs
+E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\LocationApp.Web.RazorTargetAssemblyInfo.cache
+E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\LocationApp.Web.dll
+E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\LocationApp.Web.pdb

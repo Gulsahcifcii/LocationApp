@@ -67,3 +67,8 @@ E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\Raz
 E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\Razor\Views\Home\Index.g.cshtml.cs
 E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\Razor\Views\Block\List.g.cshtml.cs
 E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\Razor\Views\Block\Create.g.cshtml.cs
+E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\Razor\Views\Build\List.g.cshtml.cs
+E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\Razor\Views\Campus\List.g.cshtml.cs
+E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\Razor\Views\Partial.g.cshtml.cs
+E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\Razor\Views\Shared\Partials\DataTable\_Js.g.cshtml.cs
+E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\Razor\Views\Shared\Partials\DataTable\_Css.g.cshtml.cs

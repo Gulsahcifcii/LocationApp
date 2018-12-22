@@ -12,13 +12,14 @@ namespace LocationApp.Service.Services
     public class CampusService : ICampusService
     {
         private Core.Core.CampusLogic campusLogic = new Core.Core.CampusLogic();
-        public string AddCampus(int campusID, string description, string other)
+        public string AddCampus(int campusID, string name, string description, string other)
         {
             var result = campusLogic.AddCampus(new Data.Dto.CampusDto
             {
                 CampusID = campusID,
                 Description = description,
-                Other = other
+                Other = other,
+                Name = name
             });
             return JsonConvert.SerializeObject(result);
         }
@@ -32,13 +33,14 @@ namespace LocationApp.Service.Services
             var result = campusLogic.GetCampus(campusID);
             return JsonConvert.SerializeObject(result);
         }
-        public string UpdateCampus(int campusID, string description, string other)
+        public string UpdateCampus(int campusID, string name, string description, string other)
         {
             var result = campusLogic.SetCampus(new Data.Dto.CampusDto
             {
                 CampusID = campusID,
                 Description = description,
-                Other = other
+                Other = other,
+                Name = name
             });
             return JsonConvert.SerializeObject(result);
         }

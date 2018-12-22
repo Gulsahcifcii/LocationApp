@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\ASUS\source\repos\LocationApp\LocationApp.Data\Database\LocationAppModel.edmx'. 
+﻿// T4 code generation is enabled for model 'E:\Developers\Repository\LocationApp\LocationApp.Data\Database\LocationAppModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

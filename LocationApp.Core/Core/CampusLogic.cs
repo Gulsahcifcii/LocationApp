@@ -19,6 +19,7 @@ namespace LocationApp.Core.Core
             try
             {
                 campu item = new campu();
+                item.Name = campusDto.Name;
                 item.CampusID = campusDto.CampusID;
                 item.Description = campusDto.Description;
                 item.Other = campusDto.Other;

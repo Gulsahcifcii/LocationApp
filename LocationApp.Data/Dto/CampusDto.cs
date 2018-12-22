@@ -11,6 +11,7 @@ namespace LocationApp.Data.Dto
     public class CampusDto
     {
         public int CampusID { get; set; }
+        public string Name { get; set; }
         public string Description { get; set; }
         public string Other { get; set; }
     }

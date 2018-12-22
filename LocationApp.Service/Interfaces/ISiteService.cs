@@ -8,24 +8,24 @@ using System.Text;
 
 namespace LocationApp.Service.Interfaces
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "ISiteService" in both code and config file together.
     [ServiceContract]
     public interface ISiteService
     {
         [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/AddSite?siteID={siteID}&name={name}&description={description}&gps={gps}")]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+            UriTemplate = "/AddSite?siteID={siteID}&name={name}&description={description}&gps={gps}")]
         string AddSite(int siteID, string name, string description, string gps);
-
         [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/SetSite?siteID={siteID}&name={name}&description={description}&gps={gps}")]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+          UriTemplate = "/SetSite?siteID={siteID}&name={name}&description={description}&gps={gps}")]
         string SetSite(int siteID, string name, string description, string gps);
-
         [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/DelSite?siteID={siteID}")]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+          UriTemplate = "/DelSite?siteID={siteID}")]
         string DelSite(int siteID);
-
         [OperationContract]
-        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/GetSite?siteID={siteID}")]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+          UriTemplate = "/GetSite?siteID={siteID}")]
         string GetSite(int siteID);
     }
 }

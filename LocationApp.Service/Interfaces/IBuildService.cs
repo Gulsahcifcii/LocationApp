@@ -12,43 +12,20 @@ namespace LocationApp.Service.Interfaces
     public interface IBuildService
     {
         [OperationContract]
-        [WebInvoke(Method = "POST",
-            RequestFormat = WebMessageFormat.Json,
-            ResponseFormat = WebMessageFormat.Json,
-            UriTemplate = "/AddBuild?buildID={buildID}&campusID={campusID}&siteID={siteID}&name={name}&address={address}&properties={properties}&gps={gps}")]
-        string AddBuild(int buildID,
-            int campusID,
-            int siteID,
-            string name,
-            string address,
-            string properties, string gps);
-
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+         UriTemplate = "/AddBuild?buildID={buildID}&campusID={campusID}&siteID={siteID}&name={name}&address={address}&properties={properties}&gps={gps}")]
+        string AddBuild(int buildID, int campusID, int siteID, string name, string address, string properties, string gps);
         [OperationContract]
-        [WebInvoke(Method = "POST",
-          RequestFormat = WebMessageFormat.Json,
-          ResponseFormat = WebMessageFormat.Json,
-          UriTemplate = "/UpdateBuild?buildID={buildID}&campusID={campusID}&siteID={siteID}&name={name}&address={address}&properties={properties}&gps={gps}")]
-        string UpdateBuild(int buildID,
-          int campusID,
-          int siteID,
-          string name,
-          string address,
-          string properties, string gps);
-
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+        UriTemplate = "/UpdateBuild?buildID={buildID}&campusID={campusID}&siteID={siteID}&name={name}&address={address}&properties={properties}&gps={gps}")]
+        string UpdateBuild(int buildID, int campusID, int siteID, string name, string address, string properties, string gps);
         [OperationContract]
-        [WebInvoke(Method = "POST",
-          RequestFormat = WebMessageFormat.Json,
-          ResponseFormat = WebMessageFormat.Json,
-          UriTemplate = "/DelBuild?buildID={buildID}")]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+        UriTemplate = "/DelBuild?buildID={buildID}")]
         string DelBuild(int builD);
-
         [OperationContract]
-        [WebInvoke(Method = "POST",
-          RequestFormat = WebMessageFormat.Json,
-          ResponseFormat = WebMessageFormat.Json,
-          UriTemplate = "/GetBuild?buildID={buildID}")]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+        UriTemplate = "/GetBuild?buildID={buildID}")]
         string GetBuild(int builD);
-
-
     }
 }

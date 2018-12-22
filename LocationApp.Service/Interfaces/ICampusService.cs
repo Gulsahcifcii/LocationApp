@@ -12,32 +12,23 @@ namespace LocationApp.Service.Interfaces
     public interface ICampusService
     {
         [OperationContract]
-        [WebInvoke(Method = "POST",
-        RequestFormat = WebMessageFormat.Json,
-        ResponseFormat = WebMessageFormat.Json,
+        [WebInvoke(Method = "POST",RequestFormat = WebMessageFormat.Json,ResponseFormat = WebMessageFormat.Json,
         UriTemplate = "/AddCampus?campusID={campusID}&description={description}&other={other}")]
         string AddCampus(int campusID, string description, string other);
 
         [OperationContract]
-        [WebInvoke(Method = "POST",
-        RequestFormat = WebMessageFormat.Json,
-        ResponseFormat = WebMessageFormat.Json,
+        [WebInvoke(Method = "POST",RequestFormat = WebMessageFormat.Json,ResponseFormat = WebMessageFormat.Json,
         UriTemplate = "/UpdateCampus?campusID={campusID}&description={description}&other={other}")]
         string UpdateCampus(int campusID, string description, string other);
 
         [OperationContract]
-        [WebInvoke(Method = "POST",
-        RequestFormat = WebMessageFormat.Json,
-        ResponseFormat = WebMessageFormat.Json,
+        [WebInvoke(Method = "POST",RequestFormat = WebMessageFormat.Json,ResponseFormat = WebMessageFormat.Json,
         UriTemplate = "/DelCampus?campusID={campusID}")]
         string DelCampus(int campusID);
 
         [OperationContract]
-        [WebInvoke(Method = "POST",
-        RequestFormat = WebMessageFormat.Json,
-        ResponseFormat = WebMessageFormat.Json,
+        [WebInvoke(Method = "POST",RequestFormat = WebMessageFormat.Json,ResponseFormat = WebMessageFormat.Json,
         UriTemplate = "/GetCampus?campusID={campusID}")]
         string GetCampus(int campusID);
-
     }
 }

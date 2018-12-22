@@ -15,34 +15,34 @@ namespace LocationApp.Service.Services
     {
         private UserPasswordLogic userPasswordLogic = new UserPasswordLogic();
 
-        public string AddUserPassword(int UserPasswordID, string Password, int UserID)
+        public string AddUserPassword(int userPasswordID, string password, int userID)
         {
             var result = userPasswordLogic.AddUserPassword(new UserPasswordDto
             {
-                userPasswordID = UserPasswordID,
-                password = Password,
-                userID= UserID
+                userPasswordID = userPasswordID,
+                password = password,
+                userID= userID
             });
 
             return JsonConvert.SerializeObject(result);
         }
-        public string DelUserPassword(int UserPasswordID)
+        public string DelUserPassword(int userPasswordID)
         {
-            var result = userPasswordLogic.DelUserPassword(UserPasswordID);
+            var result = userPasswordLogic.DelUserPassword(userPasswordID);
             return JsonConvert.SerializeObject(result);
         }
-        public string GetUserPassword(int UserPasswordID)
+        public string GetUserPassword(int userPasswordID)
         {
-            var result = userPasswordLogic.GetUserPassword(UserPasswordID);
+            var result = userPasswordLogic.GetUserPassword(userPasswordID);
             return JsonConvert.SerializeObject(result);
         }
-        public string SetUserTPassword(int UserPasswordID, string Password, int UserID)
+        public string SetUserTPassword(int userPasswordID, string password, int userID)
         {
             var result = userPasswordLogic.AddUserPassword(new UserPasswordDto
             {
-                userPasswordID = UserPasswordID,
-                password = Password,
-                userID = UserID
+                userPasswordID = userPasswordID,
+                password = password,
+                userID = userID
             });
             return JsonConvert.SerializeObject(result);
         }

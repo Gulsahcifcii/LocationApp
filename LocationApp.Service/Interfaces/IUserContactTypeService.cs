@@ -12,20 +12,21 @@ namespace LocationApp.Service.Interfaces
     public interface IUserContactTypeService
     {
         [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/AddUserContactType?UserContactTypeID={UserContactTypeID}&TypeName={TypeName}&Description={Description}")]
-        string AddUserContactType(int UserContactTypeID, string TypeName, string Description);
-
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+            UriTemplate = "/AddUserContactType?UserContactTypeID={UserContactTypeID}&TypeName={TypeName}&Description={Description}")]
+        string AddUserContactType(int userContactTypeID, string typeName, string description);
         [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/SetUserContactType?UserContactTypeID={UserContactTypeID}&TypeName={TypeName}&Description={Description}")]
-        string SetUserContactType(int UserContactTypeID, string TypeName, string Description);
-
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+            UriTemplate = "/SetUserContactType?userContactTypeID={userContactTypeID}&typeName={typeName}&description={description}")]
+        string SetUserContactType(int userContactTypeID, string typeName, string description);
         [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/DelUserContactType?UserContactTypeID={UserContactTypeID}")]
-        string DelUserContactType(int UserContactTypeID);
-
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+            UriTemplate = "/DelUserContactType?userContactTypeID={userContactTypeID}")]
+        string DelUserContactType(int userContactTypeID);
         [OperationContract]
-        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/GetUserContactType?UserContactTypeID={UserContactTypeID}")]
-        string GetUserContactType(int UserContactTypeID);
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+            UriTemplate = "/GetUserContactType?userContactTypeID={userContactTypeID}")]
+        string GetUserContactType(int userContactTypeID);
 
     }
 }

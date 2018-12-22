@@ -16,34 +16,34 @@ namespace LocationApp.Service.Services
     {
         private UserUserRoleLogic userUserRoleLogic = new UserUserRoleLogic();
 
-        public string AddUserUserRole(int UserUserRoleID, int UserID, int UserRoleID)
+        public string AddUserUserRole(int userUserRoleID, int userID, int userRoleID)
         {
             var result = userUserRoleLogic.AddUserUserRole(new UserUserRoleDto
             {
-                UserUserRoleID = UserUserRoleID,
-                UserID = UserID,
-                UserRoleID = UserRoleID
+                UserUserRoleID = userUserRoleID,
+                UserID = userID,
+                UserRoleID = userRoleID
         });
 
             return JsonConvert.SerializeObject(result);
         }
-        public string DelUserUserRole(int UserUserRoleID)
+        public string DelUserUserRole(int userUserRoleID)
         {
-            var result = userUserRoleLogic.DelUserUserRole(UserUserRoleID);
+            var result = userUserRoleLogic.DelUserUserRole(userUserRoleID);
             return JsonConvert.SerializeObject(result);
         }
-        public string GetUserUserRole(int UserUserRoleID)
+        public string GetUserUserRole(int userUserRoleID)
         {
-            var result = userUserRoleLogic.GetUserUserRole(UserUserRoleID);
+            var result = userUserRoleLogic.GetUserUserRole(userUserRoleID);
             return JsonConvert.SerializeObject(result);
         }
-        public string SetUserUserRole(int UserUserRoleID, int UserID, int UserRoleID)
+        public string SetUserUserRole(int userUserRoleID, int userID, int userRoleID)
         {
             var result = userUserRoleLogic.AddUserUserRole(new UserUserRoleDto
             {
-                UserUserRoleID = UserUserRoleID,
-                UserID = UserID,
-                UserRoleID = UserRoleID
+                UserUserRoleID = userUserRoleID,
+                UserID = userID,
+                UserRoleID = userRoleID
             });
             return JsonConvert.SerializeObject(result);
         }

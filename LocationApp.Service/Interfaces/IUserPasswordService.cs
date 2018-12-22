@@ -12,20 +12,20 @@ namespace LocationApp.Service.Interfaces
     public interface IUserPasswordService
     {
         [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/AddUserPassword?UserPasswordID={titleId}&Password={Password}&UserID={UserID}")]
-        string AddUserPassword(int UserPasswordID, string Password, int UserID);
-
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+            UriTemplate = "/AddUserPassword?userPasswordID={userPasswordID}&password={password}&userID={userID}")]
+        string AddUserPassword(int userPasswordID, string password, int userID);
         [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/SetUserPassword?UserPasswordID={titleId}&Password={Password}&UserID={UserID}")]
-        string SetUserTPassword(int UserPasswordID, string Password, int UserID);
-
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+            UriTemplate = "/SetUserPassword?userPasswordID={userPasswordID}&password={password}&userID={userID}")]
+        string SetUserTPassword(int userPasswordID, string password, int userID);
         [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/DelUserPassword?UserPasswordID={UserPasswordID}")]
-        string DelUserPassword(int UserPasswordID);
-
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, 
+            UriTemplate = "/DelUserPassword?userPasswordID={userPasswordID}")]
+        string DelUserPassword(int userPasswordID);
         [OperationContract]
-        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/GetUserPassword?UserPasswordID={UserPasswordID}")]
-        string GetUserPassword(int UserPasswordID);
-
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+            UriTemplate = "/GetUserPassword?userPasswordID={userPasswordID}")]
+        string GetUserPassword(int userPasswordID);
     }
 }

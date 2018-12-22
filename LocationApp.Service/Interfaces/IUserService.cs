@@ -13,20 +13,21 @@ namespace LocationApp.Service.Interfaces
     public interface IUserService
     {
         [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/AddUserTitle?UserId={UserId}&Name={Name}&SurName={SurName}&Gender={Gender}&NationID={NationID}&UserTitleID={UserTitleID}")]
-        string AddUser(int UserId, string Name, string SurName, bool Gender, string NationID, int UserTitleID);
-
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+            UriTemplate = "/AddUserTitle?userId={userId}&name={name}&surName={surName}&gender={gender}&nationID={nationID}&userTitleID={userTitleID}")]
+        string AddUser(int userId, string name, string surName, bool gender, string nationID, int userTitleID);
         [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/SetUserTitle?UserId={UserId}&Name={Name}&SurName={SurName}&Gender={Gender}&NationID={NationID}&UserTitleID={UserTitleID}")]
-        string SetUser(int UserId, string Name, string SurName, bool Gender, string NationID, int UserTitleID);
-
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, 
+            UriTemplate = "/SetUserTitle?userId={userId}&name={name}&surName={surName}&gender={gender}&nationID={nationID}&userTitleID={userTitleID}")]
+        string SetUser(int userId, string name, string surName, bool gender, string nationID, int userTitleID);
         [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/UserId?UserId={UserId}")]
-        string DelUser(int UserId);
-
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+            UriTemplate = "/UserId?userId={userId}")]
+        string DelUser(int userId);
         [OperationContract]
-        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/UserId?UserId={UserId}")]
-        string GetUser(int UserId);
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+            UriTemplate = "/UserId?userId={userId}")]
+        string GetUser(int userId);
 
     }
 }

@@ -12,20 +12,23 @@ namespace LocationApp.Service.Interfaces
     public interface IRoomTypeService
     {
         [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/AddRoomType?RoomTypeID={RoomTypeID}&Name={Name}&Description={Description}")]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+         UriTemplate = "/AddRoomType?RoomTypeID={RoomTypeID}&Name={Name}&Description={Description}")]
         string AddRoomType(int RoomTypeID, string Name, string Description);
 
         [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/SetRoomType?RoomTypeID={RoomTypeID}&Name={Name}&Description={Description}")]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+         UriTemplate = "/SetRoomType?RoomTypeID={RoomTypeID}&Name={Name}&Description={Description}")]
         string SetRoomType(int RoomTypeID, string Name ,string Description);
 
         [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/DelRoomType?RoomTypeID={RoomTypeID}")]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+         UriTemplate = "/DelRoomType?RoomTypeID={RoomTypeID}")]
         string DelRoomType(int RoomTypeID);
 
         [OperationContract]
-        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/GetRoomType?RoomTypeID={RoomTypeID}")]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+         UriTemplate = "/GetRoomType?RoomTypeID={RoomTypeID}")]
         string GetRoomType(int RoomTypeID);
-
     }
 }

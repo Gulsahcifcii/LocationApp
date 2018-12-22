@@ -12,30 +12,22 @@ namespace LocationApp.Service.Interfaces
     public interface IDepartmentService
     {
         [OperationContract]
-        [WebInvoke(Method = "POST",
-        RequestFormat = WebMessageFormat.Json,
-        ResponseFormat = WebMessageFormat.Json,
+        [WebInvoke(Method = "POST",RequestFormat = WebMessageFormat.Json,ResponseFormat = WebMessageFormat.Json,
         UriTemplate = "/AddDepartment?departmentID={departmentID}&description={description}&other={other}&subUnitID={subUnitID}")]
         string AddDepartment(int departmentID, string description, string other, int subUnitID);
 
         [OperationContract]
-        [WebInvoke(Method = "POST",
-        RequestFormat = WebMessageFormat.Json,
-        ResponseFormat = WebMessageFormat.Json,
+        [WebInvoke(Method = "POST",RequestFormat = WebMessageFormat.Json,ResponseFormat = WebMessageFormat.Json,
         UriTemplate = "/UpdateDepartment?departmentID={departmentID}&description={description}&other={other}&subUnitID={subUnitID}")]
         string UpdateDepartment(int departmentID, string description, string other, int subUnitID);
 
         [OperationContract]
-        [WebInvoke(Method = "GET",
-        RequestFormat = WebMessageFormat.Json,
-        ResponseFormat = WebMessageFormat.Json,
+        [WebInvoke(Method = "GET",RequestFormat = WebMessageFormat.Json,ResponseFormat = WebMessageFormat.Json,
         UriTemplate = "/GetDepartment?departmentID={departmentID}")]
         string GetDepartment(int departmentID);
 
         [OperationContract]
-        [WebInvoke(Method = "POST",
-        RequestFormat = WebMessageFormat.Json,
-        ResponseFormat = WebMessageFormat.Json,
+        [WebInvoke(Method = "POST",RequestFormat = WebMessageFormat.Json,ResponseFormat = WebMessageFormat.Json,
         UriTemplate = "/DelDepartment?departmentID={departmentID}")]
         string DelDepartment(int departmentID);
     }

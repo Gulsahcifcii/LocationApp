@@ -12,20 +12,20 @@ namespace LocationApp.Service.Interfaces
     public interface IUserTitleService
     {
         [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/AddUserTitle?titleId={titleId}&titleName={titleName}")]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+            UriTemplate = "/AddUserTitle?titleId={titleId}&titleName={titleName}")]
         string AddUserTitle(int titleId, string titleName);
-
         [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/SetUserTitle?titleId={titleId}&titleName={titleName}")]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+            UriTemplate = "/SetUserTitle?titleId={titleId}&titleName={titleName}")]
         string SetUserTitle(int titleId, string titleName);
-
         [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/DelUserTitle?userTitleId={userTitleId}")]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+            UriTemplate = "/DelUserTitle?userTitleId={userTitleId}")]
         string DelUserTitle(int userTitleId);
-
         [OperationContract]
-        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/GetUserTitle?userTitleId={userTitleId}")]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, 
+            UriTemplate = "/GetUserTitle?userTitleId={userTitleId}")]
         string GetUserTitle(int userTitleId);
-
     }
 }

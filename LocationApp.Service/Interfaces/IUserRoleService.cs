@@ -12,19 +12,20 @@ namespace LocationApp.Service.Interfaces
     public interface IUserRoleService
     {
         [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/AddUserContactType?UserContactTypeID={UserContactTypeID}&TypeName={TypeName}&Description={Description}")]
-        string AddUserRole(int userRoleID, string userRoleName, string userRoleDescription,bool active);
-
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+            UriTemplate = "/AddUserRole?userRoleID={userRoleID}&userRoleName={userRoleName}&userRoleDescription={userRoleDescription}&active={active}")]
+        string AddUserRole(int userRoleID, string userRoleName, string userRoleDescription, bool active);
         [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/SetUserContactType?UserContactTypeID={UserContactTypeID}&TypeName={TypeName}&Description={Description}")]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+            UriTemplate = "/SetUserRole?userRoleID={userRoleID}&userRoleName={userRoleName}&userRoleDescription={userRoleDescription}&active={active}")]
         string SetUserRole(int userRoleID, string userRoleName, string userRoleDescription, bool active);
-
         [OperationContract]
-        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/DelUserContactType?UserContactTypeID={UserContactTypeID}")]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+            UriTemplate = "/DelUserRole?userRoleID={userRoleID}")]
         string DelUserRole(int userRoleID);
-
         [OperationContract]
-        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, UriTemplate = "/GetUserContactType?UserContactTypeID={UserContactTypeID}")]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+            UriTemplate = "/GetUserRole?userRoleID={userRoleID}")]
         string GetUserRole(int userRoleID);
 
     }

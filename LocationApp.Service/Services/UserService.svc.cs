@@ -15,40 +15,40 @@ namespace LocationApp.Service.Services
     {
         private UserLogic userLogic = new UserLogic();
 
-        public string AddUser(int UserId, string Name, string SurName, bool Gender, string NationID, int UserTitleID)
+        public string AddUser(int userId, string name, string surName, bool gender, string nationID, int userTitleID)
         {
             var result = userLogic.AddUser(new UserDto
             {
-                UserId = UserId,
-                Name = Name,
-                SurName = SurName,
-                Gender = Gender,
-                NationID = NationID,
-                UserTitleID = UserTitleID
+                UserId = userId,
+                Name = name,
+                SurName = surName,
+                Gender = gender,
+                NationID = nationID,
+                UserTitleID = userTitleID
         });
 
             return JsonConvert.SerializeObject(result);
         }
-        public string DelUser(int UserId)
+        public string DelUser(int userId)
         {
-            var result = userLogic.DelUser(UserId);
+            var result = userLogic.DelUser(userId);
             return JsonConvert.SerializeObject(result);
         }
-        public string GetUser(int UserId)
+        public string GetUser(int userId)
         {
-            var result = userLogic.GetUser(UserId);
+            var result = userLogic.GetUser(userId);
             return JsonConvert.SerializeObject(result);
         }
-        public string SetUser(int UserId, string Name, string SurName, bool Gender, string NationID, int UserTitleID)
+        public string SetUser(int userId, string name, string surName, bool gender, string nationID, int userTitleID)
         {
             var result = userLogic.AddUser(new UserDto
             {
-                UserId = UserId,
-                Name = Name,
-                SurName = SurName,
-                Gender = Gender,
-                NationID = NationID,
-                UserTitleID = UserTitleID
+                UserId = userId,
+                Name = name,
+                SurName = surName,
+                Gender = gender,
+                NationID = nationID,
+                UserTitleID = userTitleID
             });
             return JsonConvert.SerializeObject(result);
         }

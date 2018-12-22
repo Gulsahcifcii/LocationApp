@@ -15,6 +15,8 @@ namespace LocationApp.Data.Dto
         [DataMember]
         public int SubUnitID { get; set; }
         [DataMember]
+        public string Name { get; set; }
+        [DataMember]
         public string Description { get; set; }
         [DataMember]
         public string Other { get; set; }

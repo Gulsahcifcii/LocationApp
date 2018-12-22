@@ -17,7 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocationApp.Core", "Locatio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocationApp.Service", "LocationApp.Service\LocationApp.Service.csproj", "{618CE518-B3CC-4E59-BC1A-3DB555571C27}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocationApp.Web", "LocationApp.Web\LocationApp.Web.csproj", "{9E4687FF-467F-494F-BAF9-7675F4D4C32A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocationApp.Web", "LocationApp.Web\LocationApp.Web.csproj", "{9E4687FF-467F-494F-BAF9-7675F4D4C32A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

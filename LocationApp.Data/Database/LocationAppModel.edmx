@@ -49,6 +49,7 @@
             <PropertyRef Name="DepartmentID" />
           </Key>
           <Property Name="DepartmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
           <Property Name="Description" Type="varchar" MaxLength="50" />
           <Property Name="Other" Type="varchar" MaxLength="100" />
           <Property Name="SubUnitID" Type="int" />
@@ -737,6 +738,7 @@
             <PropertyRef Name="DepartmentID" />
           </Key>
           <Property Name="DepartmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Other" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="SubUnitID" Type="Int32" />
@@ -1179,7 +1181,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1234,6 +1236,7 @@
                 <ScalarProperty Name="SubUnitID" ColumnName="SubUnitID" />
                 <ScalarProperty Name="Other" ColumnName="Other" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
               </MappingFragment>
             </EntityTypeMapping>

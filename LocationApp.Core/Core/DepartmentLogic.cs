@@ -23,6 +23,7 @@ namespace LocationApp.Core.Core
                 item.Description = departmentDto.Description;
                 item.Other = departmentDto.Other;
                 item.SubUnitID = departmentDto.SubUnitID;
+                item.Name = departmentDto.Name;
 
                 using (UnitOfWork unitOfWork = new UnitOfWork())
                 {
@@ -46,6 +47,8 @@ namespace LocationApp.Core.Core
                 item.Description = departmentDto.Description;
                 item.Other = departmentDto.Other;
                 item.SubUnitID = departmentDto.SubUnitID;
+                item.Name = departmentDto.Name;
+
                 using (UnitOfWork unitOfWork = new UnitOfWork())
                 {
                     unitOfWork.GetRepository<department>().Update(item);

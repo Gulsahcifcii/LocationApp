@@ -44,6 +44,7 @@ namespace LocationApp.Core.Core
                 item.CampusID = campusDto.CampusID;
                 item.Description = campusDto.Description;
                 item.Other = campusDto.Other;
+                item.Name = campusDto.Name;
 
                 using (UnitOfWork unitofWork = new UnitOfWork())
                 {

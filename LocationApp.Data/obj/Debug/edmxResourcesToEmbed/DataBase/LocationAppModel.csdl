@@ -165,6 +165,7 @@
       <PropertyRef Name="DepartmentID" />
     </Key>
     <Property Name="DepartmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Other" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="SubUnitID" Type="Int32" />

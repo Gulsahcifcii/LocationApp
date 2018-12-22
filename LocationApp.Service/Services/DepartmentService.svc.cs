@@ -12,7 +12,7 @@ namespace LocationApp.Service.Services
     public class DepartmentService : IDepartmentService
     {
         Core.Core.DepartmentLogic departmentLogic = new Core.Core.DepartmentLogic();
-        public string AddDepartment(int departmentID, string description, string other, int subUnitID)
+        public string AddDepartment(int departmentID, string name, string description, string other, int subUnitID)
         {
             var result = departmentLogic.AddDepartment(new Data.Dto.DepartmentDto
             {
@@ -33,7 +33,7 @@ namespace LocationApp.Service.Services
             var result = departmentLogic.GetDepartment(departmentID);
             return JsonConvert.SerializeObject(result);
         }
-        public string UpdateDepartment(int departmentID, string description, string other, int subUnitID)
+        public string UpdateDepartment(int departmentID, string name, string description, string other, int subUnitID)
         {
             var result = departmentLogic.SetDepartment(new Data.Dto.DepartmentDto
             {

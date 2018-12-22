@@ -50,6 +50,7 @@
           <ScalarProperty Name="SubUnitID" ColumnName="SubUnitID" />
           <ScalarProperty Name="Other" ColumnName="Other" />
           <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
         </MappingFragment>
       </EntityTypeMapping>

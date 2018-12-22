@@ -54,3 +54,16 @@ E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\Loc
 E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\LocationApp.Web.RazorTargetAssemblyInfo.cache
 E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\LocationApp.Web.dll
 E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\LocationApp.Web.pdb
+E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\LocationApp.Web.TagHelpers.input.cache
+E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\LocationApp.Web.TagHelpers.output.cache
+E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\LocationApp.Web.RazorCoreGenerate.cache
+E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\LocationApp.Web.RazorTargetAssemblyInfo.cs
+E:\Developers\Repository\LocationApp\LocationApp.Web\bin\Debug\netcoreapp2.1\LocationApp.Web.Views.dll
+E:\Developers\Repository\LocationApp\LocationApp.Web\bin\Debug\netcoreapp2.1\LocationApp.Web.Views.pdb
+E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\LocationApp.Web.Views.pdb
+E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\LocationApp.Web.csproj.CopyComplete
+E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_Layout.g.cshtml.cs
+E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\Razor\Views\_ViewStart.g.cshtml.cs
+E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\Razor\Views\Home\Index.g.cshtml.cs
+E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\Razor\Views\Block\List.g.cshtml.cs
+E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\Razor\Views\Block\Create.g.cshtml.cs

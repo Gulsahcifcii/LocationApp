@@ -8,7 +8,15 @@ namespace LocationApp.Web.Controllers
 {
     public class BuildController : Controller
     {
+        public IActionResult Create()
+        {
+            return View();
+        }
         public IActionResult List()
+        {
+            return View();
+        }
+        public IActionResult Edit()
         {
             return View();
         }

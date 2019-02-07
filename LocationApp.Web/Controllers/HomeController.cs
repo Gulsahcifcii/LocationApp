@@ -9,7 +9,15 @@ namespace WebApplication1.Controllers
 {
     public class HomeController : Controller
     {
+        public IActionResult Create()
+        {
+            return View();
+        }
         public IActionResult List()
+        {
+            return View();
+        }
+        public IActionResult Edit()
         {
             return View();
         }

@@ -8,7 +8,13 @@ namespace LocationApp.Web.Controllers
 {
     public class LoginController : Controller
     {
+        [HttpGet]
         public IActionResult Auth()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Auth(string username,string password)
         {
             return View();
         }

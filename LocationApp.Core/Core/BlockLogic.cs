@@ -93,5 +93,6 @@ namespace LocationApp.Core.Core
                 return new BlockDto();
             }
         }
+
     }
 }

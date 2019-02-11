@@ -31,6 +31,7 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<build>().Insert(item);
                     unitofWork.saveChanges();
+
                     return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK).ToString();
                 }
             }
@@ -56,12 +57,12 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<build>().Update(item);
                     unitofWork.saveChanges();
-                    return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK).ToString();
+                   return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK).ToString();
                 }
             }
             catch (Exception ex)
             {
-                return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError).ToString();
+               return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError).ToString();
             }
         }
         public string DelBuild(int buildID)
@@ -73,12 +74,12 @@ namespace LocationApp.Core.Core
                     var selectedBuild = unitofWork.GetRepository<build>().GetById(x => x.BuildID == buildID);
                     unitofWork.GetRepository<build>().Delete(selectedBuild);
                     unitofWork.saveChanges();
-                    return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK).ToString();
+                   return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK).ToString();
                 }
             }
             catch (Exception)
             {
-                return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError).ToString();
+               return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError).ToString();
             }
         }
         public BuildDto GetBuild(int buildID)

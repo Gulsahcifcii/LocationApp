@@ -8,15 +8,28 @@ namespace LocationApp.Web.Controllers
 {
     public class FloorController : Controller
     {
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
-        public IActionResult List()
+        [HttpPost]
+        public IActionResult Create(int FloorID, int BlockID, string Name, string Other,string Map)
         {
             return View();
         }
-        public IActionResult Edit()
+        [HttpGet]
+        public IActionResult Edit(int FloorID)
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Edit(int FloorID, int BlockID, string Name, string Other, string Map)
+        {
+            return View();
+        }
+        [HttpGet]
+        public IActionResult List()
         {
             return View();
         }

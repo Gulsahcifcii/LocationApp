@@ -14,15 +14,22 @@ namespace LocationApp.Web.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(int buildID,int siteID,int campusID,string name,string address,string gps,string properties)
+        public IActionResult Create(int BuildID, int SiteID, int CampusID, string Name, string Address, string Gps, string Properties)
         {
             return View();
         }
+        [HttpGet]
+        public IActionResult Edit(int BuildID)
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Edit(int BuildID, int SiteID, int CampusID, string Name, string Address, string Gps, string Properties)
+        {
+            return View();
+        }
+        [HttpGet]
         public IActionResult List()
-        {
-            return View();
-        }
-        public IActionResult Edit()
         {
             return View();
         }

@@ -95,3 +95,16 @@ E:\Developers\Repository\LocationApp\LocationApp.Web\bin\Debug\netcoreapp2.1\Loc
 E:\Developers\Repository\LocationApp\LocationApp.Web\bin\Debug\netcoreapp2.1\LocationApp.Service.dll.config
 E:\Developers\Repository\LocationApp\LocationApp.Web\bin\Debug\netcoreapp2.1\LocationApp.Core.pdb
 E:\Developers\Repository\LocationApp\LocationApp.Web\bin\Debug\netcoreapp2.1\LocationApp.Core.dll.config
+E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\Razor\Views\Campus\Edit.g.cshtml.cs
+E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\Razor\Views\Site\Create.g.cshtml.cs
+E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\Razor\Views\Site\Edit.g.cshtml.cs
+E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\Razor\Views\Block\Edit.g.cshtml.cs
+E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\Razor\Views\Build\Edit.g.cshtml.cs
+E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\Razor\Views\Department\Create.g.cshtml.cs
+E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\Razor\Views\Department\Edit.g.cshtml.cs
+E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\Razor\Views\RoomType\Create.g.cshtml.cs
+E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\Razor\Views\RoomType\Edit.g.cshtml.cs
+E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\Razor\Views\Room\Create.g.cshtml.cs
+E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\Razor\Views\Room\Edit.g.cshtml.cs
+E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\Razor\Views\Floor\Create.g.cshtml.cs
+E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\Razor\Views\Floor\Edit.g.cshtml.cs

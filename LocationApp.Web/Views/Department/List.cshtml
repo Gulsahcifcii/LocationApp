@@ -16,7 +16,7 @@
             <div class="title_right pull-right">
                 <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 form-group pull-right">
                     <div class="input-group pull-right">
-                        <button type="button" data-toggle="modal" data-target="#exampleModal" class="btn btn-success pull-right "><i class="fa fa-plus-circle"></i> Yeni</button>
+                        <a href="~/Department/Create" class="btn btn-success pull-right "><i class="fa fa-plus-circle"></i> Yeni</a>
                     </div>
                 </div>
             </div>
@@ -60,53 +60,6 @@
     </div>
 </div>
 <!-- /page content -->
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Yeni Departman</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-                    <input type="hidden" id="departmentID" />
-                    <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">
-                            Departman Başlık : <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="text" id="name" name="name" required="required" class="form-control col-md-7 col-xs-12">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="description">
-                            Açıklama <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="text" id="description" name="description" required="required" class="form-control col-md-7 col-xs-12">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="description">
-                            Diğer <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="text" id="other" name="other" required="required" class="form-control col-md-7 col-xs-12">
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary" type="reset">Temizle</button>
-                <button type="submit" class="btn btn-success">Kaydet</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
-            </div>
-        </div>
-    </div>
-</div>
 @section Scripts{
     @Html.Partial("/Views/Shared/Partials/DataTable/_Js.cshtml")
 }

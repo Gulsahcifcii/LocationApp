@@ -106,3 +106,4 @@ C:\Users\Samet Öz\Desktop\son\LocationApp\LocationApp.Service\obj\Debug\Locatio
 C:\Users\Samet Öz\Desktop\son\LocationApp\LocationApp.Service\obj\Debug\LocationApp.Service.csproj.CopyComplete
 C:\Users\Samet Öz\Desktop\son\LocationApp\LocationApp.Service\obj\Debug\LocationApp.Service.dll
 C:\Users\Samet Öz\Desktop\son\LocationApp\LocationApp.Service\obj\Debug\LocationApp.Service.pdb
+E:\Developers\Repository\LocationApp\LocationApp.Service\bin\System.ServiceModel.Primitives.dll

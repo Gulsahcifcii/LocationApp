@@ -13,24 +13,21 @@ namespace LocationApp.Web.Controllers
         {
             return View();
         }
-
         [HttpPost]
         public IActionResult Create(int CampusID, string Name, string Description, string Other)
         {
             return View();
         }
         [HttpGet]
-        public IActionResult Edit(int campusID)
+        public IActionResult Edit(int CampusID)
         {
             return View();
         }
-
         [HttpPost]
-        public IActionResult Edit(int campusID, string name, string description, string other)
+        public IActionResult Edit(int CampusID, string Name, string Description, string Other)
         {
             return View();
         }
-
         [HttpGet]
         public IActionResult List()
         {

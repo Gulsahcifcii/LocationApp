@@ -8,15 +8,31 @@ namespace LocationApp.Web.Controllers
 {
     public class CampusController : Controller
     {
-        public IActionResult Create()
+        [HttpGet]
+        public IActionResult Create(int CampusID)
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult Create(int CampusID, string Name, string Description, string Other)
+        {
+            return View();
+        }
+        [HttpGet]
+        public IActionResult Edit(int campusID)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Edit(int campusID, string name, string description, string other)
+        {
+            return View();
+        }
+
+        [HttpGet]
         public IActionResult List()
-        {
-            return View();
-        }
-        public IActionResult Edit()
         {
             return View();
         }

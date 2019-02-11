@@ -198,4 +198,9 @@
     <None Include="wwwroot\vendors\parsleyjs\bower_components\uwidget\uwidget.less" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\LocationApp.Data\LocationApp.Data.csproj" />
+    <ProjectReference Include="..\LocationApp.Service\LocationApp.Service.csproj" />
+  </ItemGroup>
+
 </Project>

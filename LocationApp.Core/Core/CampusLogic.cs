@@ -13,6 +13,9 @@ namespace LocationApp.Core.Core
 {
     public class CampusLogic
     {
+        //TODO: servis sonuçları woc ile gönderilmeli.
+        //WebOperationContext webOperationContext = WebOperationContext.Current;
+        //WebOperationContext.Current.OutgoingResponse.StatusCode
         public string AddCampus(CampusDto campusDto)
         {
             try

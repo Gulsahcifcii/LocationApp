@@ -13,8 +13,7 @@ namespace LocationApp.Service.Services
 {
      public class UserDepartment : IUserDepartmentService
     {
-        private UserDepartmenLogic userDepartmenLogic = new UserDepartmenLogic();
-
+        private UserDepartmenLogic userDepartmentLogic = new UserDepartmenLogic();
         public string AddUserDepartment(int userDepartmentID, int userID, int departmentID)
         {
 
@@ -31,6 +30,12 @@ namespace LocationApp.Service.Services
         {
             var result = userDepartmenLogic.DelUserDepartment(UserDepartmentID);
             return JsonConvert.SerializeObject(result);
+        }
+        public string GetAllUserDepartment()
+        {
+            var userDepartment = userDepartmentLogic.GetAllUserDepartment();
+            var item = JsonConvert.SerializeObject(userDepartment, Formatting.Indented);
+            return item;
         }
         public string GetUserDepartment(int UserDepartmentID)
         {

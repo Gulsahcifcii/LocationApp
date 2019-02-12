@@ -32,6 +32,14 @@ namespace LocationApp.Service.Services
             var result = userRoleLogic.DelUserRole(userRoleID);
             return JsonConvert.SerializeObject(result);
         }
+
+        public string GetAllUserRole()
+        {
+            var userRole = userRoleLogic.GetAllUserRole();
+            var item = JsonConvert.SerializeObject(userRole, Formatting.Indented);
+            return item;
+        }
+
         public string GetUserRole(int userRoleID)
         {
             var result = userRoleLogic.GetUserRole(userRoleID);

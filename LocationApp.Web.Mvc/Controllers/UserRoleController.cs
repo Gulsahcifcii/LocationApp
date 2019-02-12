@@ -9,6 +9,8 @@ namespace LocationApp.Web.Controllers
 {
     public class UserRoleController : Controller
     {
+        readonly LocationApp.Service.Services.UserUserRoleService userRoleService = new Service.Services.UserUserRoleService();
+
         public ActionResult List()
         {
             return View();
@@ -24,7 +26,7 @@ namespace LocationApp.Web.Controllers
             return View();
         }
         [HttpGet]
-        public ActionResult Edit(int UserRoleId)
+        public ActionResult Edit(int? id)
         {
             return View();
         }

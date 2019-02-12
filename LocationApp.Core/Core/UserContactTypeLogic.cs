@@ -14,7 +14,6 @@ namespace LocationApp.Core.Core
     public class UserContactTypeLogic
     {
         WebOperationContext webOperationContext = WebOperationContext.Current;
-
         public string AddUserContactType(UserContactTypeDto userContactTypeDto)
         {
             try
@@ -93,6 +92,26 @@ namespace LocationApp.Core.Core
             catch (Exception ex)
             {
                 return (HttpStatusCode.InternalServerError).ToString();
+            }
+        }
+        public List<UserContactTypeDto> GetAllUserContactType()
+        {
+            try
+            {
+                List<UserContactTypeDto> list = new List<UserContactTypeDto>();
+                using (UnitOfWork unitofWork = new UnitOfWork())
+                {
+                    List<UserContactTypeDto> collection = unitofWork.GetRepository<UserContactTypeDto>().Select(null, null).ToList();
+                    foreach (var item in collection)
+                    {
+                        list.Add(new UserContactTypeDto {UserContactTypeID=item.UserContactTypeID,TypeName=item.TypeName,Description=item.Description});
+                    }
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+                return new List<UserContactTypeDto>();
             }
         }
     }

@@ -27,5 +27,10 @@ namespace LocationApp.Service.Interfaces
         [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
           UriTemplate = "/GetSite?siteID={siteID}")]
         string GetSite(int siteID);
+
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+        UriTemplate = "/GetAllSite")]
+        string GetAllSite();
     }
 }

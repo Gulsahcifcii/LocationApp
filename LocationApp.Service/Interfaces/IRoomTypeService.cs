@@ -30,5 +30,10 @@ namespace LocationApp.Service.Interfaces
         [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
          UriTemplate = "/GetRoomType?RoomTypeID={RoomTypeID}")]
         string GetRoomType(int RoomTypeID);
+
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+        UriTemplate = "/GetAllRoomType")]
+        string GetAllRoomType();
     }
 }

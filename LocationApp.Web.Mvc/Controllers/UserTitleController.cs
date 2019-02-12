@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LocationApp.Data.Database;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,11 +11,7 @@ namespace LocationApp.Web.Controllers
 {
     public class UserTitleController : Controller
     {
-        LocationApp.Service.Services.UserTitleService titleService = new Service.Services.UserTitleService();
-        public ActionResult List()
-        {
-            return View();
-        }
+        LocationApp.Service.Services.UserTitleService userTitleService = new Service.Services.UserTitleService();
         [HttpGet]
         public ActionResult Create()
         {
@@ -22,16 +20,20 @@ namespace LocationApp.Web.Controllers
         [HttpPost]
         public ActionResult Create(string TitleName)
         {
-            titleService.AddUserTitle(0, TitleName);
             return View();
         }
         [HttpPost]
-        public ActionResult Edit(int UserTitleID)
+        public ActionResult Edit(int? id)
         {
             return View();
         }
         [HttpGet]
-        public ActionResult Edit()
+        public ActionResult Edit(int UserTitleID,string TitleName)
+        {
+            return View();
+        }
+
+        public ActionResult List()
         {
             return View();
         }

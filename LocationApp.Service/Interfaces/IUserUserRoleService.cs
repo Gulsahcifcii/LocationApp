@@ -27,5 +27,9 @@ namespace LocationApp.Service.Interfaces
         [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
             UriTemplate = "/GetUserUserRole?userUserRoleID={userUserRoleID}")]
         string GetUserUserRole(int userUserRoleID);
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+            UriTemplate = "/GetAllUserUserRole")]
+        string GetAllUserUserRole();
     }
 }

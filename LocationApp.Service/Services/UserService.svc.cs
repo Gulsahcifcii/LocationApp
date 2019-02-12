@@ -39,6 +39,12 @@ namespace LocationApp.Service.Services
             var result = userLogic.GetUser(userId);
             return JsonConvert.SerializeObject(result);
         }
+        public string GetUser()
+        {
+            var userTitle = userLogic.GetAllUser();
+            var item = JsonConvert.SerializeObject(user, Formatting.Indented);
+            return item;
+        }
         public string SetUser(int userId, string name, string surName, bool gender, string nationID, int userTitleID)
         {
             var result = userLogic.AddUser(new UserDto

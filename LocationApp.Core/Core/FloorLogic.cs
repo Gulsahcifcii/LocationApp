@@ -103,5 +103,26 @@ namespace LocationApp.Core.Core
                 return new FloorDto();
             }
         }
+
+        public List<FloorDto> GetAllFloor()
+        {
+            try
+            {
+                List<FloorDto> list = new List<FloorDto>();
+                using (UnitOfWork unitofWork = new UnitOfWork())
+                {
+                    List<floor> collection = unitofWork.GetRepository<floor>().Select(null, null).ToList();
+                    foreach (var item in collection)
+                    {
+                        list.Add(new FloorDto {BlockID=item.BlockID.Value,BuildID=item.BuildID.Value,FloorID=item.FloorID,Map=item.Map,Name=item.Name,Other=item.Other });
+                    }
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+                return new List<FloorDto>();
+            }
+        }
     }
 }

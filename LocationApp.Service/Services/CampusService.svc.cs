@@ -47,13 +47,11 @@ namespace LocationApp.Service.Services
             });
             return JsonConvert.SerializeObject(result);
         }
-
         public string GetAllCampus()
         {
             var campus = campusLogic.GetAllCampus();
             var item = JsonConvert.SerializeObject(campus, Formatting.Indented);
             return item;
         }
-
     }
 }

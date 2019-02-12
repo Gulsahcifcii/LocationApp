@@ -107,5 +107,25 @@ namespace LocationApp.Core.Core
                 return new UserDto();
             }
         }
+        public List<UserDto> GetAllUser()
+        {
+            try
+            {
+                List<UserDto> list = new List<UserDto>();
+                using (UnitOfWork unitofWork = new UnitOfWork())
+                {
+                    List<user> collection = unitofWork.GetRepository<user>().Select(null, null).ToList();
+                    foreach (var item in collection)
+                    {
+                        list.Add(new UserDto {UserId=item.UserID,Name=item.Name,SurName=item.SurName,Gender=(bool)item.Gender,NationID=item.NationID,UserTitleID=(int)item.UserTitleID});
+                    }
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+                return new List<UserDto>();
+            }
+        }
     }
 }

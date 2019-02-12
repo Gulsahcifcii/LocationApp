@@ -8,6 +8,9 @@ using System.Text;
 using LocationApp.Data;
 using LocationApp.Core.Core;
 using Newtonsoft.Json;
+using LocationApp.Data.Dto;
+using LocationApp.Data.Database;
+using LocationApp.Data.UnitOfWork;
 
 namespace LocationApp.Service.Services
 {
@@ -46,6 +49,12 @@ namespace LocationApp.Service.Services
                 
             });
             return JsonConvert.SerializeObject(result);
+        }
+        public string GetAllRoomType()
+        {
+            var roomType = roomTypeLogic.GetAllRoomType();
+            var item = JsonConvert.SerializeObject(roomType, Formatting.Indented);
+            return item;
         }
     }
 }

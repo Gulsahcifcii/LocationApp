@@ -30,5 +30,9 @@ namespace LocationApp.Service.Interfaces
         [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
         UriTemplate = "/GetMainUnit?mainUnitId={mainUnitId}")]
         string GetMainUnit(int mainUnitId);
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+           UriTemplate = "/GetAllMainUnit")]
+        string GetAllMainUnit();
     }
 }

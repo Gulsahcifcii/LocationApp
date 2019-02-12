@@ -3585,7 +3585,6 @@
     <Compile Include="Controllers\RoomTypeController.cs" />
     <Compile Include="Controllers\SiteController.cs" />
     <Compile Include="Controllers\SubUnitController.cs" />
-    <Compile Include="Controllers\testController.cs" />
     <Compile Include="Controllers\UserContactController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\UserRoleController.cs" />

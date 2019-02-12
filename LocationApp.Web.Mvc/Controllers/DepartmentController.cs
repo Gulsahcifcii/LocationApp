@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LocationApp.Data.Database;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,6 +11,8 @@ namespace LocationApp.Web.Controllers
 {
     public class DepartmentController : Controller
     {
+        readonly LocationApp.Service.Services.DepartmentService departmentService = new Service.Services.DepartmentService();
+
         [HttpGet]
         public ActionResult Create()
         {
@@ -20,7 +24,7 @@ namespace LocationApp.Web.Controllers
             return View();
         }
         [HttpGet]
-        public ActionResult Edit(int DepartmentID)
+        public ActionResult Edit(int? id)
         {
             return View();
         }
@@ -31,7 +35,7 @@ namespace LocationApp.Web.Controllers
         }
         public ActionResult List()
         {
-            return View();
+            return View(JsonConvert.DeserializeObject<List<department>>(departmentService.GetAllDepartment()));
         }
     }
 }

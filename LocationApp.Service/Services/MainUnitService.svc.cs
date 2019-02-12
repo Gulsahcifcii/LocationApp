@@ -30,6 +30,12 @@ namespace LocationApp.Service.Services
             var result = mainUnitLogic.DelMainUnit(mainUnitID);
             return JsonConvert.SerializeObject(result);
         }
+        public string GetAllMainUnit()
+        {
+            var mainUnit = mainUnitLogic.GetAllMainUnit();
+            var item = JsonConvert.SerializeObject(mainUnit, Formatting.Indented);
+            return item;
+        }
         public string GetMainUnit(int mainUnitID)
         {
             var result = mainUnitLogic.GetMainUnit(mainUnitID);
@@ -44,6 +50,5 @@ namespace LocationApp.Service.Services
             });
             return JsonConvert.SerializeObject(result);
         }
-       
     }
 }

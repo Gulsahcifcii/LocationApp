@@ -56,12 +56,12 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<build>().Update(item);
                     unitofWork.saveChanges();
-                   return (HttpStatusCode.OK).ToString();
+                    return (HttpStatusCode.OK).ToString();
                 }
             }
             catch (Exception ex)
             {
-               return (HttpStatusCode.InternalServerError).ToString();
+                return (HttpStatusCode.InternalServerError).ToString();
             }
         }
         public string DelBuild(int buildID)
@@ -73,12 +73,12 @@ namespace LocationApp.Core.Core
                     var selectedBuild = unitofWork.GetRepository<build>().GetById(x => x.BuildID == buildID);
                     unitofWork.GetRepository<build>().Delete(selectedBuild);
                     unitofWork.saveChanges();
-                   return (HttpStatusCode.OK).ToString();
+                    return (HttpStatusCode.OK).ToString();
                 }
             }
             catch (Exception)
             {
-               return (HttpStatusCode.InternalServerError).ToString();
+                return (HttpStatusCode.InternalServerError).ToString();
             }
         }
         public BuildDto GetBuild(int buildID)
@@ -103,6 +103,26 @@ namespace LocationApp.Core.Core
             catch (Exception ex)
             {
                 return new BuildDto();
+            }
+        }
+        public List<BuildDto> GetAllBuild()
+        {
+            try
+            {
+                List<BuildDto> list = new List<BuildDto>();
+                using (UnitOfWork unitofWork = new UnitOfWork())
+                {
+                    List<build> collection = unitofWork.GetRepository<build>().Select(null, null).ToList();
+                    foreach (var item in collection)
+                    {
+                        list.Add(new BuildDto { BuildID = item.BuildID, CampusID = item.CampusID.Value, Address = item.Adress, Properties = item.Properties, SiteID = item.SiteID.Value, Gps = item.Gps, Name = item.Name });
+                    }
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+                return new List<BuildDto>();
             }
         }
     }

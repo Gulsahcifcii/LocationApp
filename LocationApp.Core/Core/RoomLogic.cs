@@ -99,5 +99,25 @@ namespace LocationApp.Core.Core
                 return new RoomDto();
             }
         }
+        public List<RoomDto> GetAllRoom()
+        {
+            try
+            {
+                List<RoomDto> list = new List<RoomDto>();
+                using (UnitOfWork unitofWork = new UnitOfWork())
+                {
+                    List<room> collection = unitofWork.GetRepository<room>().Select(null, null).ToList();
+                    foreach (var item in collection)
+                    {
+                        list.Add(new RoomDto {FloorID=item.FloorID.Value,Map=item.Map,Name=item.Name,RoomID=item.RoomID,RoomTypeID=item.RoomTypeID.Value});
+                    }
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+                return new List<RoomDto>();
+            }
+        }
     }
 }

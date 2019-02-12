@@ -46,5 +46,11 @@ namespace LocationApp.Service.Services
             });
             return JsonConvert.SerializeObject(result);
         }
+        public string GetAllSite()
+        {
+            var site = siteLogic.GetAllSite();
+            var item = JsonConvert.SerializeObject(site, Formatting.Indented);
+            return item;
+        }
     }
 }

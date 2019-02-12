@@ -91,5 +91,26 @@ namespace LocationApp.Core.Core
                 return new SubUnitDto();
             }
         }
+        public List<SubUnitDto> GetAllSubUnit()
+        {
+            try
+            {
+                List<SubUnitDto> list = new List<SubUnitDto>();
+                using (UnitOfWork unitofWork = new UnitOfWork())
+                {
+                    List<subunit> collection = unitofWork.GetRepository<subunit>().Select(null, null).ToList();
+                    foreach (var item in collection)
+                    {
+                        list.Add(new SubUnitDto {SubUnitID=item.SubUnitID,Name=item.Name,MainUnitID=(int)item.MainUnitID});
+                    }
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+                return new List<SubUnitDto>();
+            }
+        }
+
     }
 }

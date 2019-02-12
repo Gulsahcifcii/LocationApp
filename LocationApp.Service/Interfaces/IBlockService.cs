@@ -27,5 +27,10 @@ namespace LocationApp.Service.Interfaces
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
         UriTemplate = "/GetBlock?blockID={blockID}")]
         string GetBlock(int blockID);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+        UriTemplate = "/GetAllBlock")]
+        string GetAllBlock();
     }
 }

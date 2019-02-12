@@ -38,7 +38,6 @@ namespace LocationApp.Core.Core
                 return (HttpStatusCode.InternalServerError).ToString();
             }
         }
-
         public string SetUserContact(UserContactDto userContactDto)
         {
             try
@@ -61,7 +60,6 @@ namespace LocationApp.Core.Core
                 return (HttpStatusCode.InternalServerError).ToString();
             }
         }
-
         public string DelUserContact(int UserContactID)
         {
             try
@@ -99,6 +97,26 @@ namespace LocationApp.Core.Core
             catch (Exception)
             {
                 return new UserContactDto();
+            }
+        }
+        public List<UserContactDto> GetAllUserContact()
+        {
+            try
+            {
+                List<UserContactDto> list = new List<UserContactDto>();
+                using (UnitOfWork unitofWork = new UnitOfWork())
+                {
+                    List<usercontact> collection = unitofWork.GetRepository<usercontact>().Select(null, null).ToList();
+                    foreach (var item in collection)
+                    {
+                        list.Add(new UserContactDto { UserContactID=item.UserContactID,Contact=item.Contact,UserID=(int)item.UserID,UserContactTypeID=(int)item.UserContactTypeID});
+                    }
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+                return new List<UserContactDto>();
             }
         }
     }

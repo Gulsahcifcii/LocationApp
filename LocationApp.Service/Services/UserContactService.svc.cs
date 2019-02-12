@@ -32,6 +32,12 @@ namespace LocationApp.Service.Services
             var result = userContactLogic.DelUserContact(UserContactID);
             return JsonConvert.SerializeObject(result);
         }
+        public string GetAllUserContact()
+        {
+            var userContact = userContactLogic.GetAllUserContact();
+            var item = JsonConvert.SerializeObject(userContact, Formatting.Indented);
+            return item;
+        }
         public string GetUserContact(int UserContactID)
         {
             var result = userContactLogic.GetUserContact(UserContactID);

@@ -112,5 +112,25 @@ namespace LocationApp.Core.Core
                 }
             }
         }
+        public List<BlockDto> GetAllBlock()
+        {
+            try
+            {
+                List<BlockDto> list = new List<BlockDto>();
+                using (UnitOfWork unitofWork = new UnitOfWork())
+                {
+                    List<block> collection = unitofWork.GetRepository<block>().Select(null, null).ToList();
+                    foreach (var item in collection)
+                    {
+                        list.Add(new BlockDto { BlockID=item.BlockID, BuildID= item.BuildID.Value,Gps=item.Gps,Name=item.Name  });
+                    }
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+                return new List<BlockDto>();
+            }
+        }
     }
 }

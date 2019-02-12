@@ -52,5 +52,11 @@ namespace LocationApp.Service.Services
 
             return JsonConvert.SerializeObject(result);
         }
+        public string GetAllBuild()
+        {
+            var build = buildLogic.GetAllBuild();
+            var item = JsonConvert.SerializeObject(build, Formatting.Indented);
+            return item;
+        }
     }
 }

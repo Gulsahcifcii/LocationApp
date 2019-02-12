@@ -96,5 +96,25 @@ namespace LocationApp.Core.Core
                 return new SiteDto();
             }
         }
+        public List<SiteDto> GetAllSite()
+        {
+            try
+            {
+                List<SiteDto> list = new List<SiteDto>();
+                using (UnitOfWork unitofWork = new UnitOfWork())
+                {
+                    List<site> collection = unitofWork.GetRepository<site>().Select(null, null).ToList();
+                    foreach (var item in collection)
+                    {
+                        list.Add(new SiteDto { SiteID=item.SiteID,Name=item.Name,Gps=item.Gps,Description=item.Description });
+                    }
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+                return new List<SiteDto>();
+            }
+        }
     }
 }

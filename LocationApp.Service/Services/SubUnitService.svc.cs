@@ -29,6 +29,12 @@ namespace LocationApp.Service.Services
             var result = subUnitLogic.DelSubUnit(subUnitID);
             return JsonConvert.SerializeObject(result);
         }
+        public string GetAllSubUnit()
+        {
+            var SubUnit = subUnitLogic.GetAllSubUnit();
+            var item = JsonConvert.SerializeObject(SubUnit, Formatting.Indented);
+            return item;
+        }
         public string GetSubUnit(int subUnitID)
         {
             var result = subUnitLogic.GetSubUnit(subUnitID);
@@ -44,5 +50,6 @@ namespace LocationApp.Service.Services
             });
             return JsonConvert.SerializeObject(result);
         }
+
     }
 }

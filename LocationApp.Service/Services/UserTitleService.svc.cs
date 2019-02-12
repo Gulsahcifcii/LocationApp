@@ -45,5 +45,11 @@ namespace LocationApp.Service.Services
             });
             return JsonConvert.SerializeObject(result);
         }
+        public string GetAllUserTitle()
+        {
+            var userTitle = userTitleLogic.GetAllUserTitle();
+            var item = JsonConvert.SerializeObject(userTitle, Formatting.Indented);
+            return item;
+        }
     }
 }

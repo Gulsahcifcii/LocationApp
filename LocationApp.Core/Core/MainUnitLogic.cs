@@ -91,5 +91,25 @@ namespace LocationApp.Core.Core
                 return new MainUnitDto();
             }
         }
+        public List<MainUnitDto> GetAllMainUnit()
+        {
+            try
+            {
+                List<MainUnitDto> list = new List<MainUnitDto>();
+                using (UnitOfWork unitofWork = new UnitOfWork())
+                {
+                    List<mainunit> collection = unitofWork.GetRepository<mainunit>().Select(null, null).ToList();
+                    foreach (var item in collection)
+                    {
+                        list.Add(new MainUnitDto {MainUnitID=item.MainUnitID,Name=item.Name});
+                    }
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+                return new List<MainUnitDto>();
+            }
+        }
     }
 }

@@ -93,26 +93,25 @@ namespace LocationApp.Core.Core
                 return new UserTitleDto();
             }
         }
-        
-        
-        //public List<usertitle> GetUserTitleList()
-        //{
-        //    try
-        //    {
-        //        using (UnitOfWork unitofWork = new UnitOfWork())
-        //        {
-        //            List<UserTitleDto> userTitleDtoList = new List<UserTitleDto>();
-
-        //            //var item = unitofWork.GetRepository<usertitle>().Select(x=>x.);
-        //            UserTitleDto userTitleDto = new UserTitleDto();
-        //            userTitleDtoList.Add(userTitleDto);
-        //            return null;
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return new List<usertitle>();
-        //    }
-        //}
+        public List<UserTitleDto> GetAllUserTitle()
+        {
+            try
+            {
+                List<UserTitleDto> list = new List<UserTitleDto>();
+                using (UnitOfWork unitofWork = new UnitOfWork())
+                {
+                    List<usertitle> collection = unitofWork.GetRepository<usertitle>().Select(null, null).ToList();
+                    foreach (var item in collection)
+                    {
+                        list.Add(new UserTitleDto { TitleName=item.TitleName,UserTitleId=item.UserTitleID});
+                    }
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+                return new List<UserTitleDto>();
+            }
+        }
     }
 }

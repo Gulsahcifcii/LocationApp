@@ -44,5 +44,11 @@ namespace LocationApp.Service.Services
             });
             return JsonConvert.SerializeObject(result);
         }
+        public string GetAllDepartment()
+        {
+            var department = departmentLogic.GetAllDepartment();
+            var item = JsonConvert.SerializeObject(department, Formatting.Indented);
+            return item;
+        }
     }
 }

@@ -27,6 +27,10 @@ namespace LocationApp.Service.Interfaces
         [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
             UriTemplate = "/GetUserContactType?userContactTypeID={userContactTypeID}")]
         string GetUserContactType(int userContactTypeID);
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+           UriTemplate = "/GetAllUserContactType")]
+        string GetAllUserContactType();
 
     }
 }

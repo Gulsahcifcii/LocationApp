@@ -30,5 +30,10 @@ namespace LocationApp.Service.Interfaces
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
         UriTemplate = "/DelDepartment?departmentID={departmentID}")]
         string DelDepartment(int departmentID);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+        UriTemplate = "/GetAllDepartment")]
+        string GetAllDepartment();
     }
 }

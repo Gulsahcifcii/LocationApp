@@ -50,6 +50,11 @@ namespace LocationApp.Service.Services
             });
             return JsonConvert.SerializeObject(result);
         }
-
+        public string GetAllFloor()
+        {
+            var floor = floorLogic.GetAllFloor();
+            var item = JsonConvert.SerializeObject(floor, Formatting.Indented);
+            return item;
+        }
     }
 }

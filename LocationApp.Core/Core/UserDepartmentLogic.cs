@@ -36,7 +36,6 @@ namespace LocationApp.Core.Core
                 return (HttpStatusCode.InternalServerError).ToString();
             }
         }
-
         public string SetUserDepartment(UserDepartmentDto userDepartmentDto)
         {
             try
@@ -94,6 +93,26 @@ namespace LocationApp.Core.Core
             catch (Exception)
             {
                 return new UserDepartmentDto();
+            }
+        }
+        public List<UserDepartmentDto> GetAllUserDepartment()
+        {
+            try
+            {
+                List<UserDepartmentDto> list = new List<UserDepartmentDto>();
+                using (UnitOfWork unitofWork = new UnitOfWork())
+                {
+                    List<userdepartment> collection = unitofWork.GetRepository<userdepartment>().Select(null, null).ToList();
+                    foreach (var item in collection)
+                    {
+                        list.Add(new UserDepartmentDto {UserDepartmentID=item.UserDepartmentID,UserID=(int)item.UserID,DepartmentID=(int)item.DepartmentID});
+                    }
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+                return new List<UserDepartmentDto>();
             }
         }
     }

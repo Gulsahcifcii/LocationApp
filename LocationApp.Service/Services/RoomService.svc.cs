@@ -48,5 +48,11 @@ namespace LocationApp.Service.Services
             });
             return JsonConvert.SerializeObject(result);
         }
+        public string GetAllRoom()
+        {
+            var room = roomLogic.GetAllRoom();
+            var item = JsonConvert.SerializeObject(room, Formatting.Indented);
+            return item;
+        }
     }
 }

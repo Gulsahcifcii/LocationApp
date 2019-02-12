@@ -99,5 +99,25 @@ namespace LocationApp.Core.Core
                 return new DepartmentDto();
             }
         }
+        public List<DepartmentDto> GetAllDepartment()
+        {
+            try
+            {
+                List<DepartmentDto> list = new List<DepartmentDto>();
+                using (UnitOfWork unitofWork = new UnitOfWork())
+                {
+                    List<department> collection = unitofWork.GetRepository<department>().Select(null, null).ToList();
+                    foreach (var item in collection)
+                    {
+                        list.Add(new DepartmentDto {  DepartmentID=item.DepartmentID,Description=item.Description,Name=item.Name,Other=item.Other,SubUnitID=item.SubUnitID.Value});
+                    }
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+                return new List<DepartmentDto>();
+            }
+        }
     }
 }

@@ -27,5 +27,9 @@ namespace LocationApp.Service.Interfaces
         [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
           UriTemplate = "/GetSubUnit?subUnitID={subUnitID}")]
         string GetSubUnit(int subUnitID);
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+           UriTemplate = "/GetAllSubUnit")]
+        string GetAllSubUnit();
     }
 }

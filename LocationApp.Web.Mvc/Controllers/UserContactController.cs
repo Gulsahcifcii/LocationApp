@@ -9,6 +9,8 @@ namespace LocationApp.Web.Controllers
 {
     public class UserContactController : Controller
     {
+        readonly LocationApp.Service.Services.UserContactService userContactService = new Service.Services.UserContactService();
+
         [HttpGet]
         public ActionResult Create()
         {
@@ -21,7 +23,7 @@ namespace LocationApp.Web.Controllers
             return View();
         }
         [HttpGet]
-        public ActionResult Edit(int UserContactID)
+        public ActionResult Edit(int? id)
         {
             return View();
         }

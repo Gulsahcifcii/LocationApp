@@ -97,5 +97,25 @@ namespace LocationApp.Core.Core
                 return (HttpStatusCode.InternalServerError).ToString();
             }
         }
+        public List<UserRoleDto> GetAllUserRole()
+        {
+            try
+            {
+                List<UserRoleDto> list = new List<UserRoleDto>();
+                using (UnitOfWork unitofWork = new UnitOfWork())
+                {
+                    List<userrole> collection = unitofWork.GetRepository<userrole>().Select(null, null).ToList();
+                    foreach (var item in collection)
+                    {
+                        list.Add(new UserRoleDto {UserRoleID=item.UserRoleID,UserRoleName=item.UserRoleName,UserRoleDescription=item.UserRoleDescription,Active=(bool)item.Active});
+                    }
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+                return new List<UserRoleDto>();
+            }
+        }
     }
 }

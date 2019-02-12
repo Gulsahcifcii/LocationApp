@@ -36,8 +36,6 @@ namespace LocationApp.Core.Core
                 return (HttpStatusCode.InternalServerError).ToString();
             }
         }
-
-      
         public string SetRoomType(RoomTypeDto roomTypeDto)
         {
             try
@@ -59,9 +57,6 @@ namespace LocationApp.Core.Core
                 return (HttpStatusCode.InternalServerError).ToString();
             }
         }
-
-
-
         public string DelRoomType(int roomTypeID)
         {
             try
@@ -79,7 +74,6 @@ namespace LocationApp.Core.Core
                 return (HttpStatusCode.InternalServerError).ToString();
             }
         }
-
         public RoomTypeDto GetRoomType(int roomTypeID)
         {
             try
@@ -101,6 +95,25 @@ namespace LocationApp.Core.Core
                 return new RoomTypeDto();
             }
         }
-
+        public List<RoomTypeDto> GetAllRoomType()
+        {
+            try
+            {
+                List<RoomTypeDto> list = new List<RoomTypeDto>();
+                using (UnitOfWork unitofWork = new UnitOfWork())
+                {
+                    List<roomtype> collection = unitofWork.GetRepository<roomtype>().Select(null, null).ToList();
+                    foreach (var item in collection)
+                    {
+                        list.Add(new RoomTypeDto {RoomTypeID=item.RoomTypeID,Name=item.Name,Description=item.Description });
+                    }
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+                return new List<RoomTypeDto>();
+            }
+        }
     }
 }

@@ -9,6 +9,8 @@ namespace LocationApp.Web.Controllers
 {
     public class SubUnitController : Controller
     {
+        readonly LocationApp.Service.Services.SubUnitService subUnitService = new Service.Services.SubUnitService();
+
         [HttpGet]
         public ActionResult Create()
         {
@@ -21,7 +23,7 @@ namespace LocationApp.Web.Controllers
             return View();
         }
         [HttpGet]
-        public ActionResult Edit(int campusID)
+        public ActionResult Edit(int? id)
         {
             return View();
         }

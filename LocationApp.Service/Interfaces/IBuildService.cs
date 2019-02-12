@@ -27,5 +27,10 @@ namespace LocationApp.Service.Interfaces
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
         UriTemplate = "/GetBuild?buildID={buildID}")]
         string GetBuild(int builD);
+
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+        UriTemplate = "/GetAllBuild")]
+        string GetAllBuild();
     }
 }

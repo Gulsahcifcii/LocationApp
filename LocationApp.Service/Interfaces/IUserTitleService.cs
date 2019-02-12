@@ -27,5 +27,9 @@ namespace LocationApp.Service.Interfaces
         [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json, 
             UriTemplate = "/GetUserTitle?userTitleId={userTitleId}")]
         string GetUserTitle(int userTitleId);
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+            UriTemplate = "/GetAllUserTitle")]
+        string GetAllUserTitle();
     }
 }

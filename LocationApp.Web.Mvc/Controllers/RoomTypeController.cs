@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LocationApp.Data.Database;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,6 +11,8 @@ namespace LocationApp.Web.Controllers
 {
     public class RoomTypeController : Controller
     {
+        readonly LocationApp.Service.Services.RoomTypeService roomType = new Service.Services.RoomTypeService();
+
         [HttpGet]
         public ActionResult Create()
         {
@@ -20,7 +24,7 @@ namespace LocationApp.Web.Controllers
             return View();
         }
         [HttpGet]
-        public ActionResult Edit(int RoomTypeID)
+        public ActionResult Edit(int? id)
         {
             return View();
         }
@@ -32,7 +36,7 @@ namespace LocationApp.Web.Controllers
         [HttpGet]
         public ActionResult List()
         {
-            return View();
+            return View(JsonConvert.DeserializeObject<List<roomtype>>(roomType.GetAllRoomType()));
         }
     }
 }

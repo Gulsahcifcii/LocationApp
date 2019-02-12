@@ -27,6 +27,10 @@ namespace LocationApp.Service.Interfaces
         [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
             UriTemplate = "/GetUserDepartment?userDepartmentID={userDepartmentID}")]
         string GetUserDepartment(int userDepartmentID);
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+           UriTemplate = "/GetAllUserDepartment")]
+        string GetAllUserDepartment();
 
     }
 }

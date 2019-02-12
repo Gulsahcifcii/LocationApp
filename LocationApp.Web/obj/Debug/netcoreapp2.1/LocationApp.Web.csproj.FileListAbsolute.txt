@@ -108,3 +108,12 @@ E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\Raz
 E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\Razor\Views\Room\Edit.g.cshtml.cs
 E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\Razor\Views\Floor\Create.g.cshtml.cs
 E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\Razor\Views\Floor\Edit.g.cshtml.cs
+E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\Razor\Views\MainUnit\Create.g.cshtml.cs
+E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\Razor\Views\SubUnit\Create.g.cshtml.cs
+E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\Razor\Views\UserContact\Create.g.cshtml.cs
+E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\Razor\Views\UserRole\Create.g.cshtml.cs
+E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\Razor\Views\UserTitle\Create.g.cshtml.cs
+E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\Razor\Views\UserContact\Edit.g.cshtml.cs
+E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\Razor\Views\SubUnit\Edit.g.cshtml.cs
+E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\Razor\Views\MainUnit\Edit.g.cshtml.cs
+E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\Razor\Views\UserRole\Edit.g.cshtml.cs

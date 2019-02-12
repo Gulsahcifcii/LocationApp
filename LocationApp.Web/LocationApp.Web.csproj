@@ -36,6 +36,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Views\MainUnit\List.cshtml" />
+    <None Include="Views\SubUnit\List.cshtml" />
+    <None Include="Views\UserContact\List.cshtml" />
+    <None Include="Views\UserRole\List.cshtml" />
+    <None Include="Views\UserTitle\List.cshtml" />
     <None Include="wwwroot\vendors\Chart.js\.github\ISSUE_TEMPLATE.md" />
     <None Include="wwwroot\vendors\Chart.js\.github\PULL_REQUEST_TEMPLATE.md" />
     <None Include="wwwroot\vendors\echarts\.github\CONTRIBUTING.md" />

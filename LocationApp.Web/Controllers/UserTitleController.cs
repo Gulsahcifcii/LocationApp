@@ -12,5 +12,25 @@ namespace LocationApp.Web.Controllers
         {
             return View();
         }
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Create(int UserTitleID, string TitleName)
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Edit(int UserTitleID)
+        {
+            return View();
+        }
+        [HttpGet]
+        public IActionResult Edit()
+        {
+            return View();
+        }
     }
 }

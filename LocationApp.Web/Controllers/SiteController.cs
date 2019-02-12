@@ -9,7 +9,7 @@ namespace LocationApp.Web.Controllers
     public class SiteController : Controller
     {
         [HttpGet]
-        public IActionResult Create(int SiteID)
+        public IActionResult Create()
         {
             return View();
         }

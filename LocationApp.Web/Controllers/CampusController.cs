@@ -9,7 +9,7 @@ namespace LocationApp.Web.Controllers
     public class CampusController : Controller
     {
         [HttpGet]
-        public IActionResult Create(int CampusID)
+        public IActionResult Create()
         {
             return View();
         }

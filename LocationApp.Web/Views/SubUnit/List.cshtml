@@ -2,26 +2,21 @@
     ViewData["Title"] = "List";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@section Styles{
-    <!-- Datatables -->
-    <link href="../vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
-    <link href="../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
-    <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
-    <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
-    <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
-}
 
+@section Styles{
+    @Html.Partial("/Views/Shared/Partials/DataTable/_Css.cshtml")
+}
 <!-- page content -->
 <div class="right_col" role="main">
     <div class="">
         <div class="page-title">
             <div class="title_left">
-                <h3>Alt Birimler</h3>
+                <h3>Alt Birim</h3>
             </div>
             <div class="title_right pull-right">
                 <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 form-group pull-right">
                     <div class="input-group pull-right">
-                        <button type="button" data-toggle="modal" data-target="#exampleModal" class="btn btn-success pull-right "><i class="fa fa-plus-circle"></i> Yeni</button>
+                        <a href="~/SubUnit/Create" class="btn btn-success pull-right "><i class="fa fa-plus-circle"></i> Yeni</a>
                     </div>
                 </div>
             </div>
@@ -31,7 +26,7 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Alt Birim Listeleme<small></small></h2>
+                        <h2>Altbirim<small></small></h2>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
@@ -41,14 +36,12 @@
                             <thead>
                                 <tr>
                                     <th>Alt Birim Adı</th>
-                                    <th>Ust Birim Adı</th>
                                     <th>İşlemler</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>Alt Birim Adı</td>
-                                    <td>Üst Birim Adı</td>
+                                    <td>-</td>
                                     <td>
                                         <button type="button" class="btn btn-round btn-danger"><i class="fa fa-edit fa-hover"></i><span class="text-muted"></span></button>
                                         <button type="button" class="btn btn-round btn-info"><i class="fa fa-trash fa-hover"></i><span class="text-muted"></span></button>
@@ -63,64 +56,7 @@
     </div>
 </div>
 <!-- /page content -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Alt Birim Ekleme</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-                    <input type="hidden" id="subUnitID" style="visibility:hidden" />
-                    <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Üst Birim</label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <select id="mainUnitID" class="form-control">
-                                <option>Choose option</option>
-                                <option>Option one</option>
-                                <option>Option two</option>
-                                <option>Option three</option>
-                                <option>Option four</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">
-                            Alt Birim Adı : <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="text" id="name" name="name" required="required" class="form-control col-md-7 col-xs-12">
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary" type="reset">Temizle</button>
-                <button type="submit" class="btn btn-success">Kaydet</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
-            </div>
-        </div>
-    </div>
-</div>
-
+<!-- Modal -->
 @section Scripts{
-    <!-- Datatables -->
-    <script src="../vendors/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-    <script src="../vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="../vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
-    <script src="../vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
-    <script src="../vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
-    <script src="../vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
-    <script src="../vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
-    <script src="../vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
-    <script src="../vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
-    <script src="../vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
-    <script src="../vendors/jszip/dist/jszip.min.js"></script>
-    <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
-    <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
+    @Html.Partial("/Views/Shared/Partials/DataTable/_Js.cshtml")
 }

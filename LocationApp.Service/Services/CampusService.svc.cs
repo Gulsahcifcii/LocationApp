@@ -1,4 +1,6 @@
-﻿using LocationApp.Service.Interfaces;
+﻿using LocationApp.Data.Database;
+using LocationApp.Data.Dto;
+using LocationApp.Service.Interfaces;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -30,8 +32,9 @@ namespace LocationApp.Service.Services
         }
         public string GetCampus(int campusID)
         {
-            var result = campusLogic.GetCampus(campusID);
-            return JsonConvert.SerializeObject(result);
+            var campus  = campusLogic.GetCampus(campusID);
+            var item = JsonConvert.SerializeObject(campus, Formatting.Indented);
+            return item;
         }
         public string UpdateCampus(int campusID, string name, string description, string other)
         {
@@ -44,5 +47,13 @@ namespace LocationApp.Service.Services
             });
             return JsonConvert.SerializeObject(result);
         }
+
+        public string GetAllCampus()
+        {
+            var campus = campusLogic.GetAllCampus();
+            var item = JsonConvert.SerializeObject(campus, Formatting.Indented);
+            return item;
+        }
+
     }
 }

@@ -44,10 +44,11 @@ namespace LocationApp.Data.Repository
         {
             if (where != null)
             {
-                return dbSet.Where(where);
+                return dbSet;
             }
 
             return dbSet;
-        }   
+        }
+       
     }
 }

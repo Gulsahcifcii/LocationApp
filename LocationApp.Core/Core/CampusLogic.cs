@@ -92,6 +92,7 @@ namespace LocationApp.Core.Core
                     item = unitofWork.GetRepository<campu>().GetById(x => x.CampusID == campusID);
                     CampusDto campusDto = new CampusDto();
                     campusDto.CampusID = item.CampusID;
+                    campusDto.Name = item.Name;
                     campusDto.Description = item.Description;
                     campusDto.Other = item.Other;
                     return campusDto;
@@ -115,6 +116,26 @@ namespace LocationApp.Core.Core
                 {
                     return false;
                 }
+            }
+        }
+        public List<CampusDto> GetAllCampus()
+        {
+            try
+            {
+                List<CampusDto> list = new List<CampusDto>();
+                using (UnitOfWork unitofWork = new UnitOfWork())
+                {
+                    List<campu> collection = unitofWork.GetRepository<campu>().Select(null,null).ToList();
+                    foreach (var item in collection)
+                    {
+                        list.Add(new CampusDto { CampusID = item.CampusID, Description = item.Description, Name = item.Name, Other = item.Other });
+                    }
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+                return new List<CampusDto>();
             }
         }
     }

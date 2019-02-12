@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using LocationApp.Data.Database;
+using LocationApp.Data.Dto;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,9 +26,20 @@ namespace LocationApp.Web.Controllers
             return View();
         }
         [HttpGet]
-        public ActionResult Edit(int CampusID)
+        public ActionResult Edit(int ? id)
         {
-            return View();
+            var item = campusService.GetCampus(id.Value);
+            var result = JsonConvert.DeserializeObject<CampusDto>(item);
+            if (result!=null)
+            {
+                campu campu = new campu();
+                campu.CampusID = result.CampusID;
+                campu.Description = result.Description;
+                campu.Name = result.Name;
+                campu.Other = campu.Other;
+                return View(campu);
+            }
+            return View(result);
         }
         [HttpPost]
         public ActionResult Edit(int CampusID, string Name, string Description, string Other)
@@ -36,7 +49,7 @@ namespace LocationApp.Web.Controllers
         [HttpGet]
         public ActionResult List()
         {
-            return View();
+            return View(JsonConvert.DeserializeObject<List<campu>>(campusService.GetAllCampus()));
         }
     }
 }

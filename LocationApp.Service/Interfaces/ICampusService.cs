@@ -30,5 +30,10 @@ namespace LocationApp.Service.Interfaces
         [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
         UriTemplate = "/GetCampus?campusID={campusID}")]
         string GetCampus(int campusID);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+        UriTemplate = "/GetAllCampus")]
+        string GetAllCampus();
     }
 }

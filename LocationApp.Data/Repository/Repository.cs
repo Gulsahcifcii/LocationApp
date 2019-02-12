@@ -31,15 +31,6 @@ namespace LocationApp.Data.Repository
         {
             return dbSet.Where(predicate).FirstOrDefault();
         }
-        //public IQueryable<T> GetAll()
-        //{
-        //    IQueryable<T> iQueryable = DbSet.Where(GetClidExpression());
-
-        //    if (typeof(T) == typeof(BNT_BP00))
-        //        iQueryable = iQueryable.Where(this.GetBpidExpression());
-
-        //    return iQueryable;
-        //}
         public void Insert(T Entity)
         {
             dbSet.Add(Entity);

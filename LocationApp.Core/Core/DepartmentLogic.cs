@@ -29,13 +29,12 @@ namespace LocationApp.Core.Core
                 {
                     unitOfWork.GetRepository<department>().Insert(item);
                     unitOfWork.saveChanges();
-                    return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK).ToString();
+                    return (HttpStatusCode.OK).ToString();
                 }
-
             }
             catch (Exception ex)
             {
-                return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError).ToString();
+                return (HttpStatusCode.InternalServerError).ToString();
             }
         }
         public string SetDepartment(DepartmentDto departmentDto)
@@ -53,13 +52,12 @@ namespace LocationApp.Core.Core
                 {
                     unitOfWork.GetRepository<department>().Update(item);
                     unitOfWork.saveChanges();
-                    return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK).ToString();
+                    return (HttpStatusCode.OK).ToString();
                 }
-
             }
             catch (Exception ex)
             {
-                return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError).ToString();
+                return (HttpStatusCode.InternalServerError).ToString();
             }
         }
         public string DelDepartment(int departmentID)
@@ -71,12 +69,12 @@ namespace LocationApp.Core.Core
                     var selectedDeparment = unitofWork.GetRepository<department>().GetById(x => x.DepartmentID == departmentID);
                     unitofWork.GetRepository<department>().Delete(selectedDeparment);
                     unitofWork.saveChanges();
-                    return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK).ToString();
+                    return (HttpStatusCode.OK).ToString();
                 }
             }
             catch (Exception)
             {
-                return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError).ToString();
+                return (HttpStatusCode.InternalServerError).ToString();
             }
         }
         public DepartmentDto GetDepartment(int departmentID)

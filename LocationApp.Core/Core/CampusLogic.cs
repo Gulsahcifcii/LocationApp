@@ -13,11 +13,15 @@ namespace LocationApp.Core.Core
 {
     public class CampusLogic
     {
-        WebOperationContext webOperationContext = WebOperationContext.Current;
         public string AddCampus(CampusDto campusDto)
         {
             try
             {
+                #region ANY RECORD
+                if (isThere(campusDto))
+                    return (HttpStatusCode.InternalServerError).ToString();
+                #endregion
+
                 campu item = new campu();
                 item.Name = campusDto.Name;
                 item.CampusID = campusDto.CampusID;
@@ -28,12 +32,12 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<campu>().Insert(item);
                     unitofWork.saveChanges();
-                    return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK).ToString();
+                    return (HttpStatusCode.OK).ToString();
                 }
             }
             catch (Exception ex)
             {
-                return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError).ToString();
+                return (HttpStatusCode.InternalServerError).ToString();
             }
         }
         public string SetCampus(CampusDto campusDto)
@@ -50,12 +54,12 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<campu>().Update(item);
                     unitofWork.saveChanges();
-                    return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK).ToString();
+                    return (HttpStatusCode.OK).ToString();
                 }
             }
             catch (Exception ex)
             {
-                return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError).ToString();
+                return (HttpStatusCode.InternalServerError).ToString();
             }
         }
         public string DelCampus(int campusID)
@@ -67,12 +71,12 @@ namespace LocationApp.Core.Core
                     var selectedCampus = unitofWork.GetRepository<campu>().GetById(x => x.CampusID == campusID);
                     unitofWork.GetRepository<campu>().Delete(selectedCampus);
                     unitofWork.saveChanges();
-                    return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK).ToString();
+                    return (HttpStatusCode.OK).ToString();
                 }
             }
             catch (Exception)
             {
-                return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError).ToString();
+                return (HttpStatusCode.InternalServerError).ToString();
             }
         }
         public CampusDto GetCampus(int campusID)
@@ -93,6 +97,21 @@ namespace LocationApp.Core.Core
             catch (Exception ex)
             {
                 return new CampusDto();
+            }
+        }
+        public bool isThere(CampusDto campusDto)
+        {
+            using (UnitOfWork unitofWork = new UnitOfWork())
+            {
+                var item = unitofWork.GetRepository<campu>().GetById(x => x.Name.ToUpper() == campusDto.Name.ToUpper());
+                if (item != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
     }

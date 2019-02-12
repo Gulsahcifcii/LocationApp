@@ -28,12 +28,12 @@ namespace LocationApp.Core.Core
                 {
                     unitOfWork.GetRepository<userrole>().Insert(item);
                     unitOfWork.saveChanges();
-                    return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK).ToString();
+                    return (HttpStatusCode.OK).ToString();
                 }
             }
             catch (Exception)
             {
-                return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError).ToString();
+                return (HttpStatusCode.InternalServerError).ToString();
             }
         }
         public string SetUserRole(UserRoleDto userRoleDto)
@@ -50,12 +50,12 @@ namespace LocationApp.Core.Core
                 {
                     unitOfWork.GetRepository<userrole>().Insert(item);
                     unitOfWork.saveChanges();
-                    return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK).ToString();
+                    return (HttpStatusCode.OK).ToString();
                 }
             }
             catch (Exception)
             {
-                return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError).ToString(); ;
+                return (HttpStatusCode.InternalServerError).ToString(); ;
             }
         }
         public UserRoleDto GetUserRole(int userRoleID)
@@ -88,13 +88,13 @@ namespace LocationApp.Core.Core
                     var selectedUserRoleID = unitOfWork.GetRepository<userrole>().GetById(x => x.UserRoleID == userRoleID);
                     unitOfWork.GetRepository<userrole>().Delete(selectedUserRoleID);
                     unitOfWork.saveChanges();
-                    return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK).ToString();
+                    return (HttpStatusCode.OK).ToString();
 
                 }
             }
             catch (Exception ex)
             {
-                return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError).ToString();
+                return (HttpStatusCode.InternalServerError).ToString();
             }
         }
     }

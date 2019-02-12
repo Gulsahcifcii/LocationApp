@@ -14,8 +14,7 @@ namespace LocationApp.Core.Core
 {
     public class UserTitleLogic
     {
-        WebOperationContext webOperationContext = WebOperationContext.Current;
-
+        //WebOperationContext webOperationContext = WebOperationContext.Current;
         public string AddUserTitle(UserTitleDto userTitleDto)
         {
             try
@@ -28,12 +27,12 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<usertitle>().Insert(item);
                     unitofWork.saveChanges();
-                    return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK).ToString();
+                    return (HttpStatusCode.OK).ToString();
                 }
             }
             catch (Exception ex)
             {
-                return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError).ToString();
+                return (HttpStatusCode.InternalServerError).ToString();
             }
         }
 
@@ -49,12 +48,12 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<usertitle>().Update(item);
                     unitofWork.saveChanges();
-                    return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK).ToString();
+                    return (HttpStatusCode.OK).ToString();
                 }
             }
             catch (Exception)
             {
-                return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError).ToString();
+                return (HttpStatusCode.InternalServerError).ToString();
             }
         }
         public string DelUserTitle(int userTitleId)
@@ -66,12 +65,12 @@ namespace LocationApp.Core.Core
                     var selectedUserTitle = unitofWork.GetRepository<usertitle>().GetById(x => x.UserTitleID == userTitleId);
                     unitofWork.GetRepository<usertitle>().Delete(selectedUserTitle);
                     unitofWork.saveChanges();
-                    return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK).ToString();
+                    return (HttpStatusCode.OK).ToString();
                 }
             }
             catch (Exception)
             {
-                return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError).ToString();
+                return (HttpStatusCode.InternalServerError).ToString();
             }
         }
         public UserTitleDto GetUserTitle(int userTitleId)

@@ -117,3 +117,4 @@ E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\Raz
 E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\Razor\Views\SubUnit\Edit.g.cshtml.cs
 E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\Razor\Views\MainUnit\Edit.g.cshtml.cs
 E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\Razor\Views\UserRole\Edit.g.cshtml.cs
+E:\Developers\Repository\LocationApp\LocationApp.Web\obj\Debug\netcoreapp2.1\Razor\Views\UserTitle\Edit.g.cshtml.cs

@@ -1,0 +1,91 @@
+﻿@model LocationApp.Data.Database.floor
+@{
+    ViewData["Title"] = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Styles{
+    @Html.Partial("/Views/Shared/Partials/DataTable/_Css.cshtml")
+}
+<!-- page content -->
+<div class="right_col" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3>Lokasyon <small> Kat</small></h3>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Kat<small></small></h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    @using (Html.BeginForm("Create", "Floor", FormMethod.Post, new { @class = "form-horizontal form-label-left" }))
+                    {
+                        @Html.HiddenFor(model => model.FloorID)
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="BlockID">Blok  :</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select id="BlokID" class="form-control">
+                                    <option>Choose option</option>
+                                    <option>Option one</option>
+                                    <option>Option two</option>
+                                    <option>Option three</option>
+                                    <option>Option four</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="BlockID">Bina  :</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select id="BuildID" class="form-control">
+                                    <option>Choose option</option>
+                                    <option>Option one</option>
+                                    <option>Option two</option>
+                                    <option>Option three</option>
+                                    <option>Option four</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">
+                                Kat Başlık : <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @Html.TextBoxFor(model => model.Name, new { @class = "form-control col-md-7 col-xs-12" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">
+                                Harita  : <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @Html.TextBoxFor(model => model.Map, new { @class = "form-control col-md-7 col-xs-12" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="description">
+                                Diğer <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @Html.TextBoxFor(model => model.Other, new { @class = "form-control col-md-7 col-xs-12" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <button class="btn btn-primary" type="button">Listele</button>
+                                <button type="submit" class="btn btn-success">Kaydet</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /page content -->
+@section Scripts{
+    @Html.Partial("/Views/Shared/Partials/DataTable/_Js.cshtml")
+}

@@ -26,12 +26,12 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<mainunit>().Insert(item);
                     unitofWork.saveChanges();
-                    return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK).ToString();
+                    return (HttpStatusCode.OK).ToString();
                 }
             }
             catch (Exception ex)
             {
-                return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError).ToString();
+                return (HttpStatusCode.InternalServerError).ToString();
             }
         }
         public string SetMainUnit(MainUnitDto mainUnitDto)
@@ -46,12 +46,12 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<mainunit>().Update(item);
                     unitofWork.saveChanges();
-                    return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK).ToString();
+                    return (HttpStatusCode.OK).ToString();
                 }
             }
             catch (Exception ex)
             {
-                return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError).ToString();
+                return (HttpStatusCode.InternalServerError).ToString();
             }
         }
         public string DelMainUnit(int mainUnitID)
@@ -63,12 +63,12 @@ namespace LocationApp.Core.Core
                     var selectedMainUnit = unitofWork.GetRepository<mainunit>().GetById(x => x.MainUnitID == mainUnitID);
                     unitofWork.GetRepository<mainunit>().Delete(selectedMainUnit);
                     unitofWork.saveChanges();
-                    return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK).ToString();
+                    return (HttpStatusCode.OK).ToString();
                 }
             }
             catch (Exception)
             {
-                return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError).ToString();
+                return (HttpStatusCode.InternalServerError).ToString();
             }
         }
         public MainUnitDto GetMainUnit(int mainUnitID)

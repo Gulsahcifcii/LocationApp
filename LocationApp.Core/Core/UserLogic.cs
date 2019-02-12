@@ -33,12 +33,12 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<user>().Insert(item);
                     unitofWork.saveChanges();
-                    return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK).ToString();
+                    return (HttpStatusCode.OK).ToString();
                 }
             }
             catch (Exception ex)
             {
-                return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError).ToString();
+                return (HttpStatusCode.InternalServerError).ToString();
             }
         }
 
@@ -58,12 +58,12 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<user>().Update(item);
                     unitofWork.saveChanges();
-                    return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK).ToString();
+                    return (HttpStatusCode.OK).ToString();
                 }
             }
             catch (Exception)
             {
-                return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError).ToString();
+                return (HttpStatusCode.InternalServerError).ToString();
             }
         }
         public string DelUser(int UserID)
@@ -75,12 +75,12 @@ namespace LocationApp.Core.Core
                     var selectedUser = unitofWork.GetRepository<user>().GetById(x => x.UserID == UserID);
                     unitofWork.GetRepository<user>().Delete(selectedUser);
                     unitofWork.saveChanges();
-                    return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK).ToString();
+                    return (HttpStatusCode.OK).ToString();
                 }
             }
             catch (Exception)
             {
-                return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError).ToString();
+                return (HttpStatusCode.InternalServerError).ToString();
             }
         }
         public UserDto GetUser(int UserID)

@@ -28,12 +28,12 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<userdepartment>().Insert(item);
                     unitofWork.saveChanges();
-                    return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK).ToString();
+                    return (HttpStatusCode.OK).ToString();
                 }
             }
             catch (Exception ex)
             {
-                return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError).ToString();
+                return (HttpStatusCode.InternalServerError).ToString();
             }
         }
 
@@ -50,12 +50,12 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<userdepartment>().Update(item);
                     unitofWork.saveChanges();
-                    return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK).ToString();
+                    return (HttpStatusCode.OK).ToString();
                 }
             }
             catch (Exception)
             {
-                return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError).ToString();
+                return (HttpStatusCode.InternalServerError).ToString();
             }
         }
         public string DelUserDepartment(int UserDepartmentID)
@@ -67,12 +67,12 @@ namespace LocationApp.Core.Core
                     var selectedUserDepartment = unitofWork.GetRepository<userdepartment>().GetById(x => x.UserDepartmentID == UserDepartmentID);
                     unitofWork.GetRepository<userdepartment>().Delete(selectedUserDepartment);
                     unitofWork.saveChanges();
-                    return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK).ToString();
+                    return (HttpStatusCode.OK).ToString();
                 }
             }
             catch (Exception)
             {
-                return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError).ToString();
+                return (HttpStatusCode.InternalServerError).ToString();
             }
         }
         public UserDepartmentDto GetUserDepartment(int UserDepartmentID)

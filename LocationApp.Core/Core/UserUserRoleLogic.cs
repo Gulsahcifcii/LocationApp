@@ -29,12 +29,12 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<useruserrole>().Insert(item);
                     unitofWork.saveChanges();
-                    return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK).ToString();
+                    return (HttpStatusCode.OK).ToString();
                 }
             }
             catch (Exception ex)
             {
-                return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError).ToString();
+                return (HttpStatusCode.InternalServerError).ToString();
             }
         }
 
@@ -51,12 +51,12 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<useruserrole>().Update(item);
                     unitofWork.saveChanges();
-                    return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK).ToString();
+                    return (HttpStatusCode.OK).ToString();
                 }
             }
             catch (Exception)
             {
-                return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError).ToString();
+                return (HttpStatusCode.InternalServerError).ToString();
             }
         }
         public string DelUserUserRole(int UserUserRoleID)
@@ -68,12 +68,12 @@ namespace LocationApp.Core.Core
                     var selectedUserTitle = unitofWork.GetRepository<useruserrole>().GetById(x => x.UserUserRoleID == UserUserRoleID);
                     unitofWork.GetRepository<useruserrole>().Delete(selectedUserTitle);
                     unitofWork.saveChanges();
-                    return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK).ToString();
+                    return (HttpStatusCode.OK).ToString();
                 }
             }
             catch (Exception)
             {
-                return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError).ToString();
+                return (HttpStatusCode.InternalServerError).ToString();
             }
         }
         public UserUserRoleDto GetUserUserRole(int UserUserRoleID)

@@ -33,7 +33,7 @@ namespace LocationApp.Core.Core
             }
             catch(Exception ex)
             {
-                return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError).ToString();
+                return (HttpStatusCode.InternalServerError).ToString();
             }
         }
         public string SetUserContactType(UserContactTypeDto userContactTypeDto)
@@ -49,12 +49,12 @@ namespace LocationApp.Core.Core
                 {
                     unitOfWork.GetRepository<usercontacttype>().Update(item);
                     unitOfWork.saveChanges();
-                    return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK).ToString();
+                    return (HttpStatusCode.OK).ToString();
                 }
             }
             catch(Exception ex)
             {
-                return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError).ToString();
+                return (HttpStatusCode.InternalServerError).ToString();
             }
         }
         public UserContactTypeDto GetUserContactType(int userContactTypeID)
@@ -86,13 +86,13 @@ namespace LocationApp.Core.Core
                     var selectedUserContactType = unitOfWork.GetRepository<usercontacttype>().GetById(x => x.UserContactTypeID == userContactTypeID);
                     unitOfWork.GetRepository<usercontacttype>().Delete(selectedUserContactType);
                     unitOfWork.saveChanges();
-                    return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK).ToString();
+                    return (HttpStatusCode.OK).ToString();
 
                 }
             }
             catch (Exception ex)
             {
-                return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError).ToString();
+                return (HttpStatusCode.InternalServerError).ToString();
             }
         }
     }

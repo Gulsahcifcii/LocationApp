@@ -30,12 +30,12 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<userpassword>().Insert(item);
                     unitofWork.saveChanges();
-                    return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK).ToString();
+                    return (HttpStatusCode.OK).ToString();
                 }
             }
             catch (Exception ex)
             {
-                return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError).ToString();
+                return (HttpStatusCode.InternalServerError).ToString();
             }
         }
 
@@ -52,12 +52,12 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<userpassword>().Update(item);
                     unitofWork.saveChanges();
-                    return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK).ToString();
+                    return (HttpStatusCode.OK).ToString();
                 }
             }
             catch (Exception)
             {
-                return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError).ToString();
+                return (HttpStatusCode.InternalServerError).ToString();
             }
         }
         public string DelUserPassword(int UserPasswordID)
@@ -69,12 +69,12 @@ namespace LocationApp.Core.Core
                     var selectedUserPassword = unitofWork.GetRepository<userpassword>().GetById(x => x.UserPasswordID == UserPasswordID);
                     unitofWork.GetRepository<userpassword>().Delete(selectedUserPassword);
                     unitofWork.saveChanges();
-                    return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK).ToString();
+                    return (HttpStatusCode.OK).ToString();
                 }
             }
             catch (Exception)
             {
-                return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError).ToString();
+                return (HttpStatusCode.InternalServerError).ToString();
             }
         }
         public UserPasswordDto GetUserPassword(int UserPasswordID)

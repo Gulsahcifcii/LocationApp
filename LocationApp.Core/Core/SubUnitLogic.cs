@@ -26,12 +26,12 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<subunit>().Insert(item);
                     unitofWork.saveChanges();
-                    return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK).ToString();
+                    return (HttpStatusCode.OK).ToString();
                 }
             }
             catch (Exception ex)
             {
-                return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError).ToString();
+                return (HttpStatusCode.InternalServerError).ToString();
             }
         }
         public string SetSubUnit(SubUnitDto subUnitDto)
@@ -46,12 +46,12 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<subunit>().Update(item);
                     unitofWork.saveChanges();
-                    return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK).ToString();
+                    return (HttpStatusCode.OK).ToString();
                 }
             }
             catch (Exception ex)
             {
-                return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError).ToString();
+                return (HttpStatusCode.InternalServerError).ToString();
             }
         }
         public string DelSubUnit(int subUnitID)
@@ -63,12 +63,12 @@ namespace LocationApp.Core.Core
                     var selectedSubUnit = unitofWork.GetRepository<subunit>().GetById(x => x.SubUnitID == subUnitID);
                     unitofWork.GetRepository<subunit>().Delete(selectedSubUnit);
                     unitofWork.saveChanges();
-                    return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK).ToString();
+                    return (HttpStatusCode.OK).ToString();
                 }
             }
             catch (Exception)
             {
-                return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError).ToString();
+                return (HttpStatusCode.InternalServerError).ToString();
             }
         }
         public SubUnitDto GetSubUnit(int subUnitID)

@@ -30,12 +30,12 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<floor>().Insert(item);
                     unitofWork.saveChanges();
-                    return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK).ToString();
+                    return (HttpStatusCode.OK).ToString();
                 }
             }
             catch (Exception ex)
             {
-                return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError).ToString();
+                return (HttpStatusCode.InternalServerError).ToString();
             }
         }
         public string SetFloor(FloorDto floorDto)
@@ -54,12 +54,12 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<floor>().Update(item);
                     unitofWork.saveChanges();
-                    return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK).ToString();
+                    return (HttpStatusCode.OK).ToString();
                 }
             }
             catch (Exception ex)
             {
-                return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError).ToString();
+                return (HttpStatusCode.InternalServerError).ToString();
             }
         }
         public string DelFloor(int floorID)
@@ -71,12 +71,12 @@ namespace LocationApp.Core.Core
                     var selectedFloor = unitofWork.GetRepository<floor>().GetById(x => x.FloorID == floorID);
                     unitofWork.GetRepository<floor>().Delete(selectedFloor);
                     unitofWork.saveChanges();
-                    return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK).ToString();
+                    return (HttpStatusCode.OK).ToString();
                 }
             }
             catch (Exception)
             {
-                return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError).ToString();
+                return (HttpStatusCode.InternalServerError).ToString();
             }
         }
         public FloorDto GetFloor(int floorID)

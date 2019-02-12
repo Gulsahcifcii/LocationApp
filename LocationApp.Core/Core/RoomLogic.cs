@@ -29,12 +29,12 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<room>().Insert(item);
                     unitofWork.saveChanges();
-                    return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK).ToString();
+                    return (HttpStatusCode.OK).ToString();
                 }
             }
             catch (Exception ex)
             {
-                return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError).ToString();
+                return (HttpStatusCode.InternalServerError).ToString();
             }
         }
         public string SetRoom(RoomDto roomDto)
@@ -51,12 +51,12 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<room>().Update(item);
                     unitofWork.saveChanges();
-                    return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK).ToString();
+                    return (HttpStatusCode.OK).ToString();
                 }
             }
             catch (Exception ex)
             {
-                return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError).ToString();
+                return (HttpStatusCode.InternalServerError).ToString();
             }
         }
         public string DelRoom(int roomID)
@@ -68,12 +68,12 @@ namespace LocationApp.Core.Core
                     var selectedRoom = unitofWork.GetRepository<room>().GetById(x => x.RoomID == roomID);
                     unitofWork.GetRepository<room>().Delete(selectedRoom);
                     unitofWork.saveChanges();
-                    return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK).ToString();
+                    return (HttpStatusCode.OK).ToString();
                 }
             }
             catch (Exception)
             {
-                return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError).ToString();
+                return (HttpStatusCode.InternalServerError).ToString();
             }
         }
         public RoomDto GetRoom(int roomID)

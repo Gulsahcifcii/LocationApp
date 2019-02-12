@@ -13,11 +13,15 @@ namespace LocationApp.Core.Core
 {
     public class BlockLogic
     {
-        WebOperationContext webOperationContext = WebOperationContext.Current;
         public string AddBlock(BlockDto blockDto)
         {
             try
             {
+                if (isThere(blockDto))
+                {
+                    return (HttpStatusCode.InternalServerError).ToString();
+                }
+
                 block item = new block();
                 item.BlockID = blockDto.BlockID;
                 item.BuildID = blockDto.BlockID;
@@ -26,13 +30,13 @@ namespace LocationApp.Core.Core
                 {
                     unitOfWork.GetRepository<block>().Insert(item);
                     unitOfWork.saveChanges();
-                    return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK).ToString();
+                    return (HttpStatusCode.OK).ToString();
                 }
 
             }
             catch (Exception ex)
             {
-                return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError).ToString();
+                return (HttpStatusCode.InternalServerError).ToString();
             }
         }
         public string SetBlock(BlockDto blockDto)
@@ -47,12 +51,12 @@ namespace LocationApp.Core.Core
                 {
                     unitOfWork.GetRepository<block>().Update(item);
                     unitOfWork.saveChanges();
-                    return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK).ToString();
+                    return (HttpStatusCode.OK).ToString();
                 }
             }
             catch (Exception ex)
             {
-                return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError).ToString();
+                return (HttpStatusCode.InternalServerError).ToString();
             }
         }
         public string DelBlock(int blockID)
@@ -64,12 +68,12 @@ namespace LocationApp.Core.Core
                     var selectedBlock = unitofWork.GetRepository<block>().GetById(x => x.BlockID == blockID);
                     unitofWork.GetRepository<block>().Delete(selectedBlock);
                     unitofWork.saveChanges();
-                    return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK).ToString();
+                    return (HttpStatusCode.OK).ToString();
                 }
             }
             catch (Exception)
             {
-                return (webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError).ToString();
+                return (HttpStatusCode.InternalServerError).ToString();
             }
         }
         public BlockDto GetBlock(int blockID)
@@ -93,6 +97,20 @@ namespace LocationApp.Core.Core
                 return new BlockDto();
             }
         }
-
+        public bool isThere(BlockDto blockDto)
+        {
+            using (UnitOfWork unitofWork = new UnitOfWork())
+            {
+                var item = unitofWork.GetRepository<block>().GetById(x => x.BuildID == blockDto.BuildID && x.Name ==blockDto.Name);
+                if (item != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
     }
 }

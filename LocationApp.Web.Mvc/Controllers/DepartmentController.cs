@@ -43,7 +43,7 @@ namespace LocationApp.Web.Controllers
             if (result != null)
             {
                 GetMainUnit(result.SubUnitDto.MainUnitID);
-                GetSubUnit(result.SubUnitDto.SubUnitID);
+                GetSubUnits(result.SubUnitDto.SubUnitID);
                 return View(result);
             }
             else
@@ -72,14 +72,14 @@ namespace LocationApp.Web.Controllers
         }
         void GetSubUnits(int selectedValue)
         {
-            var list = JsonConvert.DeserializeObject<List<SubUnitDto>>(subUnitService.GetAllSubUnit(0));
+            var list = JsonConvert.DeserializeObject<List<SubUnitDto>>(subUnitService.GetAllSubUnitWithByMainUnitID(0));
             SelectList slist = new SelectList(list, "SubUnitID", "Name", selectedValue);
             ViewBag.SubUnitID = slist;
         }
         [HttpGet]
         public JsonResult GetSubUnit(int mainUnitID)
         {
-            var data = JsonConvert.DeserializeObject<List<SubUnitDto>>(subUnitService.GetAllSubUnit(mainUnitID));
+            var data = JsonConvert.DeserializeObject<List<SubUnitDto>>(subUnitService.GetAllSubUnitWithByMainUnitID(mainUnitID));
             return Json(data, JsonRequestBehavior.AllowGet);
         }
     }

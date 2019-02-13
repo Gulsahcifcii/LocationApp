@@ -63,7 +63,7 @@ namespace LocationApp.Web.Controllers
         [HttpGet]
         public ActionResult List()
         {
-            return View(JsonConvert.DeserializeObject<List<SubUnitDto>>(subUnitService.GetAllSubUnit(0)));
+            return View(JsonConvert.DeserializeObject<List<SubUnitDto>>(subUnitService.GetAllSubUnit()));
         }
         void GetMainUnit(int selectedValue)
         {

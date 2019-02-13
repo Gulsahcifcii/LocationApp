@@ -24,22 +24,6 @@ namespace LocationApp.Service.Services
             });
             return JsonConvert.SerializeObject(result);
         }
-        public string DelSubUnit(int subUnitID)
-        {
-            var result = subUnitLogic.DelSubUnit(subUnitID);
-            return JsonConvert.SerializeObject(result);
-        }
-        public string GetAllSubUnit(int subUnitID)
-        {
-            var SubUnit = subUnitLogic.GetAllSubUnit(subUnitID);
-            var item = JsonConvert.SerializeObject(SubUnit, Formatting.Indented);
-            return item;
-        }
-        public string GetSubUnit(int subUnitID)
-        {
-            var result = subUnitLogic.GetSubUnit(subUnitID);
-            return JsonConvert.SerializeObject(result);
-        }
         public string SetSubUnit(int subUnitID, string name, int mainUnitID)
         {
             var result = subUnitLogic.SetSubUnit(new SubUnitDto
@@ -50,6 +34,27 @@ namespace LocationApp.Service.Services
             });
             return JsonConvert.SerializeObject(result);
         }
-
+        public string DelSubUnit(int subUnitID)
+        {
+            var result = subUnitLogic.DelSubUnit(subUnitID);
+            return JsonConvert.SerializeObject(result);
+        }
+        public string GetSubUnit(int subUnitID)
+        {
+            var result = subUnitLogic.GetSubUnit(subUnitID);
+            return JsonConvert.SerializeObject(result);
+        }
+        public string GetAllSubUnit()
+        {
+            var SubUnit = subUnitLogic.GetAllSubUnit();
+            var item = JsonConvert.SerializeObject(SubUnit, Formatting.Indented);
+            return item;
+        }
+        public string GetAllSubUnitWithByMainUnitID(int mainUnitID)
+        {
+            var SubUnit = subUnitLogic.GetAllWithByMainUnitID(mainUnitID);
+            var item = JsonConvert.SerializeObject(SubUnit, Formatting.Indented);
+            return item;
+        }
     }
 }

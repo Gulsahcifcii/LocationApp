@@ -91,7 +91,7 @@ namespace LocationApp.Core.Core
                 return new SubUnitDto();
             }
         }
-        public List<SubUnitDto> GetAllSubUnit(int mainUnitID)
+        public List<SubUnitDto> GetAllSubUnit()
         {
             try
             {
@@ -118,10 +118,29 @@ namespace LocationApp.Core.Core
                         sDto.MainUnitDto.Name = item.MainUnitName;
                         sDtoList.Add(sDto);
                     }
-
-                    if (mainUnitID > 0)
+                    return sDtoList;
+                }
+            }
+            catch (Exception ex)
+            {
+                return new List<SubUnitDto>();
+            }
+        }
+        public List<SubUnitDto> GetAllWithByMainUnitID(int mainUnitID)
+        {
+            try
+            {
+                List<SubUnitDto> sDtoList = new List<SubUnitDto>();
+                using (UnitOfWork unitOfWork = new UnitOfWork())
+                {
+                    var list = unitOfWork.GetRepository<subunit>().Select(null, null).Where(a => a.MainUnitID == mainUnitID).ToList();
+                    foreach (var item in list)
                     {
-                        sDtoList = sDtoList.Where(a => a.MainUnitID == mainUnitID).ToList();
+                        SubUnitDto sDto = new SubUnitDto();
+                        sDto.SubUnitID = item.SubUnitID;
+                        sDto.MainUnitID = item.MainUnitID.Value;
+                        sDto.Name = item.Name;
+                        sDtoList.Add(sDto);
                     }
                     return sDtoList;
                 }

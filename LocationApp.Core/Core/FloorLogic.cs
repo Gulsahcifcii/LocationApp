@@ -1,4 +1,5 @@
-﻿using LocationApp.Data.Database;
+﻿using LocationApp.Core.Helper;
+using LocationApp.Data.Database;
 using LocationApp.Data.Dto;
 using LocationApp.Data.UnitOfWork;
 using System;
@@ -13,8 +14,7 @@ namespace LocationApp.Core.Core
 {
     public class FloorLogic
     {
-        WebOperationContext webOperationContext = WebOperationContext.Current;
-        public string AddFloor(FloorDto floorDto)
+        public ResultHelper AddFloor(FloorDto floorDto)
         {
             try
             {
@@ -30,15 +30,15 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<floor>().Insert(item);
                     unitofWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, floorDto.FloorID, "İşlem Başarılı !");
                 }
             }
             catch (Exception ex)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, floorDto.FloorID, "İşlem Başarılı !");
             }
         }
-        public string SetFloor(FloorDto floorDto)
+        public ResultHelper SetFloor(FloorDto floorDto)
         {
             try
             {
@@ -54,15 +54,15 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<floor>().Update(item);
                     unitofWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, floorDto.FloorID, "İşlem Başarılı !");
                 }
             }
             catch (Exception ex)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, floorDto.FloorID, "İşlem Başarılı !");
             }
         }
-        public string DelFloor(int floorID)
+        public ResultHelper DelFloor(int floorID)
         {
             try
             {
@@ -71,12 +71,12 @@ namespace LocationApp.Core.Core
                     var selectedFloor = unitofWork.GetRepository<floor>().GetById(x => x.FloorID == floorID);
                     unitofWork.GetRepository<floor>().Delete(selectedFloor);
                     unitofWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, floorID, "İşlem Başarılı !");
                 }
             }
             catch (Exception)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, floorID, "İşlem Başarılı !");
             }
         }
         public FloorDto GetFloor(int floorID)

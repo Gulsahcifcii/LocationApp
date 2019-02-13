@@ -1,4 +1,5 @@
-﻿using LocationApp.Data.Database;
+﻿using LocationApp.Core.Helper;
+using LocationApp.Data.Database;
 using LocationApp.Data.Dto;
 using LocationApp.Data.UnitOfWork;
 using System;
@@ -13,8 +14,7 @@ namespace LocationApp.Core.Core
 {
     public class SubUnitLogic
     {
-        WebOperationContext webOperationContext = WebOperationContext.Current;
-        public string AddSubUnit(SubUnitDto subUnitDto)
+        public ResultHelper AddSubUnit(SubUnitDto subUnitDto)
         {
             try
             {
@@ -26,15 +26,15 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<subunit>().Insert(item);
                     unitofWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, subUnitDto.SubUnitID, "İşlem Başarılı !");
                 }
             }
             catch (Exception ex)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, subUnitDto.SubUnitID, "İşlem Başarılı !");
             }
         }
-        public string SetSubUnit(SubUnitDto subUnitDto)
+        public ResultHelper SetSubUnit(SubUnitDto subUnitDto)
         {
             try
             {
@@ -46,15 +46,15 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<subunit>().Update(item);
                     unitofWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, subUnitDto.SubUnitID, "İşlem Başarılı !");
                 }
             }
             catch (Exception ex)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, subUnitDto.SubUnitID, "İşlem Başarılı !");
             }
         }
-        public string DelSubUnit(int subUnitID)
+        public ResultHelper DelSubUnit(int subUnitID)
         {
             try
             {
@@ -63,12 +63,12 @@ namespace LocationApp.Core.Core
                     var selectedSubUnit = unitofWork.GetRepository<subunit>().GetById(x => x.SubUnitID == subUnitID);
                     unitofWork.GetRepository<subunit>().Delete(selectedSubUnit);
                     unitofWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, subUnitID, "İşlem Başarılı !");
                 }
             }
             catch (Exception)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, subUnitID, "İşlem Başarılı !");
             }
         }
         public SubUnitDto GetSubUnit(int subUnitID)

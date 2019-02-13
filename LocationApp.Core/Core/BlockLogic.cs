@@ -22,7 +22,6 @@ namespace LocationApp.Core.Core
                 {
                     return new ResultHelper(false, 0, "asd");
                 }
-
                 block item = new block();
                 item.BlockID = blockDto.BlockID;
                 item.BuildID = blockDto.BuildID;
@@ -32,12 +31,12 @@ namespace LocationApp.Core.Core
                 {
                     unitOfWork.GetRepository<block>().Insert(item);
                     unitOfWork.saveChanges();
-                    return new ResultHelper(true, item.BlockID, "İşlem Başarılı !");
+                    return new ResultHelper(true, item.BlockID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception ex)
             {
-                return new ResultHelper(false, 0, "İşlem Başarısız !");
+                return new ResultHelper(false, 0, ResultHelper.UnSuccessMessage);
             }
         }
         public ResultHelper SetBlock(BlockDto blockDto)

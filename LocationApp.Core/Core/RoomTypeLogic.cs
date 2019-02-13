@@ -9,13 +9,13 @@ using System.ServiceModel.Web;
 using LocationApp.Data.Dto;
 using LocationApp.Data.UnitOfWork;
 using System.Net;
+using LocationApp.Core.Helper;
 
 namespace LocationApp.Core.Core
 {
     public class RoomTypeLogic
     {
-        WebOperationContext webOperationContext = WebOperationContext.Current;
-        public string AddRoomType(RoomTypeDto roomTypeDto)
+        public ResultHelper AddRoomType(RoomTypeDto roomTypeDto)
         {
             try
             {
@@ -28,15 +28,15 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<roomtype>().Insert(item);
                     unitofWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, roomTypeDto.RoomTypeID, "İşlem Başarılı !");
                 }
             }
             catch (Exception ex)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, roomTypeDto.RoomTypeID, "İşlem Başarılı !");
             }
         }
-        public string SetRoomType(RoomTypeDto roomTypeDto)
+        public ResultHelper SetRoomType(RoomTypeDto roomTypeDto)
         {
             try
             {
@@ -49,15 +49,15 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<roomtype>().Update(item);
                     unitofWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, roomTypeDto.RoomTypeID, "İşlem Başarılı !");
                 }
             }
             catch (Exception)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, roomTypeDto.RoomTypeID, "İşlem Başarılı !");
             }
         }
-        public string DelRoomType(int roomTypeID)
+        public ResultHelper DelRoomType(int roomTypeID)
         {
             try
             {
@@ -66,12 +66,12 @@ namespace LocationApp.Core.Core
                     var selectedRoomType = unitofWork.GetRepository<roomtype>().GetById(x => x.RoomTypeID == roomTypeID);
                     unitofWork.GetRepository<roomtype>().Delete(selectedRoomType);
                     unitofWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, roomTypeID, "İşlem Başarılı !");
                 }
             }
             catch (Exception)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, roomTypeID, "İşlem Başarılı !");
             }
         }
         public RoomTypeDto GetRoomType(int roomTypeID)

@@ -1,4 +1,5 @@
-﻿using LocationApp.Data.Database;
+﻿using LocationApp.Core.Helper;
+using LocationApp.Data.Database;
 using LocationApp.Data.Dto;
 using LocationApp.Data.UnitOfWork;
 using System;
@@ -13,8 +14,7 @@ namespace LocationApp.Core.Core
 {
     public class SiteLogic
     {
-        WebOperationContext webOperationContext = WebOperationContext.Current;
-        public string AddSite(SiteDto siteDto)
+        public ResultHelper AddSite(SiteDto siteDto)
         {
             try
             {
@@ -28,16 +28,16 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<site>().Insert(item);
                     unitofWork.saveChanges();
-                   
-                    return (HttpStatusCode.OK).ToString();
+
+                    return new ResultHelper(true, siteDto.SiteID, "İşlem Başarılı !");
                 }
             }
             catch (Exception ex)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, siteDto.SiteID, "İşlem Başarılı !");
             }
         }
-        public string SetSite(SiteDto siteDto)
+        public ResultHelper SetSite(SiteDto siteDto)
         {
             try
             {
@@ -51,15 +51,15 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<site>().Update(item);
                     unitofWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, siteDto.SiteID, "İşlem Başarılı !");
                 }
             }
             catch (Exception ex)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, siteDto.SiteID, "İşlem Başarılı !");
             }
         }
-        public string DelSite(int siteID)
+        public ResultHelper DelSite(int siteID)
         {
             try
             {
@@ -68,12 +68,12 @@ namespace LocationApp.Core.Core
                     var selectedSite = unitofWork.GetRepository<site>().GetById(x => x.SiteID == siteID);
                     unitofWork.GetRepository<site>().Delete(selectedSite);
                     unitofWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, siteID, "İşlem Başarılı !");
                 }
             }
             catch (Exception)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, siteID, "İşlem Başarılı !");
             }
         }
         public SiteDto GetSite(int siteID)
@@ -107,7 +107,7 @@ namespace LocationApp.Core.Core
                     List<site> collection = unitofWork.GetRepository<site>().Select(null, null).ToList();
                     foreach (var item in collection)
                     {
-                        list.Add(new SiteDto { SiteID=item.SiteID,Name=item.Name,Gps=item.Gps,Description=item.Description });
+                        list.Add(new SiteDto { SiteID = item.SiteID, Name = item.Name, Gps = item.Gps, Description = item.Description });
                     }
                     return list;
                 }

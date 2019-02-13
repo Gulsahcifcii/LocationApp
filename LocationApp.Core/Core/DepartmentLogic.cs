@@ -1,4 +1,5 @@
-﻿using LocationApp.Data.Database;
+﻿using LocationApp.Core.Helper;
+using LocationApp.Data.Database;
 using LocationApp.Data.Dto;
 using LocationApp.Data.UnitOfWork;
 using System;
@@ -13,8 +14,7 @@ namespace LocationApp.Core.Core
 {
     public class DepartmentLogic
     {
-        WebOperationContext webOperationContext = WebOperationContext.Current;
-        public string AddDepartment(DepartmentDto departmentDto)
+        public ResultHelper AddDepartment(DepartmentDto departmentDto)
         {
             try
             {
@@ -29,15 +29,15 @@ namespace LocationApp.Core.Core
                 {
                     unitOfWork.GetRepository<department>().Insert(item);
                     unitOfWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, departmentDto.DepartmentID, "İşlem Başarılı !");
                 }
             }
             catch (Exception ex)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, departmentDto.DepartmentID, "İşlem Başarılı !");
             }
         }
-        public string SetDepartment(DepartmentDto departmentDto)
+        public ResultHelper SetDepartment(DepartmentDto departmentDto)
         {
             try
             {
@@ -52,15 +52,15 @@ namespace LocationApp.Core.Core
                 {
                     unitOfWork.GetRepository<department>().Update(item);
                     unitOfWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, departmentDto.DepartmentID, "İşlem Başarılı !");
                 }
             }
             catch (Exception ex)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, departmentDto.DepartmentID, "İşlem Başarılı !");
             }
         }
-        public string DelDepartment(int departmentID)
+        public ResultHelper DelDepartment(int departmentID)
         {
             try
             {
@@ -69,12 +69,12 @@ namespace LocationApp.Core.Core
                     var selectedDeparment = unitofWork.GetRepository<department>().GetById(x => x.DepartmentID == departmentID);
                     unitofWork.GetRepository<department>().Delete(selectedDeparment);
                     unitofWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(false, departmentID, "İşlem Başarılı !");
                 }
             }
             catch (Exception)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, departmentID, "İşlem Başarılı !");
             }
         }
         public DepartmentDto GetDepartment(int departmentID)

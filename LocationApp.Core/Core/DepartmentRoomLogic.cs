@@ -1,4 +1,5 @@
-﻿using LocationApp.Data.Database;
+﻿using LocationApp.Core.Helper;
+using LocationApp.Data.Database;
 using LocationApp.Data.Dto;
 using LocationApp.Data.UnitOfWork;
 using System;
@@ -13,8 +14,7 @@ namespace LocationApp.Core.Core
 {
     public class DepartmentRoomLogic
     {
-        WebOperationContext webOperationContext = WebOperationContext.Current;
-        public string AddDepartmentRoom(DepartmentRoomDto departmentRoomDto)
+        public ResultHelper AddDepartmentRoom(DepartmentRoomDto departmentRoomDto)
         {
             try
             {
@@ -24,20 +24,19 @@ namespace LocationApp.Core.Core
                 item.RoomID = departmentRoomDto.RoomID;
                 item.Other = departmentRoomDto.Other;
 
-
                 using (UnitOfWork unitofWork = new UnitOfWork())
                 {
                     unitofWork.GetRepository<departmentroom>().Insert(item);
                     unitofWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, departmentRoomDto.DepartmentRoomID, "İşlem Başarılı !");
                 }
             }
             catch (Exception ex)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, departmentRoomDto.DepartmentRoomID, "İşlem Başarılı !");
             }
         }
-        public string SetDepartmentRoom(DepartmentRoomDto departmentRoomDto)
+        public ResultHelper SetDepartmentRoom(DepartmentRoomDto departmentRoomDto)
         {
             try
             {
@@ -47,20 +46,19 @@ namespace LocationApp.Core.Core
                 item.RoomID = departmentRoomDto.RoomID;
                 item.Other = departmentRoomDto.Other;
 
-
                 using (UnitOfWork unitofWork = new UnitOfWork())
                 {
                     unitofWork.GetRepository<departmentroom>().Insert(item);
                     unitofWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, departmentRoomDto.DepartmentRoomID, "İşlem Başarılı !");
                 }
             }
             catch (Exception ex)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, departmentRoomDto.DepartmentRoomID, "İşlem Başarılı !");
             }
         }
-        public string DelDepartmentRoom(int departmentRoomId)
+        public ResultHelper DelDepartmentRoom(int departmentRoomId)
         {
             try
             {
@@ -69,12 +67,12 @@ namespace LocationApp.Core.Core
                     var selectedDepartmentRoom = unitofWork.GetRepository<departmentroom>().GetById(x => x.DepartmentRoomID == departmentRoomId);
                     unitofWork.GetRepository<departmentroom>().Delete(selectedDepartmentRoom);
                     unitofWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, departmentRoomId, "İşlem Başarılı !");
                 }
             }
             catch (Exception)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, departmentRoomId, "İşlem Başarılı !");
             }
         }
         public DepartmentRoomDto GetDepartmentRoom(int departmentRoomID)

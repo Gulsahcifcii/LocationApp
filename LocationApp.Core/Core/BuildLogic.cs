@@ -1,4 +1,5 @@
-﻿using LocationApp.Data.Database;
+﻿using LocationApp.Core.Helper;
+using LocationApp.Data.Database;
 using LocationApp.Data.Dto;
 using LocationApp.Data.UnitOfWork;
 using System;
@@ -13,7 +14,7 @@ namespace LocationApp.Core.Core
 {
     public class BuildLogic
     {
-        public string AddBuild(BuildDto buildDto)
+        public ResultHelper AddBuild(BuildDto buildDto)
         {
             try
             {
@@ -30,16 +31,15 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<build>().Insert(item);
                     unitofWork.saveChanges();
-
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, item.BuildID, "İşlem Başarılı !");
                 }
             }
             catch (Exception ex)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false,0, "İşlem Başarılı !");
             }
         }
-        public string SetBuild(BuildDto buildDto)
+        public ResultHelper SetBuild(BuildDto buildDto)
         {
             try
             {
@@ -56,15 +56,15 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<build>().Update(item);
                     unitofWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, buildDto.BuildID, "İşlem Başarılı !");
                 }
             }
             catch (Exception ex)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, buildDto.BuildID, "İşlem Başarısız !");
             }
         }
-        public string DelBuild(int buildID)
+        public ResultHelper DelBuild(int buildID)
         {
             try
             {
@@ -73,12 +73,12 @@ namespace LocationApp.Core.Core
                     var selectedBuild = unitofWork.GetRepository<build>().GetById(x => x.BuildID == buildID);
                     unitofWork.GetRepository<build>().Delete(selectedBuild);
                     unitofWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, buildID, "İşlem Başarılı !");
                 }
             }
             catch (Exception)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, buildID, "İşlem Başarılı !");
             }
         }
         public BuildDto GetBuild(int buildID)

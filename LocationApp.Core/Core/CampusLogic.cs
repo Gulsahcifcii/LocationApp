@@ -1,4 +1,5 @@
-﻿using LocationApp.Data.Database;
+﻿using LocationApp.Core.Helper;
+using LocationApp.Data.Database;
 using LocationApp.Data.Dto;
 using LocationApp.Data.UnitOfWork;
 using System;
@@ -13,13 +14,13 @@ namespace LocationApp.Core.Core
 {
     public class CampusLogic
     {
-        public string AddCampus(CampusDto campusDto)
+        public ResultHelper AddCampus(CampusDto campusDto)
         {
             try
             {
                 #region ANY RECORD
                 if (isThere(campusDto))
-                    return (HttpStatusCode.InternalServerError).ToString();
+                    return new ResultHelper(false, campusDto.CampusID, "İşlem Başarılı !");
                 #endregion
 
                 campu item = new campu();
@@ -32,15 +33,15 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<campu>().Insert(item);
                     unitofWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, campusDto.CampusID, "İşlem Başarılı !");
                 }
             }
             catch (Exception ex)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, campusDto.CampusID, "İşlem Başarılı !");
             }
         }
-        public string SetCampus(CampusDto campusDto)
+        public ResultHelper SetCampus(CampusDto campusDto)
         {
             try
             {
@@ -54,15 +55,15 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<campu>().Update(item);
                     unitofWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, campusDto.CampusID, "İşlem Başarılı !");
                 }
             }
             catch (Exception ex)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, campusDto.CampusID, "İşlem Başarılı !");
             }
         }
-        public string DelCampus(int campusID)
+        public ResultHelper DelCampus(int campusID)
         {
             try
             {
@@ -71,12 +72,12 @@ namespace LocationApp.Core.Core
                     var selectedCampus = unitofWork.GetRepository<campu>().GetById(x => x.CampusID == campusID);
                     unitofWork.GetRepository<campu>().Delete(selectedCampus);
                     unitofWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, campusID, "İşlem Başarılı !");
                 }
             }
             catch (Exception)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, campusID, "İşlem Başarılı !");
             }
         }
         public CampusDto GetCampus(int campusID)

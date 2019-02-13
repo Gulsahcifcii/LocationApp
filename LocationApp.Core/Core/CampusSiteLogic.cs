@@ -1,4 +1,5 @@
-﻿using LocationApp.Data.Database;
+﻿using LocationApp.Core.Helper;
+using LocationApp.Data.Database;
 using LocationApp.Data.Dto;
 using LocationApp.Data.UnitOfWork;
 using System;
@@ -13,8 +14,7 @@ namespace LocationApp.Core.Core
 {
     public class CampusSiteLogic
     {
-        WebOperationContext webOperationContext = WebOperationContext.Current;
-        public string AddCampusSite(CampusSiteDto campusSiteDto)
+        public ResultHelper AddCampusSite(CampusSiteDto campusSiteDto)
         {
             try
             {
@@ -28,15 +28,15 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<campussite>().Insert(item);
                     unitofWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, campusSiteDto.CampusID, "İşlem Başarılı !");
                 }
             }
             catch (Exception ex)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, campusSiteDto.CampusID, "İşlem Başarılı !");
             }
         }
-        public string SetCampusSite(CampusSiteDto campusSiteDto)
+        public ResultHelper SetCampusSite(CampusSiteDto campusSiteDto)
         {
             try
             {
@@ -50,15 +50,15 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<campussite>().Update(item);
                     unitofWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, campusSiteDto.CampusID, "İşlem Başarılı !");
                 }
             }
             catch (Exception ex)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, campusSiteDto.CampusSiteID, "İşlem Başarılı !");
             }
         }
-        public string DelCampusSite(int campusSiteID)
+        public ResultHelper DelCampusSite(int campusSiteID)
         {
             try
             {
@@ -67,12 +67,12 @@ namespace LocationApp.Core.Core
                     var selectedCampus = unitofWork.GetRepository<campussite>().GetById(x => x.CampusSiteID == campusSiteID);
                     unitofWork.GetRepository<campussite>().Delete(selectedCampus);
                     unitofWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, campusSiteID, "İşlem Başarılı !");
                 }
             }
             catch (Exception)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(true, campusSiteID, "İşlem Başarılı !");
             }
         }
         public CampusSiteDto GetCampusSite(int campusSiteID)

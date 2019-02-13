@@ -1,4 +1,5 @@
-﻿using LocationApp.Data.Database;
+﻿using LocationApp.Core.Helper;
+using LocationApp.Data.Database;
 using LocationApp.Data.Dto;
 using LocationApp.Data.UnitOfWork;
 using System;
@@ -13,8 +14,7 @@ namespace LocationApp.Core.Core
 {
     public class MainUnitLogic
     {
-        WebOperationContext webOperationContext = WebOperationContext.Current;
-        public string AddMainUnit(MainUnitDto mainUnitDto)
+        public ResultHelper AddMainUnit(MainUnitDto mainUnitDto)
         {
             try
             {
@@ -26,15 +26,15 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<mainunit>().Insert(item);
                     unitofWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, mainUnitDto.MainUnitID, "İşlem Başarılı !");
                 }
             }
             catch (Exception ex)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(true, mainUnitDto.MainUnitID, "İşlem Başarılı !");
             }
         }
-        public string SetMainUnit(MainUnitDto mainUnitDto)
+        public ResultHelper SetMainUnit(MainUnitDto mainUnitDto)
         {
             try
             {
@@ -46,15 +46,15 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<mainunit>().Update(item);
                     unitofWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, mainUnitDto.MainUnitID, "İşlem Başarılı !");
                 }
             }
             catch (Exception ex)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, mainUnitDto.MainUnitID, "İşlem Başarılı !");
             }
         }
-        public string DelMainUnit(int mainUnitID)
+        public ResultHelper DelMainUnit(int mainUnitID)
         {
             try
             {
@@ -63,12 +63,12 @@ namespace LocationApp.Core.Core
                     var selectedMainUnit = unitofWork.GetRepository<mainunit>().GetById(x => x.MainUnitID == mainUnitID);
                     unitofWork.GetRepository<mainunit>().Delete(selectedMainUnit);
                     unitofWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, mainUnitID, "İşlem Başarılı !");
                 }
             }
             catch (Exception)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, mainUnitID, "İşlem Başarılı !");
             }
         }
         public MainUnitDto GetMainUnit(int mainUnitID)
@@ -101,7 +101,7 @@ namespace LocationApp.Core.Core
                     List<mainunit> collection = unitofWork.GetRepository<mainunit>().Select(null, null).ToList();
                     foreach (var item in collection)
                     {
-                        list.Add(new MainUnitDto {MainUnitID=item.MainUnitID,Name=item.Name});
+                        list.Add(new MainUnitDto { MainUnitID = item.MainUnitID, Name = item.Name });
                     }
                     return list;
                 }

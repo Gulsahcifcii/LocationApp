@@ -1,4 +1,5 @@
-﻿using LocationApp.Data.Database;
+﻿using LocationApp.Core.Helper;
+using LocationApp.Data.Database;
 using LocationApp.Data.Dto;
 using LocationApp.Data.UnitOfWork;
 using System;
@@ -13,8 +14,7 @@ namespace LocationApp.Core.Core
 {
     public class RoomLogic
     {
-        WebOperationContext webOperationContext = WebOperationContext.Current;
-        public string AddRoom(RoomDto roomDto)
+        public ResultHelper AddRoom(RoomDto roomDto)
         {
             try
             {
@@ -29,15 +29,16 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<room>().Insert(item);
                     unitofWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, roomDto.RoomID, "İşlem Başarılı !");
+
                 }
             }
             catch (Exception ex)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, roomDto.RoomID, "İşlem Başarılı !");
             }
         }
-        public string SetRoom(RoomDto roomDto)
+        public ResultHelper SetRoom(RoomDto roomDto)
         {
             try
             {
@@ -51,15 +52,15 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<room>().Update(item);
                     unitofWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, roomDto.RoomID, "İşlem Başarılı !");
                 }
             }
             catch (Exception ex)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, roomDto.RoomID, "İşlem Başarılı !");
             }
         }
-        public string DelRoom(int roomID)
+        public ResultHelper DelRoom(int roomID)
         {
             try
             {
@@ -68,12 +69,12 @@ namespace LocationApp.Core.Core
                     var selectedRoom = unitofWork.GetRepository<room>().GetById(x => x.RoomID == roomID);
                     unitofWork.GetRepository<room>().Delete(selectedRoom);
                     unitofWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, roomID, "İşlem Başarılı !");
                 }
             }
             catch (Exception)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, roomID, "İşlem Başarılı !");
             }
         }
         public RoomDto GetRoom(int roomID)

@@ -1,4 +1,5 @@
 ﻿using LocationApp.Data.Database;
+using LocationApp.Data.Dto;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -12,9 +13,11 @@ namespace LocationApp.Web.Controllers
     public class BlockController : Controller
     {
         LocationApp.Service.Services.BlockService blockService = new Service.Services.BlockService();
+        LocationApp.Service.Services.BuildService buildService = new Service.Services.BuildService();
         [HttpGet]
         public ActionResult Create()
         {
+            GetDropDownListForSite();
             return View();
         }
         [HttpPost]
@@ -37,6 +40,13 @@ namespace LocationApp.Web.Controllers
         public ActionResult List()
         {
             return View(JsonConvert.DeserializeObject<List<block>>(blockService.GetAllBlock()));
+        }
+
+        void GetDropDownListForSite()
+        {
+            var list = JsonConvert.DeserializeObject<List<BuildDto>>(buildService.GetAllBuild());
+            SelectList slist = new SelectList(list, "BuildID", "Name");
+            ViewBag.SiteID = slist;
         }
     }
 }

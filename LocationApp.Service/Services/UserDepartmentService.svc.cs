@@ -17,7 +17,7 @@ namespace LocationApp.Service.Services
         public string AddUserDepartment(int userDepartmentID, int userID, int departmentID)
         {
 
-            var result = userDepartmenLogic.AddUserDepartment(new UserDepartmentDto
+            var result = userDepartmentLogic.AddUserDepartment(new UserDepartmentDto
             {
                 UserDepartmentID = userDepartmentID,
                 DepartmentID = departmentID,
@@ -28,7 +28,7 @@ namespace LocationApp.Service.Services
         }
         public string DelUserDepartment(int UserDepartmentID)
         {
-            var result = userDepartmenLogic.DelUserDepartment(UserDepartmentID);
+            var result = userDepartmentLogic.DelUserDepartment(UserDepartmentID);
             return JsonConvert.SerializeObject(result);
         }
         public string GetAllUserDepartment()
@@ -39,12 +39,12 @@ namespace LocationApp.Service.Services
         }
         public string GetUserDepartment(int UserDepartmentID)
         {
-            var result = userDepartmenLogic.GetUserDepartment(UserDepartmentID);
+            var result = userDepartmentLogic.GetUserDepartment(UserDepartmentID);
             return JsonConvert.SerializeObject(result);
         }
         public string SetUserDepartment(int UserDepartmentID, int UserID, int DepartmentID)
         {
-            var result = userDepartmenLogic.AddUserDepartment(new UserDepartmentDto
+            var result = userDepartmentLogic.AddUserDepartment(new UserDepartmentDto
             {
                 UserDepartmentID = UserDepartmentID,
                 UserID = UserID,

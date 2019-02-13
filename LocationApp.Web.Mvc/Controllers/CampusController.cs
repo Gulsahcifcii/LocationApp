@@ -49,7 +49,7 @@ namespace LocationApp.Web.Controllers
         [HttpGet]
         public ActionResult List()
         {
-            return View(JsonConvert.DeserializeObject<List<campu>>(campusService.GetAllCampus()));
+            return View(JsonConvert.DeserializeObject<List<CampusDto>>(campusService.GetAllCampus()));
         }
     }
 }

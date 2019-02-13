@@ -1,4 +1,4 @@
-﻿using LocationApp.Data.Database;
+﻿using LocationApp.Core.Helper;
 using LocationApp.Data.Dto;
 using LocationApp.Web.Mvc.Helpers;
 using Newtonsoft.Json;
@@ -25,16 +25,14 @@ namespace LocationApp.Web.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Create(int DepartmentID,int SubUnitID,string Name,string Description,string Other)
+        public ActionResult Create(int DepartmentID, int SubUnitID, string Name, string Description, string Other)
         {
-            string result = JsonConvert.DeserializeObject(
-                  departmentService.AddDepartment(0,Name,Description,Other,SubUnitID)
-                  ).ToString();
-
-            if (result == "OK")
+            ResultHelper result = JsonConvert.DeserializeObject<ResultHelper>
+                (departmentService.AddDepartment(0, Name, Description, Other, SubUnitID));
+            if (result.Result)
                 return RedirectToAction("List");
             else
-                ViewBag.Message = Helper.GetResultMessage(false);
+                ViewBag.Message = Helper.GetResultMessage(result.Result,result.ResultDescription);
             return View();
         }
         [HttpGet]
@@ -54,14 +52,12 @@ namespace LocationApp.Web.Controllers
         [HttpPost]
         public ActionResult Edit(int DepartmentID, int SubUnitID, string Name, string Description, string Other)
         {
-            string result = JsonConvert.DeserializeObject(
-                   departmentService.UpdateDepartment(DepartmentID, Name, Description, Other, SubUnitID)
-                   ).ToString();
-
-            if (result == "OK")
+            ResultHelper result = JsonConvert.DeserializeObject<ResultHelper>
+                (departmentService.UpdateDepartment(DepartmentID, Name, Description, Other, SubUnitID));
+            if (result.Result)
                 return RedirectToAction("List");
             else
-                ViewBag.Message = Helper.GetResultMessage(false);
+                ViewBag.Message = Helper.GetResultMessage(result.Result,result.ResultDescription);
             return View();
         }
         public ActionResult List()

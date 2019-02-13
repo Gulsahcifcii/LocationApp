@@ -31,12 +31,12 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<build>().Insert(item);
                     unitofWork.saveChanges();
-                    return new ResultHelper(true, item.BuildID, "İşlem Başarılı !");
+                    return new ResultHelper(true, item.BuildID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception ex)
             {
-                return new ResultHelper(false,0, "İşlem Başarılı !");
+                return new ResultHelper(false,0, ResultHelper.UnSuccessMessage);
             }
         }
         public ResultHelper SetBuild(BuildDto buildDto)
@@ -56,12 +56,12 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<build>().Update(item);
                     unitofWork.saveChanges();
-                    return new ResultHelper(true, buildDto.BuildID, "İşlem Başarılı !");
+                    return new ResultHelper(true, buildDto.BuildID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception ex)
             {
-                return new ResultHelper(false, buildDto.BuildID, "İşlem Başarısız !");
+                return new ResultHelper(false, buildDto.BuildID, ResultHelper.UnSuccessMessage);
             }
         }
         public ResultHelper DelBuild(int buildID)
@@ -73,12 +73,12 @@ namespace LocationApp.Core.Core
                     var selectedBuild = unitofWork.GetRepository<build>().GetById(x => x.BuildID == buildID);
                     unitofWork.GetRepository<build>().Delete(selectedBuild);
                     unitofWork.saveChanges();
-                    return new ResultHelper(true, buildID, "İşlem Başarılı !");
+                    return new ResultHelper(true, buildID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception)
             {
-                return new ResultHelper(false, buildID, "İşlem Başarılı !");
+                return new ResultHelper(false, buildID, ResultHelper.UnSuccessMessage);
             }
         }
         public BuildDto GetBuild(int buildID)

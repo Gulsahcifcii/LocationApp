@@ -29,13 +29,13 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<room>().Insert(item);
                     unitofWork.saveChanges();
-                    return new ResultHelper(true, roomDto.RoomID, "İşlem Başarılı !");
+                    return new ResultHelper(true, roomDto.RoomID, ResultHelper.SuccessMessage);
 
                 }
             }
             catch (Exception ex)
             {
-                return new ResultHelper(false, roomDto.RoomID, "İşlem Başarılı !");
+                return new ResultHelper(false, roomDto.RoomID, ResultHelper.UnSuccessMessage);
             }
         }
         public ResultHelper SetRoom(RoomDto roomDto)
@@ -52,12 +52,12 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<room>().Update(item);
                     unitofWork.saveChanges();
-                    return new ResultHelper(true, roomDto.RoomID, "İşlem Başarılı !");
+                    return new ResultHelper(true, roomDto.RoomID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception ex)
             {
-                return new ResultHelper(false, roomDto.RoomID, "İşlem Başarılı !");
+                return new ResultHelper(false, roomDto.RoomID, ResultHelper.UnSuccessMessage);
             }
         }
         public ResultHelper DelRoom(int roomID)
@@ -69,12 +69,12 @@ namespace LocationApp.Core.Core
                     var selectedRoom = unitofWork.GetRepository<room>().GetById(x => x.RoomID == roomID);
                     unitofWork.GetRepository<room>().Delete(selectedRoom);
                     unitofWork.saveChanges();
-                    return new ResultHelper(true, roomID, "İşlem Başarılı !");
+                    return new ResultHelper(true, roomID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception)
             {
-                return new ResultHelper(false, roomID, "İşlem Başarılı !");
+                return new ResultHelper(false, roomID, ResultHelper.UnSuccessMessage);
             }
         }
         public RoomDto GetRoom(int roomID)

@@ -29,12 +29,12 @@ namespace LocationApp.Core.Core
                     unitofWork.GetRepository<site>().Insert(item);
                     unitofWork.saveChanges();
 
-                    return new ResultHelper(true, siteDto.SiteID, "İşlem Başarılı !");
+                    return new ResultHelper(true, siteDto.SiteID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception ex)
             {
-                return new ResultHelper(false, siteDto.SiteID, "İşlem Başarılı !");
+                return new ResultHelper(false, siteDto.SiteID, ResultHelper.UnSuccessMessage);
             }
         }
         public ResultHelper SetSite(SiteDto siteDto)
@@ -51,12 +51,12 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<site>().Update(item);
                     unitofWork.saveChanges();
-                    return new ResultHelper(true, siteDto.SiteID, "İşlem Başarılı !");
+                    return new ResultHelper(true, siteDto.SiteID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception ex)
             {
-                return new ResultHelper(false, siteDto.SiteID, "İşlem Başarılı !");
+                return new ResultHelper(false, siteDto.SiteID, ResultHelper.UnSuccessMessage);
             }
         }
         public ResultHelper DelSite(int siteID)
@@ -68,12 +68,12 @@ namespace LocationApp.Core.Core
                     var selectedSite = unitofWork.GetRepository<site>().GetById(x => x.SiteID == siteID);
                     unitofWork.GetRepository<site>().Delete(selectedSite);
                     unitofWork.saveChanges();
-                    return new ResultHelper(true, siteID, "İşlem Başarılı !");
+                    return new ResultHelper(true, siteID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception)
             {
-                return new ResultHelper(false, siteID, "İşlem Başarılı !");
+                return new ResultHelper(false, siteID, ResultHelper.UnSuccessMessage);
             }
         }
         public SiteDto GetSite(int siteID)

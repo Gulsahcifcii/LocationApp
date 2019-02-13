@@ -28,12 +28,12 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<campussite>().Insert(item);
                     unitofWork.saveChanges();
-                    return new ResultHelper(true, campusSiteDto.CampusID, "İşlem Başarılı !");
+                    return new ResultHelper(true, campusSiteDto.CampusID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception ex)
             {
-                return new ResultHelper(false, campusSiteDto.CampusID, "İşlem Başarılı !");
+                return new ResultHelper(false, campusSiteDto.CampusID, ResultHelper.UnSuccessMessage);
             }
         }
         public ResultHelper SetCampusSite(CampusSiteDto campusSiteDto)
@@ -50,12 +50,12 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<campussite>().Update(item);
                     unitofWork.saveChanges();
-                    return new ResultHelper(true, campusSiteDto.CampusID, "İşlem Başarılı !");
+                    return new ResultHelper(true, campusSiteDto.CampusID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception ex)
             {
-                return new ResultHelper(false, campusSiteDto.CampusSiteID, "İşlem Başarılı !");
+                return new ResultHelper(false, campusSiteDto.CampusSiteID, ResultHelper.UnSuccessMessage);
             }
         }
         public ResultHelper DelCampusSite(int campusSiteID)
@@ -67,12 +67,12 @@ namespace LocationApp.Core.Core
                     var selectedCampus = unitofWork.GetRepository<campussite>().GetById(x => x.CampusSiteID == campusSiteID);
                     unitofWork.GetRepository<campussite>().Delete(selectedCampus);
                     unitofWork.saveChanges();
-                    return new ResultHelper(true, campusSiteID, "İşlem Başarılı !");
+                    return new ResultHelper(true, campusSiteID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception)
             {
-                return new ResultHelper(true, campusSiteID, "İşlem Başarılı !");
+                return new ResultHelper(true, campusSiteID, ResultHelper.UnSuccessMessage);
             }
         }
         public CampusSiteDto GetCampusSite(int campusSiteID)

@@ -1,4 +1,5 @@
-﻿using LocationApp.Data.Dto;
+﻿using LocationApp.Core.Helper;
+using LocationApp.Data.Dto;
 using LocationApp.Service.Services;
 using LocationApp.Web.Mvc.Helpers;
 using Newtonsoft.Json;
@@ -25,15 +26,12 @@ namespace LocationApp.Web.Controllers
         [HttpPost]
         public ActionResult Create(int SubUnitID, string Name, int MainUnitID)
         {
-            string result = JsonConvert.DeserializeObject(
-                           subUnitService.AddSubUnit(0, Name, MainUnitID)
-                           ).ToString();
-
-            if (result == "OK")
+            ResultHelper result = JsonConvert.DeserializeObject<ResultHelper>
+                (subUnitService.AddSubUnit(0, Name, MainUnitID));
+            if (result.Result)
                 return RedirectToAction("List");
-            //ViewBag.Message = Helper.GetResultMessage(true);
             else
-                ViewBag.Message = Helper.GetResultMessage(false);
+                ViewBag.Message = Helper.GetResultMessage(result.Result, result.ResultDescription);
             return View();
         }
         [HttpGet]
@@ -53,15 +51,12 @@ namespace LocationApp.Web.Controllers
         [HttpPost]
         public ActionResult Edit(int SubUnitID, string Name, int MainUnitID)
         {
-            string result = JsonConvert.DeserializeObject(
-                                subUnitService.SetSubUnit(SubUnitID, Name, MainUnitID)
-                                ).ToString();
-
-            if (result == "OK")
+            ResultHelper result = JsonConvert.DeserializeObject<ResultHelper>
+                (subUnitService.SetSubUnit(SubUnitID, Name, MainUnitID));
+            if (result.Result)
                 return RedirectToAction("List");
-            //ViewBag.Message = Helper.GetResultMessage(true);
             else
-                ViewBag.Message = Helper.GetResultMessage(false);
+                ViewBag.Message = Helper.GetResultMessage(result.Result,result.ResultDescription);
             return View();
         }
 
@@ -69,7 +64,6 @@ namespace LocationApp.Web.Controllers
         public ActionResult List()
         {
             return View(JsonConvert.DeserializeObject<List<SubUnitDto>>(subUnitService.GetAllSubUnit(0)));
-
         }
         void GetMainUnit(int selectedValue)
         {

@@ -23,6 +23,7 @@
                         <h2>Oda<small></small></h2>
                         <div class="clearfix"></div>
                     </div>
+                    <div> @Html.Raw(ViewBag.Message)</div>
                     @using (Html.BeginForm("Create", "Room", FormMethod.Post, new { @class = "form-horizontal form-label-left" }))
                     {
                         @Html.HiddenFor(model => model.RoomID)

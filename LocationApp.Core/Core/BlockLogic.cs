@@ -51,12 +51,12 @@ namespace LocationApp.Core.Core
                 {
                     unitOfWork.GetRepository<block>().Update(item);
                     unitOfWork.saveChanges();
-                    return new ResultHelper(true, item.BlockID, "İşlem Başarılı !");
+                    return new ResultHelper(true, item.BlockID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception ex)
             {
-                return new ResultHelper(false, blockDto.BlockID, "İşlem Başarılı !");
+                return new ResultHelper(false, blockDto.BlockID, ResultHelper.UnSuccessMessage);
             }
         }
         public ResultHelper DelBlock(int blockID)
@@ -68,12 +68,12 @@ namespace LocationApp.Core.Core
                     var selectedBlock = unitofWork.GetRepository<block>().GetById(x => x.BlockID == blockID);
                     unitofWork.GetRepository<block>().Delete(selectedBlock);
                     unitofWork.saveChanges();
-                    return new ResultHelper(true, selectedBlock.BlockID, "İşlem Başarılı !");
+                    return new ResultHelper(true, selectedBlock.BlockID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception)
             {
-                return new ResultHelper(false, blockID, "İşlem Başarılı !");
+                return new ResultHelper(false, blockID, ResultHelper.UnSuccessMessage);
             }
         }
         public BlockDto GetBlock(int blockID)

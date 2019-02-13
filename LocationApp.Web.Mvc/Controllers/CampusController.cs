@@ -1,4 +1,5 @@
-﻿using LocationApp.Data.Database;
+﻿using LocationApp.Core.Helper;
+using LocationApp.Data.Database;
 using LocationApp.Data.Dto;
 using LocationApp.Web.Mvc.Helpers;
 using Newtonsoft.Json;
@@ -22,13 +23,12 @@ namespace LocationApp.Web.Controllers
         [HttpPost]
         public ActionResult Create(string Name, string Description, string Other)
         {
-            string result = JsonConvert.DeserializeObject(
-                campusService.AddCampus(0, Name, Description, Other)
-                ).ToString();
-            if (result == "OK")
+            ResultHelper result = JsonConvert.DeserializeObject<ResultHelper>
+                (campusService.AddCampus(0, Name, Description, Other));
+            if (result.Result)
                 return RedirectToAction("List");
             else
-                ViewBag.Message = Helper.GetResultMessage(false);
+                ViewBag.Message = Helper.GetResultMessage(result.Result, result.ResultDescription);
             return View();
         }
         [HttpGet]
@@ -44,14 +44,12 @@ namespace LocationApp.Web.Controllers
         [HttpPost]
         public ActionResult Edit(int CampusID, string Name, string Description, string Other)
         {
-            string result = JsonConvert.DeserializeObject(
-                            campusService.UpdateCampus(CampusID, Name, Description, Other)
-                            ).ToString();
-
-            if (result == "OK")
+            ResultHelper result = JsonConvert.DeserializeObject<ResultHelper>
+                (campusService.UpdateCampus(CampusID, Name, Description, Other));
+            if (result.Result)
                 return RedirectToAction("List");
             else
-                ViewBag.Message = Helper.GetResultMessage(false);
+                ViewBag.Message = Helper.GetResultMessage(result.Result, result.ResultDescription);
             return View();
         }
         [HttpGet]

@@ -30,12 +30,13 @@
                         <h2>Ana Birim<small></small></h2>
                         <div class="clearfix"></div>
                     </div>
+                    <div> @Html.Raw(ViewBag.Message)</div>
                     @using (Html.BeginForm("Create", "MainUnit", FormMethod.Post, new { @class = "form-horizontal form-label-left" }))
                     {
                         @Html.HiddenFor(model => model.MainUnitID)
                         <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">
-                               Ana Birim Adı : <span class="required">*</span>
+                                Ana Birim Adı : <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 @Html.TextBoxFor(model => model.Name, new { @class = "form-control col-md-7 col-xs-12" })

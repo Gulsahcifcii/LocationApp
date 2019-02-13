@@ -26,12 +26,12 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<mainunit>().Insert(item);
                     unitofWork.saveChanges();
-                    return new ResultHelper(true, mainUnitDto.MainUnitID, "İşlem Başarılı !");
+                    return new ResultHelper(true, mainUnitDto.MainUnitID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception ex)
             {
-                return new ResultHelper(true, mainUnitDto.MainUnitID, "İşlem Başarılı !");
+                return new ResultHelper(true, mainUnitDto.MainUnitID, ResultHelper.UnSuccessMessage);
             }
         }
         public ResultHelper SetMainUnit(MainUnitDto mainUnitDto)
@@ -46,12 +46,12 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<mainunit>().Update(item);
                     unitofWork.saveChanges();
-                    return new ResultHelper(true, mainUnitDto.MainUnitID, "İşlem Başarılı !");
+                    return new ResultHelper(true, mainUnitDto.MainUnitID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception ex)
             {
-                return new ResultHelper(false, mainUnitDto.MainUnitID, "İşlem Başarılı !");
+                return new ResultHelper(false, mainUnitDto.MainUnitID, ResultHelper.UnSuccessMessage);
             }
         }
         public ResultHelper DelMainUnit(int mainUnitID)
@@ -63,12 +63,12 @@ namespace LocationApp.Core.Core
                     var selectedMainUnit = unitofWork.GetRepository<mainunit>().GetById(x => x.MainUnitID == mainUnitID);
                     unitofWork.GetRepository<mainunit>().Delete(selectedMainUnit);
                     unitofWork.saveChanges();
-                    return new ResultHelper(true, mainUnitID, "İşlem Başarılı !");
+                    return new ResultHelper(true, mainUnitID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception)
             {
-                return new ResultHelper(false, mainUnitID, "İşlem Başarılı !");
+                return new ResultHelper(false, mainUnitID, ResultHelper.UnSuccessMessage);
             }
         }
         public MainUnitDto GetMainUnit(int mainUnitID)

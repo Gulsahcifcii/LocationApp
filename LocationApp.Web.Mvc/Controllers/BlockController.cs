@@ -30,7 +30,7 @@ namespace LocationApp.Web.Controllers
             if (result.Result)
                 return RedirectToAction("List");
             else
-                ViewBag.Message = Helper.GetResultMessage(false);
+                ViewBag.Message = Helper.GetResultMessage(result.Result,result.ResultDescription);
             return View();
         }
 
@@ -50,13 +50,13 @@ namespace LocationApp.Web.Controllers
         [HttpPost]
         public ActionResult Edit(int BlockID, int BuildID, string Name, string Gps)
         {
-            string result = JsonConvert.DeserializeObject
-               (blockService.UpdateBlock(BlockID, BuildID, Name, Gps)
-               ).ToString();
-            if (result == "OK")
+            ResultHelper result = JsonConvert.DeserializeObject<ResultHelper>
+              (blockService.UpdateBlock(BlockID, BuildID, Name, Gps)
+              );
+            if (result.Result)
                 return RedirectToAction("List");
             else
-                ViewBag.Message = Helper.GetResultMessage(false);
+                ViewBag.Message = Helper.GetResultMessage(result.Result, result.ResultDescription);
             return View();
         }
         [HttpGet]

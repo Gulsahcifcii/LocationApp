@@ -1,4 +1,5 @@
-﻿using LocationApp.Data.Database;
+﻿using LocationApp.Core.Helper;
+using LocationApp.Data.Database;
 using LocationApp.Data.Dto;
 using LocationApp.Web.Mvc.Helpers;
 using Newtonsoft.Json;
@@ -20,19 +21,14 @@ namespace LocationApp.Web.Controllers
         {
             return View();
         }
-
         [HttpPost]
         public ActionResult Create(int MainUnitID, string Name)
         {
-            string result = JsonConvert.DeserializeObject(
-                            mainUnitService.AddMainUnit(0, Name)
-                            ).ToString();
-
-            if (result == "OK")
+            ResultHelper result = JsonConvert.DeserializeObject<ResultHelper>(mainUnitService.AddMainUnit(0, Name));
+            if (result.Result)
                 return RedirectToAction("List");
-            //ViewBag.Message = Helper.GetResultMessage(true);
             else
-                ViewBag.Message = Helper.GetResultMessage(false);
+                ViewBag.Message = Helper.GetResultMessage(result.Result, result.ResultDescription);
             return View();
         }
         [HttpGet]
@@ -45,22 +41,16 @@ namespace LocationApp.Web.Controllers
             else
                 return HttpNotFound();
         }
-
         [HttpPost]
         public ActionResult Edit(int MainUnitID, string Name)
         {
-            string result = JsonConvert.DeserializeObject(
-                                        mainUnitService.SetMainUnit(MainUnitID, Name)
-                                        ).ToString();
-
-            if (result == "OK")
+            ResultHelper result = JsonConvert.DeserializeObject<ResultHelper>(mainUnitService.SetMainUnit(MainUnitID, Name));
+            if (result.Result)
                 return RedirectToAction("List");
-            //ViewBag.Message = Helper.GetResultMessage(true);
             else
-                ViewBag.Message = Helper.GetResultMessage(false);
+                ViewBag.Message = Helper.GetResultMessage(result.Result, result.ResultDescription);
             return View();
         }
-
         [HttpGet]
         public ActionResult List()
         {

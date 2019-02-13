@@ -7,15 +7,12 @@ namespace LocationApp.Web.Mvc.Helpers
 {
     public class Helper
     {
-        private const string Success = "İşlem Başarılı  !";
-        private const string UnSuccess = "İşlem Başarısız !";
-        public static string GetResultMessage(bool status)
+        public static string GetResultMessage(bool status,string message)
         {
-            string message = "";
             if (status)
-                message = "<div class='alert alert-success' role='alert'>" + Success + "</div>";
+                message = "<div class='alert alert-success' role='alert'>" + message + "</div>";
             else
-                message = "<div class='alert alert-danger' role='alert'>" + UnSuccess + "</div>";
+                message = "<div class='alert alert-danger' role='alert'>" + message + "</div>";
             return message;
         }
     }

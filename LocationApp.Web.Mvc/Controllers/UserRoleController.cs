@@ -1,4 +1,5 @@
-﻿using LocationApp.Data.Dto;
+﻿using LocationApp.Core.Helper;
+using LocationApp.Data.Dto;
 using LocationApp.Web.Mvc.Helpers;
 using Newtonsoft.Json;
 using System;
@@ -25,18 +26,15 @@ namespace LocationApp.Web.Controllers
         }
         //TODO:checkbox düzelt
         [HttpPost]
-        public ActionResult Create(string UserRoleName,string UserRoleDescription,bool Active=false )
+        public ActionResult Create(string UserRoleName, string UserRoleDescription, bool Active = false)
         {
-            
-            string result = JsonConvert.DeserializeObject(
-                          userRoleService.AddUserRole(0, UserRoleName, UserRoleDescription, Active)
-                          ).ToString();
 
-            if (result == "OK")
+            ResultHelper result = JsonConvert.DeserializeObject<ResultHelper>
+                (userRoleService.AddUserRole(0, UserRoleName, UserRoleDescription, Active));
+            if (result.Result)
                 return RedirectToAction("List");
-            //ViewBag.Message = Helper.GetResultMessage(true);
             else
-                ViewBag.Message = Helper.GetResultMessage(false);
+                ViewBag.Message = Helper.GetResultMessage(result.Result, result.ResultDescription);
             return View();
         }
         [HttpGet]
@@ -52,15 +50,12 @@ namespace LocationApp.Web.Controllers
         [HttpPost]
         public ActionResult Edit(int UserRoleId, string UserRoleName, string UserRoleDescription, bool Active)
         {
-            string result = JsonConvert.DeserializeObject(
-                                        userRoleService.SetUserRole(UserRoleId, UserRoleName, UserRoleDescription, Active)
-                                        ).ToString();
-
-            if (result == "OK")
+            ResultHelper result = JsonConvert.DeserializeObject<ResultHelper>
+                (userRoleService.SetUserRole(UserRoleId, UserRoleName, UserRoleDescription, Active));
+            if (result.Result)
                 return RedirectToAction("List");
-            //ViewBag.Message = Helper.GetResultMessage(true);
             else
-                ViewBag.Message = Helper.GetResultMessage(false);
+                ViewBag.Message = Helper.GetResultMessage(result.Result,result.ResultDescription);
             return View();
         }
     }

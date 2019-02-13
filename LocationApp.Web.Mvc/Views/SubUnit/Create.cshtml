@@ -30,29 +30,30 @@
                         <h2>Alt Birim<small></small></h2>
                         <div class="clearfix"></div>
                     </div>
+                    <div> @Html.Raw(ViewBag.Message)</div>
                     @using (Html.BeginForm("Create", "SubUnit", FormMethod.Post, new { @class = "form-horizontal form-label-left" }))
                     {
                         @Html.HiddenFor(model => model.SubUnitID)
-                    <div class="form-group">
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="siteID">Ana Birim:*</label>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="siteID">Ana Birim:*</label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <select id="MainUnit" class="form-control">
+                                        <option>Choose option</option>
+                                        <option>Option one</option>
+                                        <option>Option two</option>
+                                        <option>Option three</option>
+                                        <option>Option four</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">
+                                Alt Birim:<span class="required">*</span>
+                            </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <select id="MainUnit" class="form-control">
-                                    <option>Choose option</option>
-                                    <option>Option one</option>
-                                    <option>Option two</option>
-                                    <option>Option three</option>
-                                    <option>Option four</option>
-                                </select>
+                                @Html.TextBoxFor(model => model.Name, new { @class = "form-control col-md-7 col-xs-12" })
                             </div>
                         </div>
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">
-                            Alt Birim:<span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            @Html.TextBoxFor(model => model.Name, new { @class = "form-control col-md-7 col-xs-12" })
-                        </div>
-                    </div>
 
                         <div class="form-group">
                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">

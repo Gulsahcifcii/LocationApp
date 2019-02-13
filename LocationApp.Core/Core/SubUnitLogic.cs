@@ -26,12 +26,12 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<subunit>().Insert(item);
                     unitofWork.saveChanges();
-                    return new ResultHelper(true, subUnitDto.SubUnitID, "İşlem Başarılı !");
+                    return new ResultHelper(true, subUnitDto.SubUnitID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception ex)
             {
-                return new ResultHelper(false, subUnitDto.SubUnitID, "İşlem Başarılı !");
+                return new ResultHelper(false, subUnitDto.SubUnitID, ResultHelper.UnSuccessMessage);
             }
         }
         public ResultHelper SetSubUnit(SubUnitDto subUnitDto)
@@ -46,12 +46,12 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<subunit>().Update(item);
                     unitofWork.saveChanges();
-                    return new ResultHelper(true, subUnitDto.SubUnitID, "İşlem Başarılı !");
+                    return new ResultHelper(true, subUnitDto.SubUnitID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception ex)
             {
-                return new ResultHelper(false, subUnitDto.SubUnitID, "İşlem Başarılı !");
+                return new ResultHelper(false, subUnitDto.SubUnitID, ResultHelper.UnSuccessMessage);
             }
         }
         public ResultHelper DelSubUnit(int subUnitID)
@@ -63,12 +63,12 @@ namespace LocationApp.Core.Core
                     var selectedSubUnit = unitofWork.GetRepository<subunit>().GetById(x => x.SubUnitID == subUnitID);
                     unitofWork.GetRepository<subunit>().Delete(selectedSubUnit);
                     unitofWork.saveChanges();
-                    return new ResultHelper(true, subUnitID, "İşlem Başarılı !");
+                    return new ResultHelper(true, subUnitID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception)
             {
-                return new ResultHelper(false, subUnitID, "İşlem Başarılı !");
+                return new ResultHelper(false, subUnitID, ResultHelper.UnSuccessMessage);
             }
         }
         public SubUnitDto GetSubUnit(int subUnitID)

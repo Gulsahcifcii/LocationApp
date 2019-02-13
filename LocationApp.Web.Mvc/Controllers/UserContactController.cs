@@ -1,4 +1,5 @@
-﻿using LocationApp.Data.Dto;
+﻿using LocationApp.Core.Helper;
+using LocationApp.Data.Dto;
 using LocationApp.Web.Mvc.Helpers;
 using Newtonsoft.Json;
 using System;
@@ -23,14 +24,12 @@ namespace LocationApp.Web.Controllers
         [HttpPost]
         public ActionResult Create(int UserContactID, string Contact, int UserID, int UserContactTypeID)
         {
-            string result = JsonConvert.DeserializeObject(userContactService.AddUserContact(0, Contact, UserID, UserContactTypeID)
-                            ).ToString();
-
-            if (result == "OK")
+            ResultHelper result = JsonConvert.DeserializeObject<ResultHelper>
+                (userContactService.AddUserContact(0, Contact, UserID, UserContactTypeID));
+            if (result.Result)
                 return RedirectToAction("List");
-            //ViewBag.Message = Helper.GetResultMessage(true);
             else
-                ViewBag.Message = Helper.GetResultMessage(false);
+                ViewBag.Message = Helper.GetResultMessage(result.Result,result.ResultDescription);
             return View();
         }
         [HttpGet]
@@ -47,15 +46,12 @@ namespace LocationApp.Web.Controllers
         [HttpPost]
         public ActionResult Edit(int UserContactID, string Contact, int UserID, int UserContactTypeID)
         {
-            string result = JsonConvert.DeserializeObject(
-                                        userContactService.SetUserContact(UserContactID, Contact, UserID, UserContactTypeID)
-                                        ).ToString();
-
-            if (result == "OK")
+            ResultHelper result = JsonConvert.DeserializeObject<ResultHelper>
+                (userContactService.SetUserContact(UserContactID, Contact, UserID, UserContactTypeID));
+            if (result.Result)
                 return RedirectToAction("List");
-            //ViewBag.Message = Helper.GetResultMessage(true);
             else
-                ViewBag.Message = Helper.GetResultMessage(false);
+                ViewBag.Message = Helper.GetResultMessage(result.Result,result.ResultDescription);
             return View();
         }
 

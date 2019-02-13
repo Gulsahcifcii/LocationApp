@@ -30,6 +30,7 @@
                         <h2>Alt Birim<small></small></h2>
                         <div class="clearfix"></div>
                     </div>
+                    <div> @Html.Raw(ViewBag.Message)</div>
                     @using (Html.BeginForm("Edit", "SubUnit", FormMethod.Post, new { @class = "form-horizontal form-label-left" }))
                     {
                         @Html.HiddenFor(model => model.SubUnitID)

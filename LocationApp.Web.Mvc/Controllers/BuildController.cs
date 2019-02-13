@@ -1,4 +1,5 @@
-﻿using LocationApp.Data.Database;
+﻿using LocationApp.Core.Helper;
+using LocationApp.Data.Database;
 using LocationApp.Data.Dto;
 using LocationApp.Service.Services;
 using LocationApp.Web.Mvc.Helpers;
@@ -27,12 +28,12 @@ namespace LocationApp.Web.Controllers
         [HttpPost]
         public ActionResult Create(int SiteID, int CampusID, string Name, string Address, string Gps, string Properties)
         {
-            string result = JsonConvert.DeserializeObject
-                (buildService.AddBuild(0, CampusID, SiteID, Name, Address, Properties, Gps)).ToString();
-            if (result == "OK")
+            ResultHelper result = JsonConvert.DeserializeObject<ResultHelper>
+                (buildService.AddBuild(0, CampusID, SiteID, Name, Address, Properties, Gps));
+            if (result.Result)
                 return RedirectToAction("List");
             else
-                ViewBag.Message = Helper.GetResultMessage(false);
+                ViewBag.Message = Helper.GetResultMessage(result.Result,result.ResultDescription);
             return View();
         }
         [HttpGet]
@@ -52,12 +53,12 @@ namespace LocationApp.Web.Controllers
         [HttpPost]
         public ActionResult Edit(int BuildID, int SiteID, int CampusID, string Name, string Address, string Gps, string Properties)
         {
-            string result = JsonConvert.DeserializeObject
-               (buildService.UpdateBuild(BuildID, CampusID, SiteID, Name, Address, Properties, Gps)).ToString();
-            if (result == "OK")
+            ResultHelper result = JsonConvert.DeserializeObject<ResultHelper>
+               (buildService.UpdateBuild(BuildID, CampusID, SiteID, Name, Address, Properties, Gps));
+            if (result.Result)
                 return RedirectToAction("List");
             else
-                ViewBag.Message = Helper.GetResultMessage(false);
+                ViewBag.Message = Helper.GetResultMessage(result.Result,result.ResultDescription);
             return View();
         }
         [HttpGet]

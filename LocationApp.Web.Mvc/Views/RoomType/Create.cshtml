@@ -23,6 +23,7 @@
                         <h2>Oda Türleri<small></small></h2>
                         <div class="clearfix"></div>
                     </div>
+                    <div> @Html.Raw(ViewBag.Message)</div>
                     @using (Html.BeginForm("Create", "RoomType", FormMethod.Post, new { @class = "form-horizontal form-label-left" }))
                     {
                         <div class="form-group">

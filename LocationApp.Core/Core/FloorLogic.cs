@@ -30,12 +30,12 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<floor>().Insert(item);
                     unitofWork.saveChanges();
-                    return new ResultHelper(true, floorDto.FloorID, "İşlem Başarılı !");
+                    return new ResultHelper(true, floorDto.FloorID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception ex)
             {
-                return new ResultHelper(false, floorDto.FloorID, "İşlem Başarılı !");
+                return new ResultHelper(false, floorDto.FloorID, ResultHelper.UnSuccessMessage);
             }
         }
         public ResultHelper SetFloor(FloorDto floorDto)
@@ -54,12 +54,12 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<floor>().Update(item);
                     unitofWork.saveChanges();
-                    return new ResultHelper(true, floorDto.FloorID, "İşlem Başarılı !");
+                    return new ResultHelper(true, floorDto.FloorID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception ex)
             {
-                return new ResultHelper(false, floorDto.FloorID, "İşlem Başarılı !");
+                return new ResultHelper(false, floorDto.FloorID, ResultHelper.UnSuccessMessage);
             }
         }
         public ResultHelper DelFloor(int floorID)
@@ -71,12 +71,12 @@ namespace LocationApp.Core.Core
                     var selectedFloor = unitofWork.GetRepository<floor>().GetById(x => x.FloorID == floorID);
                     unitofWork.GetRepository<floor>().Delete(selectedFloor);
                     unitofWork.saveChanges();
-                    return new ResultHelper(true, floorID, "İşlem Başarılı !");
+                    return new ResultHelper(true, floorID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception)
             {
-                return new ResultHelper(false, floorID, "İşlem Başarılı !");
+                return new ResultHelper(false, floorID, ResultHelper.UnSuccessMessage);
             }
         }
         public FloorDto GetFloor(int floorID)

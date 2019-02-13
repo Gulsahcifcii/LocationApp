@@ -1,4 +1,5 @@
-﻿using LocationApp.Data.Database;
+﻿using LocationApp.Core.Helper;
+using LocationApp.Data.Database;
 using LocationApp.Data.Dto;
 using LocationApp.Web.Mvc.Helpers;
 using Newtonsoft.Json;
@@ -22,14 +23,12 @@ namespace LocationApp.Web.Controllers
         [HttpPost]
         public ActionResult Create(int RoomTypeID, string Name, string Description)
         {
-            string result = JsonConvert.DeserializeObject(
-                roomTypeService.AddRoomType(0, Name, Description)
-                ).ToString();
-
-            if (result == "OK")
+            ResultHelper result = JsonConvert.DeserializeObject<ResultHelper>(
+                 roomTypeService.AddRoomType(0, Name, Description));
+            if (result.Result)
                 return RedirectToAction("List");
             else
-                ViewBag.Message = Helper.GetResultMessage(false);
+                ViewBag.Message = Helper.GetResultMessage(result.Result, result.ResultDescription);
             return View();
         }
         [HttpGet]
@@ -47,14 +46,12 @@ namespace LocationApp.Web.Controllers
         [HttpPost]
         public ActionResult Edit(int RoomTypeID, string Name, string Description)
         {
-            string result = JsonConvert.DeserializeObject(
-                roomTypeService.SetRoomType(RoomTypeID, Name, Description)
-                ).ToString();
-
-            if (result == "OK")
+            ResultHelper result = JsonConvert.DeserializeObject<ResultHelper>
+                (roomTypeService.SetRoomType(RoomTypeID, Name, Description));
+            if (result.Result)
                 return RedirectToAction("List");
             else
-                ViewBag.Message = Helper.GetResultMessage(false);
+                ViewBag.Message = Helper.GetResultMessage(result.Result, result.ResultDescription);
             return View();
         }
         [HttpGet]

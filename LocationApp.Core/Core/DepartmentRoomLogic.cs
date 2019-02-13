@@ -28,12 +28,12 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<departmentroom>().Insert(item);
                     unitofWork.saveChanges();
-                    return new ResultHelper(true, departmentRoomDto.DepartmentRoomID, "İşlem Başarılı !");
+                    return new ResultHelper(true, departmentRoomDto.DepartmentRoomID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception ex)
             {
-                return new ResultHelper(false, departmentRoomDto.DepartmentRoomID, "İşlem Başarılı !");
+                return new ResultHelper(false, departmentRoomDto.DepartmentRoomID, ResultHelper.UnSuccessMessage);
             }
         }
         public ResultHelper SetDepartmentRoom(DepartmentRoomDto departmentRoomDto)
@@ -50,12 +50,12 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<departmentroom>().Insert(item);
                     unitofWork.saveChanges();
-                    return new ResultHelper(true, departmentRoomDto.DepartmentRoomID, "İşlem Başarılı !");
+                    return new ResultHelper(true, departmentRoomDto.DepartmentRoomID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception ex)
             {
-                return new ResultHelper(false, departmentRoomDto.DepartmentRoomID, "İşlem Başarılı !");
+                return new ResultHelper(false, departmentRoomDto.DepartmentRoomID, ResultHelper.UnSuccessMessage);
             }
         }
         public ResultHelper DelDepartmentRoom(int departmentRoomId)
@@ -67,12 +67,12 @@ namespace LocationApp.Core.Core
                     var selectedDepartmentRoom = unitofWork.GetRepository<departmentroom>().GetById(x => x.DepartmentRoomID == departmentRoomId);
                     unitofWork.GetRepository<departmentroom>().Delete(selectedDepartmentRoom);
                     unitofWork.saveChanges();
-                    return new ResultHelper(true, departmentRoomId, "İşlem Başarılı !");
+                    return new ResultHelper(true, departmentRoomId, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception)
             {
-                return new ResultHelper(false, departmentRoomId, "İşlem Başarılı !");
+                return new ResultHelper(false, departmentRoomId, ResultHelper.UnSuccessMessage);
             }
         }
         public DepartmentRoomDto GetDepartmentRoom(int departmentRoomID)

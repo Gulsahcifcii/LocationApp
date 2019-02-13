@@ -20,7 +20,7 @@ namespace LocationApp.Core.Core
             {
                 #region ANY RECORD
                 if (isThere(campusDto))
-                    return new ResultHelper(false, campusDto.CampusID, "İşlem Başarılı !");
+                    return new ResultHelper(false, campusDto.CampusID, ResultHelper.UnSuccessMessage);
                 #endregion
 
                 campu item = new campu();
@@ -33,12 +33,12 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<campu>().Insert(item);
                     unitofWork.saveChanges();
-                    return new ResultHelper(true, campusDto.CampusID, "İşlem Başarılı !");
+                    return new ResultHelper(true, campusDto.CampusID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception ex)
             {
-                return new ResultHelper(false, campusDto.CampusID, "İşlem Başarılı !");
+                return new ResultHelper(false, campusDto.CampusID, ResultHelper.UnSuccessMessage);
             }
         }
         public ResultHelper SetCampus(CampusDto campusDto)
@@ -55,12 +55,12 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<campu>().Update(item);
                     unitofWork.saveChanges();
-                    return new ResultHelper(true, campusDto.CampusID, "İşlem Başarılı !");
+                    return new ResultHelper(true, campusDto.CampusID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception ex)
             {
-                return new ResultHelper(false, campusDto.CampusID, "İşlem Başarılı !");
+                return new ResultHelper(false, campusDto.CampusID, ResultHelper.UnSuccessMessage);
             }
         }
         public ResultHelper DelCampus(int campusID)
@@ -72,12 +72,12 @@ namespace LocationApp.Core.Core
                     var selectedCampus = unitofWork.GetRepository<campu>().GetById(x => x.CampusID == campusID);
                     unitofWork.GetRepository<campu>().Delete(selectedCampus);
                     unitofWork.saveChanges();
-                    return new ResultHelper(true, campusID, "İşlem Başarılı !");
+                    return new ResultHelper(true, campusID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception)
             {
-                return new ResultHelper(false, campusID, "İşlem Başarılı !");
+                return new ResultHelper(false, campusID, ResultHelper.UnSuccessMessage);
             }
         }
         public CampusDto GetCampus(int campusID)

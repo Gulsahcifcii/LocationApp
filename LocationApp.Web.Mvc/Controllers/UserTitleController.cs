@@ -1,4 +1,5 @@
-﻿using LocationApp.Data.Database;
+﻿using LocationApp.Core.Helper;
+using LocationApp.Data.Database;
 using LocationApp.Data.Dto;
 using LocationApp.Web.Mvc.Helpers;
 using Newtonsoft.Json;
@@ -22,15 +23,12 @@ namespace LocationApp.Web.Controllers
         [HttpPost]
         public ActionResult Create(string TitleName)
         {
-            string result = JsonConvert.DeserializeObject(
-                           userTitleService.AddUserTitle(0,TitleName)
-                           ).ToString();
-
-            if (result == "OK")
+            ResultHelper result = JsonConvert.DeserializeObject<ResultHelper>
+                (userTitleService.AddUserTitle(0, TitleName));
+            if (result.Result)
                 return RedirectToAction("List");
-            //ViewBag.Message = Helper.GetResultMessage(true);
             else
-                ViewBag.Message = Helper.GetResultMessage(false);
+                ViewBag.Message = Helper.GetResultMessage(result.Result, result.ResultDescription);
             return View();
         }
         [HttpGet]
@@ -44,17 +42,15 @@ namespace LocationApp.Web.Controllers
                 return HttpNotFound();
         }
         [HttpPost]
-        public ActionResult Edit(int UserTitleID,string TitleName)
+        public ActionResult Edit(int UserTitleID, string TitleName)
         {
-            string result = JsonConvert.DeserializeObject(
-                                       userTitleService.SetUserTitle(UserTitleID, TitleName)
-                                       ).ToString();
+            ResultHelper result = JsonConvert.DeserializeObject<ResultHelper>
+                (userTitleService.SetUserTitle(UserTitleID, TitleName));
 
-            if (result == "OK")
+            if (result.Result)
                 return RedirectToAction("List");
-            //ViewBag.Message = Helper.GetResultMessage(true);
             else
-                ViewBag.Message = Helper.GetResultMessage(false);
+                ViewBag.Message = Helper.GetResultMessage(result.Result, result.ResultDescription);
             return View();
         }
 

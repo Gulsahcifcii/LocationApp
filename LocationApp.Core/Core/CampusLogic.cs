@@ -33,7 +33,7 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<campu>().Insert(item);
                     unitofWork.saveChanges();
-                    return new ResultHelper(true, campusDto.CampusID, ResultHelper.SuccessMessage);
+                    return new ResultHelper(true, item.CampusID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception ex)

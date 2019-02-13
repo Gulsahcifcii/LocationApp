@@ -143,9 +143,9 @@
       <PropertyRef Name="CampusID" />
     </Key>
     <Property Name="CampusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="Other" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Name" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="Other" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="builds" Relationship="locationappModel.build_campus_CampusID_fk" FromRole="campu" ToRole="build" />
     <NavigationProperty Name="campussites" Relationship="locationappModel.campussite_campus_CampusID_fk" FromRole="campu" ToRole="campussite" />
   </EntityType>
@@ -154,8 +154,8 @@
       <PropertyRef Name="CampusSiteID" />
     </Key>
     <Property Name="CampusSiteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="SiteID" Type="Int32" />
-    <Property Name="CampusID" Type="Int32" />
+    <Property Name="SiteID" Type="Int32" Nullable="false" />
+    <Property Name="CampusID" Type="Int32" Nullable="false" />
     <Property Name="Other" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="campu" Relationship="locationappModel.campussite_campus_CampusID_fk" FromRole="campussite" ToRole="campu" />
     <NavigationProperty Name="site" Relationship="locationappModel.campussite_site_SiteID_fk" FromRole="campussite" ToRole="site" />
@@ -405,7 +405,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="campussite_campus_CampusID_fk">
-    <End Type="locationappModel.campu" Role="campu" Multiplicity="0..1" />
+    <End Type="locationappModel.campu" Role="campu" Multiplicity="1" />
     <End Type="locationappModel.campussite" Role="campussite" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="campu">
@@ -417,7 +417,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="campussite_site_SiteID_fk">
-    <End Type="locationappModel.site" Role="site" Multiplicity="0..1" />
+    <End Type="locationappModel.site" Role="site" Multiplicity="1" />
     <End Type="locationappModel.campussite" Role="campussite" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="site">

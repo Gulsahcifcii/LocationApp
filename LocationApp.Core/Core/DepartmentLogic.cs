@@ -29,7 +29,7 @@ namespace LocationApp.Core.Core
                 {
                     unitOfWork.GetRepository<department>().Insert(item);
                     unitOfWork.saveChanges();
-                    return new ResultHelper(true, departmentDto.DepartmentID, ResultHelper.SuccessMessage);
+                    return new ResultHelper(true, item.DepartmentID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception ex)

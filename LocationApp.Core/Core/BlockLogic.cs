@@ -20,7 +20,7 @@ namespace LocationApp.Core.Core
             {
                 if (isThere(blockDto))
                 {
-                    return new ResultHelper(false, 0, "asd");
+                    return new ResultHelper(false, 0, ResultHelper.UnSuccessMessage);
                 }
                 block item = new block();
                 item.BlockID = blockDto.BlockID;

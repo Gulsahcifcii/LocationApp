@@ -28,12 +28,12 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<campussite>().Insert(item);
                     unitofWork.saveChanges();
-                    return new ResultHelper(true, campusSiteDto.CampusID, ResultHelper.SuccessMessage);
+                    return new ResultHelper(true, item.CampusSiteID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception ex)
             {
-                return new ResultHelper(false, campusSiteDto.CampusID, ResultHelper.UnSuccessMessage);
+                return new ResultHelper(false, campusSiteDto.CampusSiteID, ResultHelper.UnSuccessMessage);
             }
         }
         public ResultHelper SetCampusSite(CampusSiteDto campusSiteDto)
@@ -50,7 +50,7 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<campussite>().Update(item);
                     unitofWork.saveChanges();
-                    return new ResultHelper(true, campusSiteDto.CampusID, ResultHelper.SuccessMessage);
+                    return new ResultHelper(true, campusSiteDto.CampusSiteID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception ex)

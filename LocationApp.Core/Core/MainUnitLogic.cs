@@ -26,7 +26,7 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<mainunit>().Insert(item);
                     unitofWork.saveChanges();
-                    return new ResultHelper(true, mainUnitDto.MainUnitID, ResultHelper.SuccessMessage);
+                    return new ResultHelper(true, item.MainUnitID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception ex)
@@ -46,7 +46,7 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<mainunit>().Update(item);
                     unitofWork.saveChanges();
-                    return new ResultHelper(true, mainUnitDto.MainUnitID, ResultHelper.SuccessMessage);
+                    return new ResultHelper(true, item.MainUnitID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception ex)

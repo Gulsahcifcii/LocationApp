@@ -30,7 +30,7 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<floor>().Insert(item);
                     unitofWork.saveChanges();
-                    return new ResultHelper(true, floorDto.FloorID, ResultHelper.SuccessMessage);
+                    return new ResultHelper(true, item.FloorID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception ex)

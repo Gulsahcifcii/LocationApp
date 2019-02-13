@@ -18,5 +18,7 @@ namespace LocationApp.Data.Dto
         public string Description { get; set; }
         [DataMember]
         public string Gps { get; set; }
+        [DataMember]
+        public CampusSiteDto campusSiteDto { get; set; }
     }
 }

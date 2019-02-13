@@ -109,29 +109,29 @@ namespace LocationApp.Core.Core
         {
             try
             {
-                List<BuildDto> list = new List<BuildDto>();
-                using (var context = new locationAppEntities())
+                using (UnitOfWork unitofWork = new UnitOfWork())
                 {
-                    var buildList = from b in context.builds
-                                    join c in context.campus on b.CampusID equals c.CampusID
-                                    join s in context.sites on b.SiteID equals s.SiteID
-                                    select new
-                                    {
-                                        BID = b.BuildID,
-                                        BName = b.Name,
-                                        BAdress = b.Adress,
-                                        BGps = b.Gps,
-                                        BProperties = b.Properties,
-                                        BCID = b.CampusID,
-                                        CID = c.CampusID,
-                                        CName = c.Name,
-                                        CDesc = c.Description,
-                                        COther = c.Other,
-                                        SID = s.SiteID,
-                                        SName = s.Name,
-                                        SDesc = s.Description,
-                                        SGps = s.Gps
-                                    };
+                    List<BuildDto> list = new List<BuildDto>();
+                    var buildList = from b in unitofWork.GetRepository<build>().Select(null, null)
+                                join c in unitofWork.GetRepository<campu>().Select(null, null) on b.CampusID equals c.CampusID
+                                join s in unitofWork.GetRepository<site>().Select(null, null) on b.SiteID equals s.SiteID
+                                select new
+                                {
+                                    BID = b.BuildID,
+                                    BName = b.Name,
+                                    BAdress = b.Adress,
+                                    BGps = b.Gps,
+                                    BProperties = b.Properties,
+                                    BCID = b.CampusID,
+                                    CID = c.CampusID,
+                                    CName = c.Name,
+                                    CDesc = c.Description,
+                                    COther = c.Other,
+                                    SID = s.SiteID,
+                                    SName = s.Name,
+                                    SDesc = s.Description,
+                                    SGps = s.Gps
+                                };
                     foreach (var item in buildList)
                     {
                         BuildDto bDto = new BuildDto();
@@ -151,11 +151,11 @@ namespace LocationApp.Core.Core
                         list.Add(bDto);
 
                     }
+
                     return list;
                 }
-
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return new List<BuildDto>();
             }

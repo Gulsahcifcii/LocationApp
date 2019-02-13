@@ -26,17 +26,17 @@
       <PropertyRef Name="CampusID" />
     </Key>
     <Property Name="CampusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="varchar" MaxLength="50" />
-    <Property Name="Description" Type="varchar" MaxLength="100" />
-    <Property Name="Other" Type="varchar" MaxLength="150" />
+    <Property Name="Name" Type="text" />
+    <Property Name="Description" Type="text" />
+    <Property Name="Other" Type="text" />
   </EntityType>
   <EntityType Name="campussite">
     <Key>
       <PropertyRef Name="CampusSiteID" />
     </Key>
     <Property Name="CampusSiteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="SiteID" Type="int" />
-    <Property Name="CampusID" Type="int" />
+    <Property Name="SiteID" Type="int" Nullable="false" />
+    <Property Name="CampusID" Type="int" Nullable="false" />
     <Property Name="Other" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="department">
@@ -226,7 +226,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="campussite_campus_CampusID_fk">
-    <End Role="campus" Type="Self.campus" Multiplicity="0..1" />
+    <End Role="campus" Type="Self.campus" Multiplicity="1" />
     <End Role="campussite" Type="Self.campussite" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="campus">
@@ -238,7 +238,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="campussite_site_SiteID_fk">
-    <End Role="site" Type="Self.site" Multiplicity="0..1" />
+    <End Role="site" Type="Self.site" Multiplicity="1" />
     <End Role="campussite" Type="Self.campussite" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="site">

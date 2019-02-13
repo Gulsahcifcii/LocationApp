@@ -29,7 +29,7 @@ namespace LocationApp.Core.Core
                     unitofWork.GetRepository<site>().Insert(item);
                     unitofWork.saveChanges();
 
-                    return new ResultHelper(true, siteDto.SiteID, ResultHelper.SuccessMessage);
+                    return new ResultHelper(true, item.SiteID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception ex)
@@ -51,7 +51,7 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<site>().Update(item);
                     unitofWork.saveChanges();
-                    return new ResultHelper(true, siteDto.SiteID, ResultHelper.SuccessMessage);
+                    return new ResultHelper(true, item.SiteID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception ex)
@@ -82,13 +82,18 @@ namespace LocationApp.Core.Core
             {
                 using (UnitOfWork unitofWork = new UnitOfWork())
                 {
-                    site item = new site();
-                    item = unitofWork.GetRepository<site>().GetById(x => x.SiteID == siteID);
+                    site item = unitofWork.GetRepository<site>().GetById(x => x.SiteID == siteID);
                     SiteDto siteDto = new SiteDto();
                     siteDto.SiteID = item.SiteID;
                     siteDto.Description = item.Description;
                     siteDto.Gps = item.Gps;
                     siteDto.Name = item.Name;
+
+                    campussite campussite = unitofWork.GetRepository<campussite>().GetById(x => x.SiteID == item.SiteID);
+                    siteDto.campusSiteDto = new CampusSiteDto();
+                    siteDto.campusSiteDto.CampusID = campussite.CampusID;
+                    siteDto.campusSiteDto.CampusSiteID = campussite.CampusSiteID;
+                    siteDto.campusSiteDto.SiteID = campussite.SiteID;
                     return siteDto;
                 }
             }

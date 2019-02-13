@@ -22,7 +22,7 @@ namespace LocationApp.Web.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Create(int MainUnitID, string Name)
+        public ActionResult Create(string Name)
         {
             ResultHelper result = JsonConvert.DeserializeObject<ResultHelper>(mainUnitService.AddMainUnit(0, Name));
             if (result.Result)

@@ -28,7 +28,7 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<departmentroom>().Insert(item);
                     unitofWork.saveChanges();
-                    return new ResultHelper(true, departmentRoomDto.DepartmentRoomID, ResultHelper.SuccessMessage);
+                    return new ResultHelper(true, item.DepartmentRoomID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception ex)
@@ -50,7 +50,7 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<departmentroom>().Insert(item);
                     unitofWork.saveChanges();
-                    return new ResultHelper(true, departmentRoomDto.DepartmentRoomID, ResultHelper.SuccessMessage);
+                    return new ResultHelper(true, item.DepartmentRoomID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception ex)

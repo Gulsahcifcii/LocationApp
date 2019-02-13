@@ -24,7 +24,7 @@ namespace LocationApp.Web.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Create(int SubUnitID, string Name, int MainUnitID)
+        public ActionResult Create(string Name, int MainUnitID)
         {
             ResultHelper result = JsonConvert.DeserializeObject<ResultHelper>
                 (subUnitService.AddSubUnit(0, Name, MainUnitID));
@@ -56,7 +56,7 @@ namespace LocationApp.Web.Controllers
             if (result.Result)
                 return RedirectToAction("List");
             else
-                ViewBag.Message = Helper.GetResultMessage(result.Result,result.ResultDescription);
+                ViewBag.Message = Helper.GetResultMessage(result.Result, result.ResultDescription);
             return View();
         }
 

@@ -28,7 +28,7 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<roomtype>().Insert(item);
                     unitofWork.saveChanges();
-                    return new ResultHelper(true, roomTypeDto.RoomTypeID, ResultHelper.SuccessMessage);
+                    return new ResultHelper(true, item.RoomTypeID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception ex)

@@ -14,7 +14,6 @@ namespace LocationApp.Core.Core
 {
     public class UserTitleLogic
     {
-        //WebOperationContext webOperationContext = WebOperationContext.Current;
         public string AddUserTitle(UserTitleDto userTitleDto)
         {
             try

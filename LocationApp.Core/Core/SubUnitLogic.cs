@@ -26,7 +26,7 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<subunit>().Insert(item);
                     unitofWork.saveChanges();
-                    return new ResultHelper(true, subUnitDto.SubUnitID, ResultHelper.SuccessMessage);
+                    return new ResultHelper(true, item.SubUnitID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception ex)
@@ -46,7 +46,7 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<subunit>().Update(item);
                     unitofWork.saveChanges();
-                    return new ResultHelper(true, subUnitDto.SubUnitID, ResultHelper.SuccessMessage);
+                    return new ResultHelper(true, item.SubUnitID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception ex)
@@ -95,21 +95,35 @@ namespace LocationApp.Core.Core
         {
             try
             {
-                List<subunit> collection;
-                List<SubUnitDto> list = new List<SubUnitDto>();
-                using (UnitOfWork unitofWork = new UnitOfWork())
+                List<SubUnitDto> sDtoList = new List<SubUnitDto>();
+                using (UnitOfWork unitOfWork = new UnitOfWork())
                 {
-                    if (mainUnitID != 0)
-                        collection = unitofWork.GetRepository<subunit>().Select(null, null)
-                            .Where(a => a.MainUnitID == mainUnitID).ToList();
-                    else
-                        collection = unitofWork.GetRepository<subunit>().Select(null, null).ToList();
-
-                    foreach (var item in collection)
+                    var subUnits = from s in unitOfWork.GetRepository<subunit>().Select(null, null)
+                                   join m in unitOfWork.GetRepository<mainunit>().Select(null, null) on s.MainUnitID equals m.MainUnitID
+                                   select new
+                                   {
+                                       SubUnitID = s.SubUnitID,
+                                       SName = s.Name,
+                                       MainUnitID = m.MainUnitID,
+                                       MainUnitName = m.Name
+                                   };
+                    foreach (var item in subUnits)
                     {
-                        list.Add(new SubUnitDto { SubUnitID = item.SubUnitID, Name = item.Name, MainUnitID = (int)item.MainUnitID });
+                        SubUnitDto sDto = new SubUnitDto();
+                        sDto.SubUnitID = item.SubUnitID;
+                        sDto.Name = item.SName;
+                        sDto.MainUnitID = item.MainUnitID;
+                        sDto.MainUnitDto = new MainUnitDto();
+                        sDto.MainUnitDto.MainUnitID = item.MainUnitID;
+                        sDto.MainUnitDto.Name = item.MainUnitName;
+                        sDtoList.Add(sDto);
                     }
-                    return list;
+
+                    if (mainUnitID > 0)
+                    {
+                        sDtoList = sDtoList.Where(a => a.MainUnitID == mainUnitID).ToList();
+                    }
+                    return sDtoList;
                 }
             }
             catch (Exception ex)

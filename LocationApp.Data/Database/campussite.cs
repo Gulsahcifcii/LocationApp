@@ -15,8 +15,8 @@ namespace LocationApp.Data.Database
     public partial class campussite
     {
         public int CampusSiteID { get; set; }
-        public Nullable<int> SiteID { get; set; }
-        public Nullable<int> CampusID { get; set; }
+        public int SiteID { get; set; }
+        public int CampusID { get; set; }
         public string Other { get; set; }
     
         public virtual campu campu { get; set; }

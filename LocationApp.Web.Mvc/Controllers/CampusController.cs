@@ -1,5 +1,6 @@
 ﻿using LocationApp.Data.Database;
 using LocationApp.Data.Dto;
+using LocationApp.Web.Mvc.Helpers;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -21,29 +22,39 @@ namespace LocationApp.Web.Controllers
         [HttpPost]
         public ActionResult Create(string Name, string Description, string Other)
         {
-            var result = campusService.AddCampus(0, Name, Description, Other);
-            string result1 = JsonConvert.DeserializeObject(result).ToString();
+            string result = JsonConvert.DeserializeObject(
+                campusService.AddCampus(0, Name, Description, Other)
+                ).ToString();
+
+            if (result == "OK")
+                return RedirectToAction("List");
+            //ViewBag.Message = Helper.GetResultMessage(true);
+            else
+                ViewBag.Message = Helper.GetResultMessage(false);
             return View();
         }
         [HttpGet]
-        public ActionResult Edit(int ? id)
+        public ActionResult Edit(int? id)
         {
             var item = campusService.GetCampus(id.Value);
             var result = JsonConvert.DeserializeObject<CampusDto>(item);
-            if (result!=null)
-            {
-                campu campu = new campu();
-                campu.CampusID = result.CampusID;
-                campu.Description = result.Description;
-                campu.Name = result.Name;
-                campu.Other = campu.Other;
-                return View(campu);
-            }
-            return View(result);
+            if (result != null)
+                return View(result);
+            else
+                return HttpNotFound();
         }
         [HttpPost]
         public ActionResult Edit(int CampusID, string Name, string Description, string Other)
         {
+            string result = JsonConvert.DeserializeObject(
+                            campusService.UpdateCampus(CampusID, Name, Description, Other)
+                            ).ToString();
+
+            if (result == "OK")
+                return RedirectToAction("List");
+            //ViewBag.Message = Helper.GetResultMessage(true);
+            else
+                ViewBag.Message = Helper.GetResultMessage(false);
             return View();
         }
         [HttpGet]

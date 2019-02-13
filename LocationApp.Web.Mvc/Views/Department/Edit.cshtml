@@ -23,31 +23,18 @@
                         <h2>Departman<small></small></h2>
                         <div class="clearfix"></div>
                     </div>
-                    @using (Html.BeginForm("Create", "Department", FormMethod.Post, new { @class = "form-horizontal form-label-left" }))
+                    @using (Html.BeginForm("Edit", "Department", FormMethod.Post, new { @class = "form-horizontal form-label-left" }))
                     {
-                        @Html.HiddenFor(model => model.DepartmentID)
                         <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="siteID">Ana Birim :</label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <select id="MainUnit" class="form-control">
-                                    <option>Choose option</option>
-                                    <option>Option one</option>
-                                    <option>Option two</option>
-                                    <option>Option three</option>
-                                    <option>Option four</option>
-                                </select>
+                                @Html.DropDownList("MainUnitID", null, new { @class = "form-control" })
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="siteID">Alt Birim :</label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <select id="SubUnit" class="form-control">
-                                    <option>Choose option</option>
-                                    <option>Option one</option>
-                                    <option>Option two</option>
-                                    <option>Option three</option>
-                                    <option>Option four</option>
-                                </select>
+                                @Html.DropDownList("SubUnitID", null, new { @class = "form-control" })
                             </div>
                         </div>
                         <div class="form-group">
@@ -89,4 +76,21 @@
 <!-- /page content -->
 @section Scripts{
     @Html.Partial("/Views/Shared/Partials/DataTable/_Js.cshtml")
+    <script type="text/javascript">
+        $("#MainUnitID").change(function () {
+            var mainUnitID = $(this).val();
+            $("#SubUnitID").empty();
+            $.ajax({
+                url: '/Department/GetSubUnit',
+                type: "GET",
+                dataType: "json",
+                data: { mainUnitID: mainUnitID },
+                success: function (data) {
+                    $.each(data, function () {
+                        $('#SubUnitID').append('<option value=' + this.SubUnitID + '>' + this.Name + '</option>');
+                    });
+                }
+            });
+        });
+    </script>
 }

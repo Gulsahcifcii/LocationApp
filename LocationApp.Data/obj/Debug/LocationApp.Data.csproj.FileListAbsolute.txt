@@ -190,4 +190,3 @@ E:\Developers\Repository\LocationApp\LocationApp.Data\obj\Debug\LocationApp.Data
 E:\Developers\Repository\LocationApp\LocationApp.Data\obj\Debug\LocationApp.Data.csproj.CopyComplete
 E:\Developers\Repository\LocationApp\LocationApp.Data\obj\Debug\LocationApp.Data.dll
 E:\Developers\Repository\LocationApp\LocationApp.Data\obj\Debug\LocationApp.Data.pdb
-E:\Developers\Repository\LocationApp\LocationApp.Data\obj\Debug\LocationApp.Data.csprojAssemblyReference.cache

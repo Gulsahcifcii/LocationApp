@@ -1,4 +1,7 @@
 ﻿using LocationApp.Data.Database;
+using LocationApp.Data.Dto;
+using LocationApp.Service.Services;
+using LocationApp.Web.Mvc.Helpers;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -12,30 +15,67 @@ namespace LocationApp.Web.Controllers
     public class BuildController : Controller
     {
         readonly LocationApp.Service.Services.BuildService buildService = new Service.Services.BuildService();
+        readonly LocationApp.Service.Services.CampusService campusService = new Service.Services.CampusService();
+        readonly LocationApp.Service.Services.SiteService siteService = new Service.Services.SiteService();
         [HttpGet]
         public ActionResult Create()
         {
+            GetSite(0);
+            GetCampus(0);
             return View();
         }
         [HttpPost]
-        public ActionResult Create(int BuildID, int SiteID, int CampusID, string Name, string Address, string Gps, string Properties)
+        public ActionResult Create(int SiteID, int CampusID, string Name, string Address, string Gps, string Properties)
         {
+            string result = JsonConvert.DeserializeObject
+                (buildService.AddBuild(0, CampusID, SiteID, Name, Address, Properties, Gps)).ToString();
+            if (result == "OK")
+                return RedirectToAction("List");
+            else
+                ViewBag.Message = Helper.GetResultMessage(false);
             return View();
         }
         [HttpGet]
         public ActionResult Edit(int? id)
         {
-            return View();
+            var item = buildService.GetBuild(id.Value);
+            var result = JsonConvert.DeserializeObject<BuildDto>(item);
+            if (result != null)
+            {
+                GetSite(result.SiteID);
+                GetCampus(result.CampusID);
+                return View(result);
+            }
+            else
+                return HttpNotFound();
         }
         [HttpPost]
         public ActionResult Edit(int BuildID, int SiteID, int CampusID, string Name, string Address, string Gps, string Properties)
         {
+            string result = JsonConvert.DeserializeObject
+               (buildService.UpdateBuild(BuildID, CampusID, SiteID, Name, Address, Properties, Gps)).ToString();
+            if (result == "OK")
+                return RedirectToAction("List");
+            else
+                ViewBag.Message = Helper.GetResultMessage(false);
             return View();
         }
         [HttpGet]
         public ActionResult List()
         {
-            return View(JsonConvert.DeserializeObject<List<build>>(buildService.GetAllBuild()));
+            return View(JsonConvert.DeserializeObject<List<BuildDto>>(buildService.GetAllBuild()));
+        }
+        void GetSite(int selectedValue)
+        {
+            var list = JsonConvert.DeserializeObject<List<SiteDto>>(siteService.GetAllSite());
+            SelectList slist = new SelectList(list, "SiteID", "Name", selectedValue);
+            ViewBag.SiteID = slist;
+        }
+        void GetCampus(int selectedValue)
+        {
+            var list = JsonConvert.DeserializeObject<List<CampusDto>>(campusService.GetAllCampus());
+            SelectList slist = new SelectList(list, "CampusID", "Name", selectedValue);
+            ViewBag.CampusID = slist;
         }
     }
 }

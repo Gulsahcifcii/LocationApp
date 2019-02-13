@@ -25,11 +25,10 @@
                     </div>
                     @using (Html.BeginForm("Create", "Block", FormMethod.Post, new { @class = "form-horizontal form-label-left" }))
                     {
-                        @Html.HiddenFor(model => model.BlockID)
                         <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="siteID">Bina Başlık :</label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                @Html.DropDownListFor(model=>model.,null,new { @class = "form-control" })
+                                @Html.DropDownList("BuildID",null,new { @class = "form-control" })
                             </div>
                         </div>
                         <div class="form-group">

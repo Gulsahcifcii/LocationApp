@@ -12,7 +12,7 @@ using System.Text;
 
 namespace LocationApp.Service.Services
 {
-    public class UserRole : IUserRoleService
+    public class UserRoleService : IUserRoleService
     {
         private UserRoleLogic userRoleLogic = new UserRoleLogic();
         public string AddUserRole(int userRoleID, string userRoleName, string userRoleDescription, bool active)

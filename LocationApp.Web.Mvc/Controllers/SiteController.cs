@@ -1,4 +1,5 @@
 ﻿using LocationApp.Data.Database;
+using LocationApp.Data.Dto;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -36,7 +37,7 @@ namespace LocationApp.Web.Controllers
         [HttpGet]
         public ActionResult List()
         {
-            return View(JsonConvert.DeserializeObject<List<site>>(siteService.GetAllSite()));
+            return View(JsonConvert.DeserializeObject<List<SiteDto>>(siteService.GetAllSite()));
         }
     }
 }

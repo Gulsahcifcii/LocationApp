@@ -103,15 +103,41 @@ namespace LocationApp.Core.Core
         {
             try
             {
-                List<DepartmentDto> list = new List<DepartmentDto>();
-                using (UnitOfWork unitofWork = new UnitOfWork())
+                List<DepartmentDto> deplist = new List<DepartmentDto>();
+                using (var context = new locationAppEntities())
                 {
-                    List<department> collection = unitofWork.GetRepository<department>().Select(null, null).ToList();
-                    foreach (var item in collection)
+                    var departmentList = from d in context.departments
+                                         join s in context.subunits on d.SubUnitID equals s.SubUnitID
+                                         join m in context.mainunits on s.MainUnitID equals m.MainUnitID
+                                         select new
+                                         {
+                                             DID = d.DepartmentID,
+                                             DName = d.Name,
+                                             DDesc = d.Description,
+                                             DOther = d.Other,
+                                             SID = s.SubUnitID,
+                                             SName = s.Name,
+                                             SMID = s.MainUnitID,
+                                             MID = m.MainUnitID,
+                                             MName = m.Name
+                                         };
+
+                    foreach (var item in departmentList)
                     {
-                        list.Add(new DepartmentDto {  DepartmentID=item.DepartmentID,Description=item.Description,Name=item.Name,Other=item.Other,SubUnitID=item.SubUnitID.Value});
+                        DepartmentDto depDto = new DepartmentDto();
+                        depDto.DepartmentID = item.DID;
+                        depDto.Name = item.DName;
+                        depDto.Other = item.DOther;
+                        depDto.SubUnitID = item.SID;
+                        depDto.Description = item.DDesc;
+                        depDto.SubUnitDto.SubUnitID = item.SID;
+                        depDto.SubUnitDto.Name = item.SName;
+                        depDto.SubUnitDto.MainUnitID = item.SMID.Value;
+                        depDto.SubUnitDto.MainUnitDto.Name = item.MName;
+                        depDto.SubUnitDto.MainUnitDto.MainUnitID = item.MID;
+                        deplist.Add(depDto);
                     }
-                    return list;
+                    return deplist;
                 }
             }
             catch (Exception ex)

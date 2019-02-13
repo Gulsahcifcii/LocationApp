@@ -29,7 +29,7 @@ namespace LocationApp.Service.Interfaces
         string GetSubUnit(int subUnitID);
         [OperationContract]
         [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
-           UriTemplate = "/GetAllSubUnit")]
-        string GetAllSubUnit();
+           UriTemplate = "/GetAllSubUnit?subUnitID={subUnitID}")]
+        string GetAllSubUnit(int subUnitID);
     }
 }

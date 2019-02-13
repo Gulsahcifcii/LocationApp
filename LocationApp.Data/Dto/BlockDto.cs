@@ -18,5 +18,8 @@ namespace LocationApp.Data.Dto
         public string Name { get; set; }
         [DataMember]
         public string Gps { get; set; }
+
+        [DataMember]
+        public BuildDto BuildDto { get; set; }
     }
 }

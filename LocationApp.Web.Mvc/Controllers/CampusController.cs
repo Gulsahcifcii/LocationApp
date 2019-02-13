@@ -25,10 +25,8 @@ namespace LocationApp.Web.Controllers
             string result = JsonConvert.DeserializeObject(
                 campusService.AddCampus(0, Name, Description, Other)
                 ).ToString();
-
             if (result == "OK")
                 return RedirectToAction("List");
-            //ViewBag.Message = Helper.GetResultMessage(true);
             else
                 ViewBag.Message = Helper.GetResultMessage(false);
             return View();
@@ -52,7 +50,6 @@ namespace LocationApp.Web.Controllers
 
             if (result == "OK")
                 return RedirectToAction("List");
-            //ViewBag.Message = Helper.GetResultMessage(true);
             else
                 ViewBag.Message = Helper.GetResultMessage(false);
             return View();

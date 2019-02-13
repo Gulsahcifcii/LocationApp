@@ -4486,6 +4486,10 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LocationApp.Core\LocationApp.Core.csproj">
+      <Project>{68A75967-F4BC-4EA8-A237-13E887F967B5}</Project>
+      <Name>LocationApp.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LocationApp.Data\LocationApp.Data.csproj">
       <Project>{55b060ed-1b57-4668-97de-a003ea64a2b3}</Project>
       <Name>LocationApp.Data</Name>

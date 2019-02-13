@@ -20,5 +20,7 @@ namespace LocationApp.Data.Dto
         public string Description { get; set; }
         [DataMember]
         public string Other { get; set; }
-    }
+        [DataMember]
+        public SubUnitDto SubUnitDto {get;set;}
+}
 }

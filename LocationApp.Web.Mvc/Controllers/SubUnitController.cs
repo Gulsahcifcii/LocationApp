@@ -1,4 +1,8 @@
-﻿using System;
+﻿using LocationApp.Data.Dto;
+using LocationApp.Service.Services;
+using LocationApp.Web.Mvc.Helpers;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,34 +14,68 @@ namespace LocationApp.Web.Controllers
     public class SubUnitController : Controller
     {
         readonly LocationApp.Service.Services.SubUnitService subUnitService = new Service.Services.SubUnitService();
+        readonly LocationApp.Service.Services.MainUnitService mainUnitService = new Service.Services.MainUnitService();
 
         [HttpGet]
         public ActionResult Create()
         {
+            GetMainUnit(0);
             return View();
         }
-
         [HttpPost]
-        public ActionResult Create(int SubUnitID, string Name, string Description, string Other)
+        public ActionResult Create(int SubUnitID, string Name, int MainUnitID)
         {
+            string result = JsonConvert.DeserializeObject(
+                           subUnitService.AddSubUnit(0, Name, MainUnitID)
+                           ).ToString();
+
+            if (result == "OK")
+                return RedirectToAction("List");
+            //ViewBag.Message = Helper.GetResultMessage(true);
+            else
+                ViewBag.Message = Helper.GetResultMessage(false);
             return View();
         }
         [HttpGet]
         public ActionResult Edit(int? id)
         {
-            return View();
+            var item = subUnitService.GetSubUnit(id.Value);
+            var result = JsonConvert.DeserializeObject<SubUnitDto>(item);
+            if (result != null)
+            {
+                GetMainUnit(result.MainUnitID);
+                return View(result);
+            }
+            else
+                return HttpNotFound();
         }
 
         [HttpPost]
-        public ActionResult Edit(int campusID, string name, string description, string other)
+        public ActionResult Edit(int SubUnitID, string Name, int MainUnitID)
         {
+            string result = JsonConvert.DeserializeObject(
+                                subUnitService.SetSubUnit(SubUnitID, Name, MainUnitID)
+                                ).ToString();
+
+            if (result == "OK")
+                return RedirectToAction("List");
+            //ViewBag.Message = Helper.GetResultMessage(true);
+            else
+                ViewBag.Message = Helper.GetResultMessage(false);
             return View();
         }
 
         [HttpGet]
         public ActionResult List()
         {
-            return View();
+            return View(JsonConvert.DeserializeObject<List<SubUnitDto>>(subUnitService.GetAllSubUnit(0)));
+
+        }
+        void GetMainUnit(int selectedValue)
+        {
+            var list = JsonConvert.DeserializeObject<List<MainUnitDto>>(mainUnitService.GetAllMainUnit());
+            SelectList slist = new SelectList(list, "mainUnitID", "Name", selectedValue);
+            ViewBag.MainUnitID = slist;
         }
     }
 }

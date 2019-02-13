@@ -36,6 +36,8 @@
                         <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
+                                    <td>Ana Birim</td>
+                                    <td>Alt Birim</td>
                                     <th>Departman Başlık</th>
                                     <th>Açıklama</th>
                                     <th>Diğer</th>
@@ -43,15 +45,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>-</td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                    <td>
-                                        <button type="button" class="btn btn-round btn-danger"><i class="fa fa-edit fa-hover"></i><span class="text-muted"></span></button>
-                                        <button type="button" class="btn btn-round btn-info"><i class="fa fa-trash fa-hover"></i><span class="text-muted"></span></button>
-                                    </td>
-                                </tr>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.SubUnitDto.MainUnitDto.Name</td>
+                                        <td>@item.SubUnitDto.Name</td>
+                                        <td>@item.Name</td>
+                                        <td>@item.Description</td>
+                                        <td>@item.Other</td>
+                                        <td>
+                                            <a href="/Department/Edit/@item.DepartmentID" class="btn btn-round btn-danger"><i class="fa fa-edit fa-hover"></i><span class="text-muted"></span></a>
+                                            <button type="button" class="btn btn-round btn-info"><i class="fa fa-trash fa-hover"></i><span class="text-muted"></span></button>
+                                        </td>
+                                    </tr>
+                                }
                             </tbody>
                         </table>
                     </div>

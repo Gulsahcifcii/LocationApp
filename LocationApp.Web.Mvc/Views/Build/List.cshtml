@@ -47,17 +47,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Site</td>
-                                    <td>Başlık</td>
-                                    <td>Adres</td>
-                                    <td>Gps</td>
-                                    <td>Özellikler</td>
-                                    <td>
-                                        <button type="button" class="btn btn-round btn-danger"><i class="fa fa-edit fa-hover"></i><span class="text-muted"></span></button>
-                                        <button type="button" class="btn btn-round btn-info"><i class="fa fa-trash fa-hover"></i><span class="text-muted"></span></button>
-                                    </td>
-                                </tr>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.SiteDto.Name</td>
+                                        <td>@item.Name</td>
+                                        <td>@item.CampusDto.Name</td>
+                                        <td>@item.Gps</td>
+                                        <td>@item.Properties</td>
+                                        <td>
+                                            <a href="/Build/@item.BuildID" class="btn btn-round btn-danger"><i class="fa fa-edit fa-hover"></i><span class="text-muted"></span></a>
+                                            <button type="button" class="btn btn-round btn-info"><i class="fa fa-trash fa-hover"></i><span class="text-muted"></span></button>
+                                        </td>
+                                    </tr>
+                                }
                             </tbody>
                         </table>
                     </div>

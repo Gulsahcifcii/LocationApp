@@ -110,15 +110,50 @@ namespace LocationApp.Core.Core
             try
             {
                 List<BuildDto> list = new List<BuildDto>();
-                using (UnitOfWork unitofWork = new UnitOfWork())
+                using (var context = new locationAppEntities())
                 {
-                    List<build> collection = unitofWork.GetRepository<build>().Select(null, null).ToList();
-                    foreach (var item in collection)
+                    var buildList = from b in context.builds
+                                    join c in context.campus on b.CampusID equals c.CampusID
+                                    join s in context.sites on b.SiteID equals s.SiteID
+                                    select new
+                                    {
+                                        BID = b.BuildID,
+                                        BName = b.Name,
+                                        BAdress = b.Adress,
+                                        BGps = b.Gps,
+                                        BProperties = b.Properties,
+                                        BCID = b.CampusID,
+                                        CID = c.CampusID,
+                                        CName = c.Name,
+                                        CDesc = c.Description,
+                                        COther = c.Other,
+                                        SID = s.SiteID,
+                                        SName = s.Name,
+                                        SDesc = s.Description,
+                                        SGps = s.Gps
+                                    };
+                    foreach (var item in buildList)
                     {
-                        list.Add(new BuildDto { BuildID = item.BuildID, CampusID = item.CampusID.Value, Address = item.Adress, Properties = item.Properties, SiteID = item.SiteID.Value, Gps = item.Gps, Name = item.Name });
+                        BuildDto bDto = new BuildDto();
+                        bDto.BuildID = item.BID;
+                        bDto.Name = item.BName;
+                        bDto.Address = item.BAdress;
+                        bDto.CampusID = item.BCID.Value;
+                        bDto.Properties = item.BProperties;
+                        bDto.CampusDto.CampusID = item.CID;
+                        bDto.CampusDto.Name = item.CName;
+                        bDto.CampusDto.Description = item.CDesc;
+                        bDto.CampusDto.Other = item.COther;
+                        bDto.SiteDto.SiteID = item.SID;
+                        bDto.SiteDto.Name = item.SName;
+                        bDto.SiteDto.Description = item.SDesc;
+                        bDto.SiteDto.Gps = item.SGps;
+                        list.Add(bDto);
+
                     }
                     return list;
                 }
+
             }
             catch (Exception ex)
             {

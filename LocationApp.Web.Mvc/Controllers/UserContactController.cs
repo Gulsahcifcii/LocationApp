@@ -1,4 +1,7 @@
-﻿using System;
+﻿using LocationApp.Data.Dto;
+using LocationApp.Web.Mvc.Helpers;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,24 +23,46 @@ namespace LocationApp.Web.Controllers
         [HttpPost]
         public ActionResult Create(int UserContactID, string Contact, int UserID, int UserContactTypeID)
         {
+            string result = JsonConvert.DeserializeObject(userContactService.AddUserContact(0, Contact, UserID, UserContactTypeID)
+                            ).ToString();
+
+            if (result == "OK")
+                return RedirectToAction("List");
+            //ViewBag.Message = Helper.GetResultMessage(true);
+            else
+                ViewBag.Message = Helper.GetResultMessage(false);
             return View();
         }
         [HttpGet]
         public ActionResult Edit(int? id)
         {
-            return View();
+            var item = userContactService.GetUserContact(id.Value);
+            var result = JsonConvert.DeserializeObject<UserContactDto>(item);
+            if (result != null)
+                return View(result);
+            else
+                return HttpNotFound();
         }
 
         [HttpPost]
         public ActionResult Edit(int UserContactID, string Contact, int UserID, int UserContactTypeID)
         {
+            string result = JsonConvert.DeserializeObject(
+                                        userContactService.SetUserContact(UserContactID, Contact, UserID, UserContactTypeID)
+                                        ).ToString();
+
+            if (result == "OK")
+                return RedirectToAction("List");
+            //ViewBag.Message = Helper.GetResultMessage(true);
+            else
+                ViewBag.Message = Helper.GetResultMessage(false);
             return View();
         }
 
         [HttpGet]
         public ActionResult List()
         {
-            return View();
+            return View(JsonConvert.DeserializeObject<List<UserContactDto>>(userContactService.GetAllUserContact()));
         }
     }
 }

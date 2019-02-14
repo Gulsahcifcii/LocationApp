@@ -46,6 +46,7 @@
                                 <tr>
                                     @foreach (var item in Model)
                                     {
+                                        <td>@item.Name</td>
                                         <td>
                                             @if (item.BuildID != 0)
                                             {
@@ -62,7 +63,7 @@
                                             else
                                             { <text>-</text>}
                                         </td>
-                                        <td>@item.Name</td>
+
                                         <td>
                                             <a href="/Floor/Edit/@item.FloorID" class="btn btn-round btn-danger"><i class="fa fa-edit fa-hover"></i><span class="text-muted"></span></a>
                                             <button type="button" class="btn btn-round btn-info"><i class="fa fa-trash fa-hover"></i><span class="text-muted"></span></button>
@@ -79,5 +80,5 @@
 </div>
 <!-- /page content -->
 @section Scripts{
-    @Html.Partial("/Views/Shared/Partials/DataTable/_Css.cshtml")
+    @Html.Partial("/Views/Shared/Partials/DataTable/_Js.cshtml")
 }

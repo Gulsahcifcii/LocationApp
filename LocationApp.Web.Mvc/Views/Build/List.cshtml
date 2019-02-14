@@ -41,25 +41,24 @@
                                     <th>Site Başlık</th>
                                     <th>Bina Başlık</th>
                                     <th>Adres</th>
-                                    <th>Adres</th>
-                                    <th>Gps</th>
-                                    <th>Özellikler</th>
+                                    <th>Özellik</th>
+                                    <th>İşlem</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach (var item in Model)
                                 {
-                                <tr>
-                                    <td>@item.CampusDto.Name</td>
-                                    <td>@item.SiteDto.Name</td>
-                                    <td>@item.Name</td>
-                                    <td>@item.Gps</td>
-                                    <td>@item.Properties</td>
-                                    <td>
-                                        <a href="/Build/Edit/@item.BuildID" class="btn btn-round btn-danger"><i class="fa fa-edit fa-hover"></i><span class="text-muted"></span></a>
-                                        <button type="button" class="btn btn-round btn-info"><i class="fa fa-trash fa-hover"></i><span class="text-muted"></span></button>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td>@item.CampusDto.Name</td>
+                                        <td>@item.SiteDto.Name</td>
+                                        <td>@item.Name</td>
+                                        <td>@item.Address</td>
+                                        <td>@item.Properties</td>
+                                        <td>
+                                            <a href="/Build/Edit/@item.BuildID" class="btn btn-round btn-danger"><i class="fa fa-edit fa-hover"></i><span class="text-muted"></span></a>
+                                            <button type="button" class="btn btn-round btn-info"><i class="fa fa-trash fa-hover"></i><span class="text-muted"></span></button>
+                                        </td>
+                                    </tr>
                                 }
                             </tbody>
                         </table>

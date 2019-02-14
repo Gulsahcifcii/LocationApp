@@ -8,16 +8,20 @@ using LocationApp.Data.Dto;
 using LocationApp.Data.UnitOfWork;
 using System.Net;
 using LocationApp.Data.Database;
+using LocationApp.Core.Helper;
 
 namespace LocationApp.Core.Core
 {
     public class UserContactTypeLogic
     {
-        WebOperationContext webOperationContext = WebOperationContext.Current;
-        public string AddUserContactType(UserContactTypeDto userContactTypeDto)
+        public ResultHelper AddUserContactType(UserContactTypeDto userContactTypeDto)
         {
             try
             {
+                if (isThere(userContactTypeDto))
+                {
+                    return new ResultHelper(false, 0, ResultHelper.SuccessMessage);
+                }
                 usercontacttype item = new usercontacttype();
                 item.UserContactTypeID = userContactTypeDto.UserContactTypeID;
                 item.TypeName = userContactTypeDto.TypeName;
@@ -27,15 +31,15 @@ namespace LocationApp.Core.Core
                 {
                     unitOfWork.GetRepository<usercontacttype>().Insert(item);
                     unitOfWork.saveChanges();
-                    return(webOperationContext.OutgoingResponse.StatusCode=HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, item.UserContactTypeID, ResultHelper.SuccessMessage);
                 }
             }
             catch(Exception ex)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, 0, ResultHelper.UnSuccessMessage);
             }
         }
-        public string SetUserContactType(UserContactTypeDto userContactTypeDto)
+        public ResultHelper SetUserContactType(UserContactTypeDto userContactTypeDto)
         {
             try
             {
@@ -48,12 +52,12 @@ namespace LocationApp.Core.Core
                 {
                     unitOfWork.GetRepository<usercontacttype>().Update(item);
                     unitOfWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, item.UserContactTypeID, ResultHelper.SuccessMessage);
                 }
             }
             catch(Exception ex)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, userContactTypeDto.UserContactTypeID, ResultHelper.UnSuccessMessage);
             }
         }
         public UserContactTypeDto GetUserContactType(int userContactTypeID)
@@ -76,7 +80,7 @@ namespace LocationApp.Core.Core
                 return new UserContactTypeDto();                
             }
         }
-        public string DelUserContactType(int userContactTypeID)
+        public ResultHelper DelUserContactType(int userContactTypeID)
         {
             try
             {
@@ -85,13 +89,13 @@ namespace LocationApp.Core.Core
                     var selectedUserContactType = unitOfWork.GetRepository<usercontacttype>().GetById(x => x.UserContactTypeID == userContactTypeID);
                     unitOfWork.GetRepository<usercontacttype>().Delete(selectedUserContactType);
                     unitOfWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, selectedUserContactType.UserContactTypeID, ResultHelper.SuccessMessage);
 
                 }
             }
             catch (Exception ex)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, userContactTypeID, ResultHelper.UnSuccessMessage);
             }
         }
         public List<UserContactTypeDto> GetAllUserContactType()
@@ -112,6 +116,21 @@ namespace LocationApp.Core.Core
             catch (Exception ex)
             {
                 return new List<UserContactTypeDto>();
+            }
+        }
+        public bool isThere(UserContactTypeDto userContactTypeDto)
+        {
+            using (UnitOfWork unitofWork = new UnitOfWork())
+            {
+                var item = unitofWork.GetRepository<usercontacttype>().GetById(x => x.UserContactTypeID == userContactTypeDto.UserContactTypeID && x.TypeName == userContactTypeDto.TypeName&&x.Description== userContactTypeDto.Description);
+                if (item != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
     }

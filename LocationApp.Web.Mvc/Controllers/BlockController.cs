@@ -33,7 +33,6 @@ namespace LocationApp.Web.Controllers
                 ViewBag.Message = Helper.GetResultMessage(result.Result,result.ResultDescription);
             return View();
         }
-
         [HttpGet]
         public ActionResult Edit(int? id)
         {
@@ -65,7 +64,6 @@ namespace LocationApp.Web.Controllers
             var item = JsonConvert.DeserializeObject<List<BlockDto>>(blockService.GetAllBlock());
             return View(item);
         }
-
         void GetBuilds(int selectedValue)
         {
             var list = JsonConvert.DeserializeObject<List<BuildDto>>(buildService.GetAllBuild());

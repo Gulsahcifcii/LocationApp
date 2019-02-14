@@ -9,15 +9,20 @@ using System.ServiceModel.Web;
 using LocationApp.Data.Dto;
 using LocationApp.Data.UnitOfWork;
 using System.Net;
+using LocationApp.Core.Helper;
 
 namespace LocationApp.Core.Core
 {
     public class UserTitleLogic
     {
-        public string AddUserTitle(UserTitleDto userTitleDto)
+        public ResultHelper AddUserTitle(UserTitleDto userTitleDto)
         {
             try
             {
+                if (isThere(userTitleDto))
+                {
+                    return new ResultHelper(false, 0, ResultHelper.SuccessMessage);
+                }
                 usertitle item = new usertitle();
                 item.UserTitleID = userTitleDto.UserTitleId;
                 item.TitleName = userTitleDto.TitleName;
@@ -26,16 +31,15 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<usertitle>().Insert(item);
                     unitofWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, item.UserTitleID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception ex)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, 0, ResultHelper.UnSuccessMessage);
             }
         }
-
-        public string SetUserTitle(UserTitleDto userTitleDto)
+        public ResultHelper SetUserTitle(UserTitleDto userTitleDto)
         {
             try
             {
@@ -47,15 +51,15 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<usertitle>().Update(item);
                     unitofWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, item.UserTitleID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, userTitleDto.UserTitleId, ResultHelper.UnSuccessMessage);
             }
         }
-        public string DelUserTitle(int userTitleId)
+        public ResultHelper DelUserTitle(int userTitleId)
         {
             try
             {
@@ -64,12 +68,12 @@ namespace LocationApp.Core.Core
                     var selectedUserTitle = unitofWork.GetRepository<usertitle>().GetById(x => x.UserTitleID == userTitleId);
                     unitofWork.GetRepository<usertitle>().Delete(selectedUserTitle);
                     unitofWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, selectedUserTitle.UserTitleID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, userTitleId, ResultHelper.UnSuccessMessage);
             }
         }
         public UserTitleDto GetUserTitle(int userTitleId)
@@ -110,6 +114,21 @@ namespace LocationApp.Core.Core
             catch (Exception ex)
             {
                 return new List<UserTitleDto>();
+            }
+        }
+        public bool isThere(UserTitleDto userTitleDto)
+        {
+            using (UnitOfWork unitofWork = new UnitOfWork())
+            {
+                var item = unitofWork.GetRepository<usertitle>().GetById(x => x.UserTitleID == userTitleDto.UserTitleId && x.TitleName == userTitleDto.TitleName);
+                if (item != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
     }

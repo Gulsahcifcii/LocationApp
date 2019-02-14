@@ -9,36 +9,38 @@ using System.ServiceModel.Web;
 using LocationApp.Data.Dto;
 using LocationApp.Data.UnitOfWork;
 using System.Net;
+using LocationApp.Core.Helper;
 
 namespace LocationApp.Core.Core
 {
     public class UserContactLogic
     {
-        WebOperationContext webOperationContext = WebOperationContext.Current;
-        public string AddUserContact(UserContactDto userContactDto)
+        public ResultHelper AddUserContact(UserContactDto userContactDto)
         {
             try
             {
+                if (isThere(userContactDto))
+                {
+                    return new ResultHelper(false, 0, ResultHelper.SuccessMessage);
+                }
                 usercontact item = new usercontact();
                 item.UserContactID = userContactDto.UserContactID;
                 item.UserID = userContactDto.UserID;
                 item.UserContactTypeID = userContactDto.UserContactTypeID;
                 item.Contact = userContactDto.Contact;
-
-
                 using (UnitOfWork unitofWork = new UnitOfWork())
                 {
                     unitofWork.GetRepository<usercontact>().Insert(item);
                     unitofWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, item.UserContactID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception ex)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, 0, ResultHelper.UnSuccessMessage);
             }
         }
-        public string SetUserContact(UserContactDto userContactDto)
+        public ResultHelper SetUserContact(UserContactDto userContactDto)
         {
             try
             {
@@ -52,15 +54,15 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<usercontact>().Update(item);
                     unitofWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, item.UserContactID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, userContactDto.UserContactID, ResultHelper.UnSuccessMessage);
             }
         }
-        public string DelUserContact(int UserContactID)
+        public ResultHelper DelUserContact(int UserContactID)
         {
             try
             {
@@ -69,12 +71,12 @@ namespace LocationApp.Core.Core
                     var selectedUserContact = unitofWork.GetRepository<usercontact>().GetById(x => x.UserContactID == UserContactID);
                     unitofWork.GetRepository<usercontact>().Delete(selectedUserContact);
                     unitofWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, selectedUserContact.UserContactID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, UserContactID, ResultHelper.UnSuccessMessage);
             }
         }
         public UserContactDto GetUserContact(int UserContactID)
@@ -117,6 +119,21 @@ namespace LocationApp.Core.Core
             catch (Exception ex)
             {
                 return new List<UserContactDto>();
+            }
+        }
+        public bool isThere(UserContactDto userContactDto)
+        {
+            using (UnitOfWork unitofWork = new UnitOfWork())
+            {
+                var item = unitofWork.GetRepository<usercontact>().GetById(x => x.UserContactID == userContactDto.UserContactID && x.Contact == userContactDto.Contact &&x.UserID== userContactDto.UserID &&x.UserContactTypeID== userContactDto.UserContactTypeID);
+                if (item != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
     }

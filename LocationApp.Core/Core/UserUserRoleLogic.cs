@@ -9,17 +9,22 @@ using System.ServiceModel.Web;
 using LocationApp.Data.Dto;
 using LocationApp.Data.UnitOfWork;
 using System.Net;
+using LocationApp.Core.Helper;
 
 namespace LocationApp.Core.Core
 {
 
     public class UserUserRoleLogic
     {
-        WebOperationContext webOperationContext = WebOperationContext.Current;
-        public string AddUserUserRole(UserUserRoleDto userUserRoleDto)
+
+        public ResultHelper AddUserUserRole(UserUserRoleDto userUserRoleDto)
         {
             try
             {
+                if (isThere(userUserRoleDto))
+                {
+                    return new ResultHelper(false, 0, ResultHelper.SuccessMessage);
+                }
                 useruserrole item = new useruserrole();
                 item.UserUserRoleID = userUserRoleDto.UserUserRoleID;
                 item.UserID = userUserRoleDto.UserID;
@@ -29,16 +34,16 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<useruserrole>().Insert(item);
                     unitofWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, item.UserUserRoleID,ResultHelper.SuccessMessage);
+
                 }
             }
             catch (Exception ex)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, 0, ResultHelper.UnSuccessMessage);
             }
         }
-
-        public string SetUserUserRole(UserUserRoleDto userUserRoleDto)
+        public ResultHelper SetUserUserRole(UserUserRoleDto userUserRoleDto)
         {
             try
             {
@@ -51,29 +56,29 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<useruserrole>().Update(item);
                     unitofWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, item.UserUserRoleID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, 0, ResultHelper.UnSuccessMessage);
             }
         }
-        public string DelUserUserRole(int UserUserRoleID)
+        public ResultHelper DelUserUserRole(int UserUserRoleID)
         {
             try
             {
                 using (UnitOfWork unitofWork = new UnitOfWork())
                 {
-                    var selectedUserTitle = unitofWork.GetRepository<useruserrole>().GetById(x => x.UserUserRoleID == UserUserRoleID);
-                    unitofWork.GetRepository<useruserrole>().Delete(selectedUserTitle);
+                    var selectedUserUserRole = unitofWork.GetRepository<useruserrole>().GetById(x => x.UserUserRoleID == UserUserRoleID);
+                    unitofWork.GetRepository<useruserrole>().Delete(selectedUserUserRole);
                     unitofWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, selectedUserUserRole.UserUserRoleID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, UserUserRoleID, ResultHelper.UnSuccessMessage);
             }
         }
         public UserUserRoleDto GetUserUserRole(int UserUserRoleID)
@@ -115,6 +120,21 @@ namespace LocationApp.Core.Core
             catch (Exception ex)
             {
                 return new List<UserUserRoleDto>();
+            }
+        }
+        public bool isThere(UserUserRoleDto userUserRoleDto)
+        {
+            using (UnitOfWork unitofWork = new UnitOfWork())
+            {
+                var item = unitofWork.GetRepository<useruserrole>().GetById(x => x.UserUserRoleID == userUserRoleDto.UserUserRoleID && x.UserID == userUserRoleDto.UserID &&x.UserRoleID==userUserRoleDto.UserRoleID);
+                if (item != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
     }

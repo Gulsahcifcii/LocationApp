@@ -122,5 +122,43 @@ namespace LocationApp.Core.Core
                 return new List<SiteDto>();
             }
         }
+
+        public List<SiteDto> GetSiteWithCampus(int campusID)
+        {
+            try
+            {
+                List<SiteDto> sDtoList = new List<SiteDto>();
+
+                using (UnitOfWork unitOfWork = new UnitOfWork())
+                {
+                    var list = from campus in unitOfWork.GetRepository<campu>().Select(null, null)
+                               join campusSite in unitOfWork.GetRepository<campussite>().Select(null, null) on campus.CampusID equals campusSite.CampusID
+                               join site in unitOfWork.GetRepository<site>().Select(null, null) on campusSite.SiteID equals site.SiteID
+                               select new
+                               {
+                                   CID = campus.CampusID,
+                                   CName = campus.Name,
+                                   SID = site.SiteID,
+                                   SName = site.Name
+                               };
+                    foreach (var item in list)
+                    {
+                        SiteDto siteDto = new SiteDto();
+                        siteDto.SiteID = item.SID;
+                        siteDto.Name = item.SName;
+                        siteDto.campusSiteDto = new CampusSiteDto();
+                        siteDto.campusSiteDto.CampusID = item.CID;
+                        siteDto.campusSiteDto.SiteID = item.SID;
+                        sDtoList.Add(siteDto);
+                    }
+                    return sDtoList.Where(a => a.campusSiteDto.CampusID == campusID).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                return new List<SiteDto>();
+            }
+        }
+
     }
 }

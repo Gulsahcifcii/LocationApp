@@ -9,16 +9,21 @@ using System.ServiceModel.Web;
 using LocationApp.Data.Dto;
 using LocationApp.Data.UnitOfWork;
 using System.Net;
+using LocationApp.Core.Helper;
+
 namespace LocationApp.Core.Core
 {
     public class UserDepartmenLogic
     {
-        WebOperationContext webOperationContext = WebOperationContext.Current;
 
-        public string AddUserDepartment(UserDepartmentDto userDepartmentDto)
+        public ResultHelper AddUserDepartment(UserDepartmentDto userDepartmentDto)
         {
             try
             {
+                if (isThere(userDepartmentDto))
+                {
+                    return new ResultHelper(false, 0, ResultHelper.SuccessMessage);
+                }
                 userdepartment item = new userdepartment();
                 item.UserID = userDepartmentDto.UserID;
                 item.UserDepartmentID = userDepartmentDto.UserDepartmentID;
@@ -28,15 +33,15 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<userdepartment>().Insert(item);
                     unitofWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, item.UserDepartmentID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception ex)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, 0, ResultHelper.UnSuccessMessage);
             }
         }
-        public string SetUserDepartment(UserDepartmentDto userDepartmentDto)
+        public ResultHelper SetUserDepartment(UserDepartmentDto userDepartmentDto)
         {
             try
             {
@@ -49,15 +54,15 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<userdepartment>().Update(item);
                     unitofWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, item.UserDepartmentID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, userDepartmentDto.UserID, ResultHelper.UnSuccessMessage);
             }
         }
-        public string DelUserDepartment(int UserDepartmentID)
+        public ResultHelper DelUserDepartment(int UserDepartmentID)
         {
             try
             {
@@ -66,12 +71,12 @@ namespace LocationApp.Core.Core
                     var selectedUserDepartment = unitofWork.GetRepository<userdepartment>().GetById(x => x.UserDepartmentID == UserDepartmentID);
                     unitofWork.GetRepository<userdepartment>().Delete(selectedUserDepartment);
                     unitofWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, selectedUserDepartment.UserDepartmentID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, UserDepartmentID, ResultHelper.UnSuccessMessage);
             }
         }
         public UserDepartmentDto GetUserDepartment(int UserDepartmentID)
@@ -113,6 +118,21 @@ namespace LocationApp.Core.Core
             catch (Exception ex)
             {
                 return new List<UserDepartmentDto>();
+            }
+        }
+        public bool isThere(UserDepartmentDto userDepartmentDto)
+        {
+            using (UnitOfWork unitofWork = new UnitOfWork())
+            {
+                var item = unitofWork.GetRepository<userdepartment>().GetById(x => x.UserDepartmentID == userDepartmentDto.UserDepartmentID && x.UserID == userDepartmentDto.UserID&&x.DepartmentID== userDepartmentDto.DepartmentID);
+                if (item != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
     }

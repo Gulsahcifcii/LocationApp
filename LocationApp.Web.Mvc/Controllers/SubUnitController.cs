@@ -47,7 +47,6 @@ namespace LocationApp.Web.Controllers
             else
                 return HttpNotFound();
         }
-
         [HttpPost]
         public ActionResult Edit(int SubUnitID, string Name, int MainUnitID)
         {
@@ -59,7 +58,6 @@ namespace LocationApp.Web.Controllers
                 ViewBag.Message = Helper.GetResultMessage(result.Result, result.ResultDescription);
             return View();
         }
-
         [HttpGet]
         public ActionResult List()
         {

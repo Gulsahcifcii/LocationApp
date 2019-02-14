@@ -9,17 +9,20 @@ using System.ServiceModel.Web;
 using LocationApp.Data.Dto;
 using LocationApp.Data.UnitOfWork;
 using System.Net;
+using LocationApp.Core.Helper;
 
 namespace LocationApp.Core.Core
 {
    public class UserLogic
     {
-        WebOperationContext webOperationContext = WebOperationContext.Current;
-
-        public string AddUser(UserDto userDto)
+        public ResultHelper AddUser(UserDto userDto)
         {
             try
             {
+                if (isThere(userDto))
+                {
+                    return new ResultHelper(false, 0, ResultHelper.UnSuccessMessage);
+                }
                 user item = new user();
                 item.UserID = userDto.UserId;
                 item.Name = userDto.Name;
@@ -27,22 +30,19 @@ namespace LocationApp.Core.Core
                 item.Gender = userDto.Gender;
                 item.NationID = userDto.NationID;
                 item.UserTitleID = userDto.UserTitleID;
-
-
                 using (UnitOfWork unitofWork = new UnitOfWork())
                 {
                     unitofWork.GetRepository<user>().Insert(item);
                     unitofWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, item.UserID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception ex)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, 0, ResultHelper.UnSuccessMessage);
             }
         }
-
-        public string SetUser(UserDto userDto)
+        public ResultHelper SetUser(UserDto userDto)
         {
             try
             {
@@ -58,15 +58,15 @@ namespace LocationApp.Core.Core
                 {
                     unitofWork.GetRepository<user>().Update(item);
                     unitofWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, item.UserID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, userDto.UserId, ResultHelper.UnSuccessMessage);
             }
         }
-        public string DelUser(int UserID)
+        public ResultHelper DelUser(int UserID)
         {
             try
             {
@@ -75,12 +75,12 @@ namespace LocationApp.Core.Core
                     var selectedUser = unitofWork.GetRepository<user>().GetById(x => x.UserID == UserID);
                     unitofWork.GetRepository<user>().Delete(selectedUser);
                     unitofWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, selectedUser.UserID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, UserID, ResultHelper.UnSuccessMessage);
             }
         }
         public UserDto GetUser(int UserID)
@@ -125,6 +125,21 @@ namespace LocationApp.Core.Core
             catch (Exception ex)
             {
                 return new List<UserDto>();
+            }
+        }
+        public bool isThere(UserDto userDto)
+        {
+            using (UnitOfWork unitofWork = new UnitOfWork())
+            {
+                var item = unitofWork.GetRepository<user>().GetById(x => x.UserID == userDto.UserId && x.Name == userDto.Name && x.SurName == userDto.SurName && x.Gender == userDto.Gender && x.NationID == userDto.NationID && x.UserTitleID == userDto.UserTitleID);
+                if (item != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
     }

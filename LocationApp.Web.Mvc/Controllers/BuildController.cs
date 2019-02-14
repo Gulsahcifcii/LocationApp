@@ -17,6 +17,8 @@ namespace LocationApp.Web.Controllers
     {
         readonly LocationApp.Service.Services.BuildService buildService = new Service.Services.BuildService();
         readonly LocationApp.Service.Services.CampusService campusService = new Service.Services.CampusService();
+        readonly LocationApp.Service.Services.CampusService campusSiteService = new Service.Services.CampusService();
+
         readonly LocationApp.Service.Services.SiteService siteService = new Service.Services.SiteService();
         [HttpGet]
         public ActionResult Create()
@@ -78,5 +80,6 @@ namespace LocationApp.Web.Controllers
             SelectList slist = new SelectList(list, "CampusID", "Name", selectedValue);
             ViewBag.CampusID = slist;
         }
+
     }
 }

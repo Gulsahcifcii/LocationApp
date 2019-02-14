@@ -8,16 +8,20 @@ using LocationApp.Data.Dto;
 using LocationApp.Data.UnitOfWork;
 using System.Net;
 using LocationApp.Data.Database;
+using LocationApp.Core.Helper;
 
 namespace LocationApp.Core.Core
 {
     public class UserRoleLogic
     {
-        WebOperationContext webOperationContext = WebOperationContext.Current;
-        public string AddUserRole(UserRoleDto userRoleDto)
+        public ResultHelper AddUserRole(UserRoleDto userRoleDto)
         {
             try
             {
+                if (isThere(userRoleDto))
+                {
+                    return new ResultHelper(false, 0, ResultHelper.SuccessMessage);
+                }
                 userrole item = new userrole();
                 item.UserRoleID = userRoleDto.UserRoleID;
                 item.UserRoleName = userRoleDto.UserRoleName;
@@ -28,15 +32,15 @@ namespace LocationApp.Core.Core
                 {
                     unitOfWork.GetRepository<userrole>().Insert(item);
                     unitOfWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, item.UserRoleID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, 0, ResultHelper.UnSuccessMessage);
             }
         }
-        public string SetUserRole(UserRoleDto userRoleDto)
+        public ResultHelper SetUserRole(UserRoleDto userRoleDto)
         {
             try
             {
@@ -50,12 +54,12 @@ namespace LocationApp.Core.Core
                 {
                     unitOfWork.GetRepository<userrole>().Insert(item);
                     unitOfWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, item.UserRoleID, ResultHelper.SuccessMessage);
                 }
             }
             catch (Exception)
             {
-                return (HttpStatusCode.InternalServerError).ToString(); ;
+                return new ResultHelper(false, userRoleDto.UserRoleID, ResultHelper.UnSuccessMessage);
             }
         }
         public UserRoleDto GetUserRole(int userRoleID)
@@ -79,7 +83,7 @@ namespace LocationApp.Core.Core
                 return new UserRoleDto();
             }
         }
-        public string DelUserRole(int userRoleID)
+        public ResultHelper DelUserRole(int userRoleID)
         {
             try
             {
@@ -88,13 +92,13 @@ namespace LocationApp.Core.Core
                     var selectedUserRoleID = unitOfWork.GetRepository<userrole>().GetById(x => x.UserRoleID == userRoleID);
                     unitOfWork.GetRepository<userrole>().Delete(selectedUserRoleID);
                     unitOfWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, selectedUserRoleID.UserRoleID, ResultHelper.SuccessMessage);
 
                 }
             }
             catch (Exception ex)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, userRoleID, ResultHelper.UnSuccessMessage);
             }
         }
         public List<UserRoleDto> GetAllUserRole()
@@ -115,6 +119,21 @@ namespace LocationApp.Core.Core
             catch (Exception ex)
             {
                 return new List<UserRoleDto>();
+            }
+        }
+        public bool isThere(UserRoleDto userRoleDto)
+        {
+            using (UnitOfWork unitofWork = new UnitOfWork())
+            {
+                var item = unitofWork.GetRepository<userrole>().GetById(x => x.UserRoleID == userRoleDto.UserRoleID && x.UserRoleName == userRoleDto.UserRoleName&& x.UserRoleDescription== userRoleDto.UserRoleDescription&&x.Active== userRoleDto.Active);
+                if (item != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
     }

@@ -8,39 +8,39 @@ using LocationApp.Data.Dto;
 using LocationApp.Data.UnitOfWork;
 using System.Net;
 using LocationApp.Data.Database;
+using LocationApp.Core.Helper;
 
 namespace LocationApp.Core.Core
 {
     public class UserLoginLogic
     {
-        WebOperationContext webOperationContext = WebOperationContext.Current;
-
-        public string AddUserLogin(UserLoginDto userLoginDto)
+        public ResultHelper AddUserLogin(UserLoginDto userLoginDto)
         {
             try
             {
+                if (isThere(userLoginDto))
+                {
+                    return new ResultHelper(false, 0, ResultHelper.SuccessMessage);
+                }
                 userlogin item = new userlogin();
                 item.UserLoginID = userLoginDto.UserLoginID;
                 item.Password = userLoginDto.Password;
                 item.IpAdress = userLoginDto.IpAdress;
                 item.UserID = userLoginDto.UserID;
-
-
                 using (UnitOfWork unitOfWork = new UnitOfWork())
                 {
                     unitOfWork.GetRepository<userlogin>().Insert(item);
                     unitOfWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, item.UserLoginID, ResultHelper.SuccessMessage);
                 }
 
             }
             catch (Exception ex)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, 0, ResultHelper.UnSuccessMessage);
             }
         }
-
-        public string SetUserLogin(UserLoginDto userLoginDto)
+        public ResultHelper SetUserLogin(UserLoginDto userLoginDto)
         {
             try
             {
@@ -54,12 +54,12 @@ namespace LocationApp.Core.Core
                 {
                     unitOfWork.GetRepository<userlogin>().Insert(item);
                     unitOfWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, item.UserLoginID, ResultHelper.SuccessMessage);
                 }
             }
             catch
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, userLoginDto.UserLoginID, ResultHelper.UnSuccessMessage);
             }
         }
         public UserLoginDto GetUserLogin(int userLoginID)
@@ -84,7 +84,7 @@ namespace LocationApp.Core.Core
                 return new UserLoginDto();
             }
         }
-        public string DelUserLogin(int userLoginID)
+        public ResultHelper DelUserLogin(int userLoginID)
         {
             try
             {
@@ -93,13 +93,28 @@ namespace LocationApp.Core.Core
                     var selectedUserLoginID = unitOfWork.GetRepository<userlogin>().GetById(x => x.UserLoginID == userLoginID);
                     unitOfWork.GetRepository<userlogin>().Delete(selectedUserLoginID);
                     unitOfWork.saveChanges();
-                    return (HttpStatusCode.OK).ToString();
+                    return new ResultHelper(true, selectedUserLoginID.UserLoginID, ResultHelper.SuccessMessage);
 
                 }
             }
             catch (Exception ex)
             {
-                return (HttpStatusCode.InternalServerError).ToString();
+                return new ResultHelper(false, userLoginID, ResultHelper.UnSuccessMessage);
+            }
+        }
+        public bool isThere(UserLoginDto userLoginDto)
+        {
+            using (UnitOfWork unitofWork = new UnitOfWork())
+            {
+                var item = unitofWork.GetRepository<userlogin>().GetById(x => x.UserLoginID == userLoginDto.UserLoginID && x.Password == userLoginDto.Password && x.CreationDate== userLoginDto.CreationDate&&x.IpAdress== userLoginDto.IpAdress &&x.UserID== userLoginDto.UserID);
+                if (item != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
     }

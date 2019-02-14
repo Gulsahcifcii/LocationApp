@@ -20,7 +20,6 @@ namespace LocationApp.Web.Controllers
         {
             return View();
         }
-
         [HttpPost]
         public ActionResult Create(int UserContactID, string Contact, int UserID, int UserContactTypeID)
         {
@@ -42,7 +41,6 @@ namespace LocationApp.Web.Controllers
             else
                 return HttpNotFound();
         }
-
         [HttpPost]
         public ActionResult Edit(int UserContactID, string Contact, int UserID, int UserContactTypeID)
         {
@@ -54,7 +52,6 @@ namespace LocationApp.Web.Controllers
                 ViewBag.Message = Helper.GetResultMessage(result.Result,result.ResultDescription);
             return View();
         }
-
         [HttpGet]
         public ActionResult List()
         {

@@ -72,4 +72,21 @@
 
 @section Scripts{
     @Html.Partial("/Views/Shared/Partials/DataTable/_Js.cshtml")
+    <script type="text/javascript">
+        $("#CampusID").change(function () {
+            var campusID = $(this).val();
+            $("#SiteID").empty();
+            $.ajax({
+                url: '/Site/GetSiteWithByCampusID',
+                type: "GET",
+                dataType: "json",
+                data: { campusID: campusID },
+                success: function (data) {
+                    $.each(data, function () {
+                        $('#SiteID').append('<option value=' + this.SubUnitID + '>' + this.Name + '</option>');
+                    });
+                }
+            });
+        });
+    </script>
 }

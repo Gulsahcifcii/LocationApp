@@ -52,5 +52,11 @@ namespace LocationApp.Service.Services
             var item = JsonConvert.SerializeObject(site, Formatting.Indented);
             return item;
         }
+        public string GetAllSiteWithCampus(int campusID)
+        {
+            var site = siteLogic.GetSiteWithCampus(campusID);
+            var item = JsonConvert.SerializeObject(site, Formatting.Indented);
+            return item;
+        }
     }
 }

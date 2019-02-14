@@ -68,10 +68,10 @@
     <EntitySetMapping Name="floors">
       <EntityTypeMapping TypeName="locationappModel.floor">
         <MappingFragment StoreEntitySet="floor">
-          <ScalarProperty Name="BuildID" ColumnName="BuildID" />
           <ScalarProperty Name="Map" ColumnName="Map" />
           <ScalarProperty Name="Other" ColumnName="Other" />
           <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="BuildID" ColumnName="BuildID" />
           <ScalarProperty Name="BlockID" ColumnName="BlockID" />
           <ScalarProperty Name="FloorID" ColumnName="FloorID" />
         </MappingFragment>

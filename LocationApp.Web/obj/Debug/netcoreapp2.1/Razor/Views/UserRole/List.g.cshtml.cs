@@ -80,7 +80,7 @@ Write(Html.Partial("/Views/Shared/Partials/DataTable/_Css.cshtml"));
                         ");
             EndContext();
             BeginContext(631, 106, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "401cbac8d001418f99870352b0b32aad", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "763aaf405d254e2e8d9ede0af54e0c37", async() => {
                 BeginContext(695, 38, true);
                 WriteLiteral("<i class=\"fa fa-plus-circle\"></i> Yeni");
                 EndContext();

@@ -18,7 +18,6 @@ namespace LocationApp.Data.Database
         public build()
         {
             this.blocks = new HashSet<block>();
-            this.floors = new HashSet<floor>();
         }
     
         public int BuildID { get; set; }
@@ -33,7 +32,5 @@ namespace LocationApp.Data.Database
         public virtual ICollection<block> blocks { get; set; }
         public virtual campu campu { get; set; }
         public virtual site site { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<floor> floors { get; set; }
     }
 }

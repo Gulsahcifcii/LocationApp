@@ -51,5 +51,11 @@ namespace LocationApp.Service.Services
             var item = JsonConvert.SerializeObject(block, Formatting.Indented);
             return item;
         }
+        public string GetAllBlockWithByBuildID(int buildID)
+        {
+            var block = blockLogic.GetAllBlockWithByBuildID(buildID);
+            var item = JsonConvert.SerializeObject(block, Formatting.Indented);
+            return item;
+        }
     }
 }

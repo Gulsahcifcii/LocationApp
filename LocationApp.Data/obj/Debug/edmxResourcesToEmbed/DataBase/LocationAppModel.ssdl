@@ -64,10 +64,10 @@
     </Key>
     <Property Name="FloorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="BlockID" Type="int" />
+    <Property Name="BuildID" Type="int" />
     <Property Name="Name" Type="varchar" MaxLength="50" />
     <Property Name="Other" Type="varchar" MaxLength="50" />
     <Property Name="Map" Type="varchar" MaxLength="50" />
-    <Property Name="BuildID" Type="int" />
   </EntityType>
   <EntityType Name="mainunit">
     <Key>
@@ -321,30 +321,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="floor_block_BlockID_fk">
-    <End Role="block" Type="Self.block" Multiplicity="0..1" />
-    <End Role="floor" Type="Self.floor" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="block">
-        <PropertyRef Name="BlockID" />
-      </Principal>
-      <Dependent Role="floor">
-        <PropertyRef Name="BlockID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="floor_build_BuildID_fk">
-    <End Role="build" Type="Self.build" Multiplicity="0..1" />
-    <End Role="floor" Type="Self.floor" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="build">
-        <PropertyRef Name="BuildID" />
-      </Principal>
-      <Dependent Role="floor">
-        <PropertyRef Name="BuildID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="room_floor_FloorID_fk">
     <End Role="floor" Type="Self.floor" Multiplicity="0..1" />
     <End Role="room" Type="Self.room" Multiplicity="*" />
@@ -518,14 +494,6 @@
     <AssociationSet Name="FK_UserRoleID" Association="Self.FK_UserRoleID">
       <End Role="userrole" EntitySet="userrole" />
       <End Role="useruserrole" EntitySet="useruserrole" />
-    </AssociationSet>
-    <AssociationSet Name="floor_block_BlockID_fk" Association="Self.floor_block_BlockID_fk">
-      <End Role="block" EntitySet="block" />
-      <End Role="floor" EntitySet="floor" />
-    </AssociationSet>
-    <AssociationSet Name="floor_build_BuildID_fk" Association="Self.floor_build_BuildID_fk">
-      <End Role="build" EntitySet="build" />
-      <End Role="floor" EntitySet="floor" />
     </AssociationSet>
     <AssociationSet Name="room_floor_FloorID_fk" Association="Self.room_floor_FloorID_fk">
       <End Role="floor" EntitySet="floor" />

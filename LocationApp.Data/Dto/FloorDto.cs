@@ -22,5 +22,9 @@ namespace LocationApp.Data.Dto
         public string Other { get; set; }
         [DataMember]
         public string Map { get; set; }
+        [DataMember]
+        public BuildDto BuildDto { get; set; }
+        [DataMember]
+        public BlockDto BlockDto { get; set; }
     }
 }

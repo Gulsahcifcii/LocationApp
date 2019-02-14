@@ -28,18 +28,18 @@
                         <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="siteID">Kampüs Başlık :</label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                @Html.DropDownList("CampusID", null, new { @class = "form-control" })
+                                @Html.DropDownList("CampusID", null, "Seçiniz", new { @class = "form-control" })
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="siteID">Site Başlık :</label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                @Html.DropDownList("SiteID", null, new { @class = "form-control" })
+                                @Html.DropDownList("SiteID", null, "Seçiniz", new { @class = "form-control" })
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">
-                                Blok Başlık : <span class="required">*</span>
+                                Bina Başlık : <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 @Html.TextBoxFor(model => model.Name, new { @class = "form-control col-md-7 col-xs-12" })
@@ -84,4 +84,21 @@
 <!-- /page content -->
 @section Scripts{
     @Html.Partial("/Views/Shared/Partials/DataTable/_Js.cshtml")
+    <script type="text/javascript">
+        $("#CampusID").change(function () {
+            var campusID = $(this).val();
+            $("#SiteID").empty();
+            $.ajax({
+                url: '/Build/GetSiteWithByCampusID',
+                type: "GET",
+                dataType: "json",
+                data: { campusID: campusID },
+                success: function (data) {
+                    $.each(data, function () {
+                        $('#SiteID').append('<option value=' + this.SiteID + '>' + this.Name + '</option>');
+                    });
+                }
+            });
+        });
+    </script>
 }

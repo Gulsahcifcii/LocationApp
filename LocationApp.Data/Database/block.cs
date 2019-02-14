@@ -14,19 +14,11 @@ namespace LocationApp.Data.Database
     
     public partial class block
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public block()
-        {
-            this.floors = new HashSet<floor>();
-        }
-    
         public int BlockID { get; set; }
         public Nullable<int> BuildID { get; set; }
         public string Name { get; set; }
         public string Gps { get; set; }
     
         public virtual build build { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<floor> floors { get; set; }
     }
 }

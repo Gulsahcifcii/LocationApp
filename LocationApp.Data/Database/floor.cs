@@ -22,13 +22,11 @@ namespace LocationApp.Data.Database
     
         public int FloorID { get; set; }
         public Nullable<int> BlockID { get; set; }
+        public Nullable<int> BuildID { get; set; }
         public string Name { get; set; }
         public string Other { get; set; }
         public string Map { get; set; }
-        public Nullable<int> BuildID { get; set; }
     
-        public virtual block block { get; set; }
-        public virtual build build { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<room> rooms { get; set; }
     }

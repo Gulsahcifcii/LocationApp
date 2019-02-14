@@ -103,7 +103,6 @@ namespace LocationApp.Core.Core
                 return new FloorDto();
             }
         }
-
         public List<FloorDto> GetAllFloor()
         {
             try
@@ -114,7 +113,28 @@ namespace LocationApp.Core.Core
                     List<floor> collection = unitofWork.GetRepository<floor>().Select(null, null).ToList();
                     foreach (var item in collection)
                     {
-                        list.Add(new FloorDto {BlockID=item.BlockID.Value,BuildID=item.BuildID.Value,FloorID=item.FloorID,Map=item.Map,Name=item.Name,Other=item.Other });
+                        FloorDto fDto = new FloorDto();
+                        fDto.FloorID = item.FloorID;
+                        fDto.Name = item.Name;
+                        fDto.Map = item.Map;
+                        fDto.Other = item.Other;
+                        fDto.BuildID = item.BuildID.Value;
+                        fDto.BlockID = item.BlockID.Value;
+                        if (item.BuildID != 0)
+                        {
+                            var fBuild = unitofWork.GetRepository<build>().GetById(a => a.BuildID == fDto.BuildID);
+                            fDto.BuildDto = new BuildDto();
+                            fDto.BuildDto.BuildID = fBuild.BuildID;
+                            fDto.BuildDto.Name = fBuild.Name;
+                        }
+                        if (item.BlockID != 0)
+                        {
+                            fDto.BlockDto = new BlockDto();
+                            var fBlock = unitofWork.GetRepository<block>().GetById(a => a.BlockID == fDto.BlockID);
+                            fDto.BlockDto.BlockID = fBlock.BlockID;
+                            fDto.BlockDto.Name = fBlock.Name;
+                        }
+                        list.Add(fDto);
                     }
                     return list;
                 }

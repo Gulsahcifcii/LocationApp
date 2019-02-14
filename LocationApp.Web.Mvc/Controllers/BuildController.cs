@@ -23,19 +23,19 @@ namespace LocationApp.Web.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            GetSite(0);
             GetCampus(0);
+            GetSite(0);
             return View();
         }
         [HttpPost]
-        public ActionResult Create(int SiteID, int CampusID, string Name, string Address, string Gps, string Properties)
+        public ActionResult Create(int CampusID, int SiteID, string Name, string Address, string Gps, string Properties)
         {
             ResultHelper result = JsonConvert.DeserializeObject<ResultHelper>
                 (buildService.AddBuild(0, CampusID, SiteID, Name, Address, Properties, Gps));
             if (result.Result)
                 return RedirectToAction("List");
             else
-                ViewBag.Message = Helper.GetResultMessage(result.Result,result.ResultDescription);
+                ViewBag.Message = Helper.GetResultMessage(result.Result, result.ResultDescription);
             return View();
         }
         [HttpGet]
@@ -45,8 +45,8 @@ namespace LocationApp.Web.Controllers
             var result = JsonConvert.DeserializeObject<BuildDto>(item);
             if (result != null)
             {
-                GetSite(result.SiteID);
                 GetCampus(result.CampusID);
+                GetSite(result.SiteID);
                 return View(result);
             }
             else
@@ -60,7 +60,7 @@ namespace LocationApp.Web.Controllers
             if (result.Result)
                 return RedirectToAction("List");
             else
-                ViewBag.Message = Helper.GetResultMessage(result.Result,result.ResultDescription);
+                ViewBag.Message = Helper.GetResultMessage(result.Result, result.ResultDescription);
             return View();
         }
         [HttpGet]
@@ -70,7 +70,7 @@ namespace LocationApp.Web.Controllers
         }
         void GetSite(int selectedValue)
         {
-            var list = JsonConvert.DeserializeObject<List<SiteDto>>(siteService.GetAllSite());
+            var list = JsonConvert.DeserializeObject<List<SiteDto>>(siteService.GetAllSiteWithCampus(selectedValue));
             SelectList slist = new SelectList(list, "SiteID", "Name", selectedValue);
             ViewBag.SiteID = slist;
         }
@@ -79,6 +79,13 @@ namespace LocationApp.Web.Controllers
             var list = JsonConvert.DeserializeObject<List<CampusDto>>(campusService.GetAllCampus());
             SelectList slist = new SelectList(list, "CampusID", "Name", selectedValue);
             ViewBag.CampusID = slist;
+        }
+
+        [HttpGet]
+        public JsonResult GetSiteWithByCampusID(int campusID)
+        {
+            var data = JsonConvert.DeserializeObject<List<SiteDto>>(siteService.GetAllSiteWithCampus(campusID));
+            return Json(data, JsonRequestBehavior.AllowGet);
         }
 
     }

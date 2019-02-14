@@ -37,9 +37,9 @@
                         <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
+                                    <th>Kampüs Başlık</th>
                                     <th>Site Başlık</th>
                                     <th>Bina Başlık</th>
-                                    <th>Kampüs Başlık</th>
                                     <th>Adres</th>
                                     <th>Adres</th>
                                     <th>Gps</th>
@@ -49,17 +49,17 @@
                             <tbody>
                                 @foreach (var item in Model)
                                 {
-                                    <tr>
-                                        <td>@item.SiteDto.Name</td>
-                                        <td>@item.Name</td>
-                                        <td>@item.CampusDto.Name</td>
-                                        <td>@item.Gps</td>
-                                        <td>@item.Properties</td>
-                                        <td>
-                                            <a href="/Build/@item.BuildID" class="btn btn-round btn-danger"><i class="fa fa-edit fa-hover"></i><span class="text-muted"></span></a>
-                                            <button type="button" class="btn btn-round btn-info"><i class="fa fa-trash fa-hover"></i><span class="text-muted"></span></button>
-                                        </td>
-                                    </tr>
+                                <tr>
+                                    <td>@item.CampusDto.Name</td>
+                                    <td>@item.SiteDto.Name</td>
+                                    <td>@item.Name</td>
+                                    <td>@item.Gps</td>
+                                    <td>@item.Properties</td>
+                                    <td>
+                                        <a href="/Build/Edit/@item.BuildID" class="btn btn-round btn-danger"><i class="fa fa-edit fa-hover"></i><span class="text-muted"></span></a>
+                                        <button type="button" class="btn btn-round btn-info"><i class="fa fa-trash fa-hover"></i><span class="text-muted"></span></button>
+                                    </td>
+                                </tr>
                                 }
                             </tbody>
                         </table>

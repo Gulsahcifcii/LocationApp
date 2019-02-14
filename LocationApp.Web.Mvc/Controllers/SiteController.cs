@@ -96,12 +96,5 @@ namespace LocationApp.Web.Controllers
             SelectList slist = new SelectList(list, "SiteID", "Name", selectedValue);
             ViewBag.SiteID = slist;
         }
-
-        [HttpGet]
-        public JsonResult GetSiteWithByCampusID(int campusID)
-        {
-            var data = JsonConvert.DeserializeObject<List<SiteDto>>(siteService.GetAllSiteWithCampus(campusID));
-            return Json(data, JsonRequestBehavior.AllowGet);
-        }
     }
 }

@@ -140,10 +140,12 @@ namespace LocationApp.Core.Core
                         bDto.Address = item.BAdress;
                         bDto.CampusID = item.BCID.Value;
                         bDto.Properties = item.BProperties;
+                        bDto.CampusDto = new CampusDto();
                         bDto.CampusDto.CampusID = item.CID;
                         bDto.CampusDto.Name = item.CName;
                         bDto.CampusDto.Description = item.CDesc;
                         bDto.CampusDto.Other = item.COther;
+                        bDto.SiteDto = new SiteDto();
                         bDto.SiteDto.SiteID = item.SID;
                         bDto.SiteDto.Name = item.SName;
                         bDto.SiteDto.Description = item.SDesc;

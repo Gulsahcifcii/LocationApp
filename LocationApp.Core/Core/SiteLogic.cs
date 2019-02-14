@@ -122,8 +122,7 @@ namespace LocationApp.Core.Core
                 return new List<SiteDto>();
             }
         }
-
-        public List<SiteDto> GetSiteWithCampus(int campusID)
+        public List<SiteDto> GetSiteWithCampus(int CampusID)
         {
             try
             {
@@ -151,7 +150,7 @@ namespace LocationApp.Core.Core
                         siteDto.campusSiteDto.SiteID = item.SID;
                         sDtoList.Add(siteDto);
                     }
-                    return sDtoList.Where(a => a.campusSiteDto.CampusID == campusID).ToList();
+                    return sDtoList;
                 }
             }
             catch (Exception ex)

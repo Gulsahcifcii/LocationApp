@@ -150,5 +150,31 @@ namespace LocationApp.Core.Core
                 return new List<BlockDto>();
             }
         }
+        public List<BlockDto> GetAllBlockWithByBuildID(int buildID)
+        {
+            try
+            {
+                List<BlockDto> list = new List<BlockDto>();
+                using (UnitOfWork unitofWork = new UnitOfWork())
+                {
+                    List<block> collection = unitofWork.GetRepository<block>().Select(null, x=>x.BuildID==buildID).ToList();
+                    foreach (var item in collection)
+                    {
+                        BlockDto blockDto = new BlockDto();
+                        blockDto.Name = item.Name;
+                        blockDto.BlockID = item.BlockID;
+                        blockDto.BuildID = item.BuildID.Value;
+                        blockDto.Gps = item.Gps;
+                        list.Add(blockDto);
+
+                    }
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+                return new List<BlockDto>();
+            }
+        }
     }
 }

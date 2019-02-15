@@ -130,8 +130,10 @@ namespace LocationApp.Core.Core
                         depDto.Other = item.DOther;
                         depDto.SubUnitID = item.SID;
                         depDto.Description = item.DDesc;
+                        depDto.SubUnitDto = new SubUnitDto();
                         depDto.SubUnitDto.SubUnitID = item.SID;
                         depDto.SubUnitDto.Name = item.SName;
+                        depDto.SubUnitDto.MainUnitDto = new MainUnitDto();
                         depDto.SubUnitDto.MainUnitID = item.SMID.Value;
                         depDto.SubUnitDto.MainUnitDto.Name = item.MName;
                         depDto.SubUnitDto.MainUnitDto.MainUnitID = item.MID;

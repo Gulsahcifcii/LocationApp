@@ -144,5 +144,90 @@ namespace LocationApp.Core.Core
                 return new List<FloorDto>();
             }
         }
+
+        public List<FloorDto> GetAllFloorByBlockID(int blockID)
+        {
+            try
+            {
+                List<FloorDto> list = new List<FloorDto>();
+                using (UnitOfWork unitofWork = new UnitOfWork())
+                {
+                    List<floor> collection = unitofWork.GetRepository<floor>().Select(null,null).Where(a => a.BlockID == blockID).ToList();
+                    foreach (var item in collection)
+                    {
+                        FloorDto fDto = new FloorDto();
+                        fDto.FloorID = item.FloorID;
+                        fDto.Name = item.Name;
+                        fDto.Map = item.Map;
+                        fDto.Other = item.Other;
+                        fDto.BuildID = item.BuildID.Value;
+                        fDto.BlockID = item.BlockID.Value;
+                        if (item.BuildID != 0)
+                        {
+                            var fBuild = unitofWork.GetRepository<build>().GetById(a => a.BuildID == fDto.BuildID);
+                            fDto.BuildDto = new BuildDto();
+                            fDto.BuildDto.BuildID = fBuild.BuildID;
+                            fDto.BuildDto.Name = fBuild.Name;
+                        }
+                        if (item.BlockID != 0)
+                        {
+                            fDto.BlockDto = new BlockDto();
+                            var fBlock = unitofWork.GetRepository<block>().GetById(a => a.BlockID == fDto.BlockID);
+                            fDto.BlockDto.BlockID = fBlock.BlockID;
+                            fDto.BlockDto.Name = fBlock.Name;
+                        }
+                        list.Add(fDto);
+                    }
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+                return new List<FloorDto>();
+            }
+        }
+
+        public List<FloorDto> GetAllFloorByBuildID(int buildID)
+        {
+            try
+            {
+                List<FloorDto> list = new List<FloorDto>();
+                using (UnitOfWork unitofWork = new UnitOfWork())
+                {
+                    List<floor> collection = unitofWork.GetRepository<floor>().Select(null,null).Where(a=>a.BuildID==buildID).ToList();
+                    foreach (var item in collection)
+                    {
+                        FloorDto fDto = new FloorDto();
+                        fDto.FloorID = item.FloorID;
+                        fDto.Name = item.Name;
+                        fDto.Map = item.Map;
+                        fDto.Other = item.Other;
+                        fDto.BuildID = item.BuildID.Value;
+                        fDto.BlockID = item.BlockID.Value;
+                        if (item.BuildID != 0)
+                        {
+                            var fBuild = unitofWork.GetRepository<build>().GetById(a => a.BuildID == fDto.BuildID);
+                            fDto.BuildDto = new BuildDto();
+                            fDto.BuildDto.BuildID = fBuild.BuildID;
+                            fDto.BuildDto.Name = fBuild.Name;
+                        }
+                        if (item.BlockID != 0)
+                        {
+                            fDto.BlockDto = new BlockDto();
+                            var fBlock = unitofWork.GetRepository<block>().GetById(a => a.BlockID == fDto.BlockID);
+                            fDto.BlockDto.BlockID = fBlock.BlockID;
+                            fDto.BlockDto.Name = fBlock.Name;
+                        }
+                        list.Add(fDto);
+                    }
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+                return new List<FloorDto>();
+            }
+        }
+
     }
 }

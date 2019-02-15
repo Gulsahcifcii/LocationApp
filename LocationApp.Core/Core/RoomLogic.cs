@@ -92,6 +92,31 @@ namespace LocationApp.Core.Core
                     roomDto.Name = item.Name;
                     roomDto.Map = item.Map;
 
+                    var dpRoom = unitofWork.GetRepository<departmentroom>().GetById(x => x.RoomID == item.RoomID);
+                    roomDto.DepartmentRoomDto = new DepartmentRoomDto();
+                    roomDto.DepartmentRoomDto.DepartmentID = dpRoom.DepartmentID.Value;
+                    roomDto.DepartmentRoomDto.DepartmentRoomID = dpRoom.DepartmentRoomID;
+                    roomDto.DepartmentRoomDto.RoomID = dpRoom.RoomID.Value;
+
+                    var floor = unitofWork.GetRepository<floor>().GetById(x => x.FloorID == roomDto.FloorID);
+                    if (floor.BuildID != 0)
+                    {
+                        var itemBuild = unitofWork.GetRepository<build>().GetById(x => x.BuildID == floor.BuildID);
+                        roomDto.BuildDto = new BuildDto();
+                        roomDto.BuildDto.BuildID = itemBuild.BuildID;
+                        roomDto.BuildDto.Name = itemBuild.Name;
+                    }
+                    if (floor.BlockID != 0)
+                    {
+                        var itemBlock = unitofWork.GetRepository<block>().GetById(x => x.BlockID == floor.BlockID);
+                        roomDto.BlockDto = new BlockDto();
+                        roomDto.BlockDto.BlockID = itemBlock.BlockID;
+                        roomDto.BlockDto.Name = itemBlock.Name;
+                    }
+
+                    var department = unitofWork.GetRepository<departmentroom>().GetById(x => x.RoomID == roomDto.RoomID);
+                    roomDto.DepartmentDto = new DepartmentDto();
+                    roomDto.DepartmentDto.DepartmentID = department.DepartmentID.Value;
                     return roomDto;
                 }
             }
@@ -100,19 +125,59 @@ namespace LocationApp.Core.Core
                 return new RoomDto();
             }
         }
-        public List<RoomDto> GetAllRoom()
+        public List<RoomDto> GetAllRooms()
         {
             try
             {
-                List<RoomDto> list = new List<RoomDto>();
-                using (UnitOfWork unitofWork = new UnitOfWork())
+                List<RoomDto> roomList = new List<RoomDto>();
+
+                using (UnitOfWork unitOfWork = new UnitOfWork())
                 {
-                    List<room> collection = unitofWork.GetRepository<room>().Select(null, null).ToList();
-                    foreach (var item in collection)
+                    var list = from room in unitOfWork.GetRepository<room>().Select(null, null)
+                               join depRoom in unitOfWork.GetRepository<departmentroom>().Select(null, null) on room.RoomID equals depRoom.RoomID
+                               join dep in unitOfWork.GetRepository<department>().Select(null, null) on depRoom.DepartmentID equals dep.DepartmentID
+                               join floor in unitOfWork.GetRepository<floor>().Select(null, null) on room.FloorID equals floor.FloorID
+                               select new
+                               {
+                                   RoomID = room.RoomID,//Room
+                                   FloorID = room.FloorID,
+                                   RTypeID = room.RoomTypeID,
+                                   Name = room.Name,
+                                   Map = room.Map,
+                                   DPID = depRoom.DepartmentRoomID,//DepartmetnRoom
+                                   DPDepID = depRoom.DepartmentID,
+                                   DPRoomID = depRoom.RoomID,
+                                   DepID = dep.DepartmentID,
+                                   DName = dep.Name,//Department
+                                   DDesc = dep.Description,
+                                   Dother = dep.Other,
+                                   FName = floor.Name,//Floor
+                               };
+                    foreach (var item in list)
                     {
-                        list.Add(new RoomDto {FloorID=item.FloorID.Value,Map=item.Map,Name=item.Name,RoomID=item.RoomID,RoomTypeID=item.RoomTypeID.Value});
+                        RoomDto rDto = new RoomDto();
+                        rDto.RoomID = item.RoomID;
+                        rDto.FloorID = item.FloorID.Value;
+                        rDto.RoomTypeID = item.RTypeID.Value;
+                        rDto.Name = item.Name;
+                        rDto.Map = item.Map;
+                        //
+                        rDto.DepartmentRoomDto = new DepartmentRoomDto();
+                        rDto.DepartmentRoomDto.DepartmentID = item.DPDepID.Value;
+                        rDto.DepartmentRoomDto.DepartmentRoomID = item.DPRoomID.Value;
+                        rDto.DepartmentRoomDto.RoomID = item.RoomID;
+                        //
+                        rDto.DepartmentDto = new DepartmentDto();
+                        rDto.DepartmentDto.DepartmentID = item.DepID;
+                        rDto.DepartmentDto.Name = item.DName;
+                        rDto.DepartmentDto.Other = item.Dother;
+                        //
+                        rDto.FloorDto = new FloorDto();
+                        rDto.FloorDto.FloorID = item.FloorID.Value;
+                        rDto.FloorDto.Name = item.FName;
+                        roomList.Add(rDto);
                     }
-                    return list;
+                    return roomList;
                 }
             }
             catch (Exception ex)
@@ -120,5 +185,6 @@ namespace LocationApp.Core.Core
                 return new List<RoomDto>();
             }
         }
+
     }
 }

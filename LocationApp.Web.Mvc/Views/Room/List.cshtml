@@ -20,7 +20,7 @@
             <div class="title_right pull-right">
                 <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 form-group pull-right">
                     <div class="input-group pull-right">
-                        <button type="button" data-toggle="modal" data-target="#exampleModal" class="btn btn-success pull-right "><i class="fa fa-plus-circle"></i> Yeni</button>
+                        <a href="/Room/Create" class="btn btn-success pull-right "><i class="fa fa-plus-circle"></i> Yeni</a>
                     </div>
                 </div>
             </div>
@@ -41,22 +41,21 @@
                                 <tr>
                                     <th>Kat</th>
                                     <th>Oda</th>
-                                    <th>Oda Türü</th>
-                                    <th>Harita</th>
                                     <th>İşlemler</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Kat</td>
-                                    <td>Oda</td>
-                                    <td>Oda Türü</td>
-                                    <td>Harita</td>
-                                    <td>
-                                        <button type="button" class="btn btn-round btn-danger"><i class="fa fa-edit fa-hover"></i><span class="text-muted"></span></button>
-                                        <button type="button" class="btn btn-round btn-info"><i class="fa fa-trash fa-hover"></i><span class="text-muted"></span></button>
-                                    </td>
-                                </tr>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.FloorDto.Name</td>
+                                        <td>@item.Name</td>
+                                        <td>
+                                            <a href="/Room/Edit/@item.RoomID" type="button" class="btn btn-round btn-danger"><i class="fa fa-edit fa-hover"></i><span class="text-muted"></span></a>
+                                            <button type="button" class="btn btn-round btn-info"><i class="fa fa-trash fa-hover"></i><span class="text-muted"></span></button>
+                                        </td>
+                                    </tr>
+                                }
                             </tbody>
                         </table>
                     </div>

@@ -56,5 +56,17 @@ namespace LocationApp.Service.Services
             var item = JsonConvert.SerializeObject(floor, Formatting.Indented);
             return item;
         }
+        public string GetAllFloorByBlockID(int blockID)
+        {
+            var floor = floorLogic.GetAllFloorByBlockID(blockID);
+            var item = JsonConvert.SerializeObject(floor, Formatting.Indented);
+            return item;
+        }
+        public string GetAllFloorByBuildID(int buildID)
+        {
+            var floor = floorLogic.GetAllFloorByBuildID(buildID);
+            var item = JsonConvert.SerializeObject(floor, Formatting.Indented);
+            return item;
+        }
     }
 }

@@ -45,7 +45,7 @@ namespace LocationApp.Core.Core
             {
                 block item = new block();
                 item.BlockID = blockDto.BlockID;
-                item.BuildID = blockDto.BlockID;
+                item.BuildID = blockDto.BuildID;
                 item.Name = blockDto.Name;
                 using (UnitOfWork unitOfWork = new UnitOfWork())
                 {

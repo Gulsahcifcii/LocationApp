@@ -20,5 +20,15 @@ namespace LocationApp.Data.Dto
         public int RoomTypeID { get; set; }
         [DataMember]
         public string Map { get; set; }
+        [DataMember]
+        public DepartmentDto DepartmentDto { get; set; }
+        [DataMember]
+        public DepartmentRoomDto DepartmentRoomDto { get; set; }
+        [DataMember]
+        public BuildDto BuildDto { get; set; }
+        [DataMember]
+        public BlockDto BlockDto { get; set; }
+        [DataMember]
+        public FloorDto FloorDto { get; set; }
     }
 }

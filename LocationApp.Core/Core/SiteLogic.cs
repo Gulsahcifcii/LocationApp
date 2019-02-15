@@ -158,6 +158,5 @@ namespace LocationApp.Core.Core
                 return new List<SiteDto>();
             }
         }
-
     }
 }

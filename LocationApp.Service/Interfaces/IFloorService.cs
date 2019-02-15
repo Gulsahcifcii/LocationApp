@@ -35,6 +35,15 @@ namespace LocationApp.Service.Interfaces
         [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
         UriTemplate = "/GetAllFloor")]
         string GetAllFloor();
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+        UriTemplate = "/GetAllFloorByBlockID?blockID={blockID}")]
+        string GetAllFloorByBlockID(int blockID);
+
+        [OperationContract]
+        [WebInvoke(Method = "GET", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json,
+        UriTemplate = "/GetAllFloorByBuildID?buildID={buildID}")]
+        string GetAllFloorByBuildID(int buildID);
     }
 
 }

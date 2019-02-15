@@ -48,7 +48,7 @@ namespace LocationApp.Core.Core
 
                 using (UnitOfWork unitofWork = new UnitOfWork())
                 {
-                    unitofWork.GetRepository<departmentroom>().Insert(item);
+                    unitofWork.GetRepository<departmentroom>().Update(item);
                     unitofWork.saveChanges();
                     return new ResultHelper(true, item.DepartmentRoomID, ResultHelper.SuccessMessage);
                 }

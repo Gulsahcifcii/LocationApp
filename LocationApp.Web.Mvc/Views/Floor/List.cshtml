@@ -43,9 +43,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    @foreach (var item in Model)
-                                    {
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
                                         <td>@item.Name</td>
                                         <td>
                                             @if (item.BuildID != 0)
@@ -63,13 +63,12 @@
                                             else
                                             { <text>-</text>}
                                         </td>
-
                                         <td>
                                             <a href="/Floor/Edit/@item.FloorID" class="btn btn-round btn-danger"><i class="fa fa-edit fa-hover"></i><span class="text-muted"></span></a>
                                             <button type="button" class="btn btn-round btn-info"><i class="fa fa-trash fa-hover"></i><span class="text-muted"></span></button>
                                         </td>
-                                    }
-                                </tr>
+                                    </tr>
+                                }
                             </tbody>
                         </table>
                     </div>

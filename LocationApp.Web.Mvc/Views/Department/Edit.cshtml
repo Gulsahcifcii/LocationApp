@@ -26,6 +26,8 @@
                     <div> @Html.Raw(ViewBag.Message)</div>
                     @using (Html.BeginForm("Edit", "Department", FormMethod.Post, new { @class = "form-horizontal form-label-left" }))
                     {
+                        @Html.HiddenFor(model => model.DepartmentID)
+
                         <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="siteID">Ana Birim :</label>
                             <div class="col-md-6 col-sm-6 col-xs-12">

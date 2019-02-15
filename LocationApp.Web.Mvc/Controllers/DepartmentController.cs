@@ -25,7 +25,7 @@ namespace LocationApp.Web.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Create(int DepartmentID, int SubUnitID, string Name, string Description, string Other)
+        public ActionResult Create(int SubUnitID, string Name, string Description, string Other)
         {
             ResultHelper result = JsonConvert.DeserializeObject<ResultHelper>
                 (departmentService.AddDepartment(0, Name, Description, Other, SubUnitID));
@@ -67,12 +67,15 @@ namespace LocationApp.Web.Controllers
         void GetMainUnit(int selectedValue)
         {
             var list = JsonConvert.DeserializeObject<List<MainUnitDto>>(mainUnitService.GetAllMainUnit());
+            list.Add(new MainUnitDto { MainUnitID = 0, Name = "Seçiniz" });
             SelectList slist = new SelectList(list, "MainUnitID", "Name", selectedValue);
+            
             ViewBag.MainUnitID = slist;
         }
         void GetSubUnits(int selectedValue)
         {
             var list = JsonConvert.DeserializeObject<List<SubUnitDto>>(subUnitService.GetAllSubUnitWithByMainUnitID(0));
+            list.Add(new SubUnitDto { SubUnitID = 0, Name = "Seçiniz" });
             SelectList slist = new SelectList(list, "SubUnitID", "Name", selectedValue);
             ViewBag.SubUnitID = slist;
         }

@@ -50,7 +50,7 @@ namespace LocationApp.Service.Services
         }
         public string GetAllRoom()
         {
-            var room = roomLogic.GetAllRoom();
+            var room = roomLogic.GetAllRooms();
             var item = JsonConvert.SerializeObject(room, Formatting.Indented);
             return item;
         }

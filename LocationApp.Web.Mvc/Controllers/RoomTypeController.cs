@@ -21,7 +21,7 @@ namespace LocationApp.Web.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Create(int RoomTypeID, string Name, string Description)
+        public ActionResult Create(string Name, string Description)
         {
             ResultHelper result = JsonConvert.DeserializeObject<ResultHelper>(
                  roomTypeService.AddRoomType(0, Name, Description));

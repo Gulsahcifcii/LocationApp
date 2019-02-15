@@ -17,6 +17,7 @@ namespace LocationApp.Service.Services
             var result = departmentLogic.AddDepartment(new Data.Dto.DepartmentDto
             {
                 DepartmentID = departmentID,
+                Name=name,
                 Description = description,
                 Other = other,
                 SubUnitID = subUnitID

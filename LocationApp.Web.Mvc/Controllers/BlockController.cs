@@ -67,6 +67,7 @@ namespace LocationApp.Web.Controllers
         void GetBuilds(int selectedValue)
         {
             var list = JsonConvert.DeserializeObject<List<BuildDto>>(buildService.GetAllBuild());
+            list.Insert(0, new BuildDto {  BuildID= 0, Name = "Seçiniz" });
             SelectList slist = new SelectList(list, "BuildID", "Name", selectedValue);
             ViewBag.BuildID = slist;
         }

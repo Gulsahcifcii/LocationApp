@@ -1,4 +1,4 @@
-﻿@model LocationApp.Data.Database.room
+﻿@model LocationApp.Data.Dto.RoomDto
 @{
     ViewData["Title"] = "List";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -28,39 +28,42 @@
                     {
                         @Html.HiddenFor(model => model.RoomID)
                         <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="siteID">Seçim :</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select id="Secim" name="Secim" class="form-control">
+                                    <option value="0">Bina</option>
+                                    <option value="1">Blok</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="siteID">Bina :</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @Html.DropDownList("BuildID", null, new { @class = "form-control", })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="siteID">Blok :</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @Html.DropDownList("BlockID", null, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="siteID">Kat :</label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <select id="FloorID" class="form-control">
-                                    <option>Choose option</option>
-                                    <option>Option one</option>
-                                    <option>Option two</option>
-                                    <option>Option three</option>
-                                    <option>Option four</option>
-                                </select>
+                                @Html.DropDownList("FloorID", null, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="siteID">Departman :</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @Html.DropDownList("DepartmentID", null, new { @class = "form-control" })
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="siteID">Oda Türü :</label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <select id="FloorID" class="form-control">
-                                    <option>Choose option</option>
-                                    <option>Option one</option>
-                                    <option>Option two</option>
-                                    <option>Option three</option>
-                                    <option>Option four</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="siteID">Kat :</label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <select id="FloorID" class="form-control">
-                                    <option>Choose option</option>
-                                    <option>Option one</option>
-                                    <option>Option two</option>
-                                    <option>Option three</option>
-                                    <option>Option four</option>
-                                </select>
+                                @Html.DropDownList("RoomTypeID", null, new { @class = "form-control" })
                             </div>
                         </div>
                         <div class="form-group">
@@ -73,7 +76,7 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="description">
-                                Map ? <span class="required">*</span>
+                                Harita  <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 @Html.TextBoxFor(model => model.Map, new { @class = "form-control col-md-7 col-xs-12" })
@@ -92,7 +95,89 @@
     </div>
 </div>
 <!-- /page content -->
-
 @section Scripts{
     @Html.Partial("/Views/Shared/Partials/DataTable/_Js.cshtml")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var buildID = $("#BuildID").val(0);
+            var blockID = $("#BlockID").val(0);
+            if (buildID > 0) {
+                $("#Secim").val(0);
+                $("#BuildID").removeAttr('disabled');
+                $("#BlockID").attr('disabled', 'disabled');
+            }
+            else {
+                $("#Secim").val(1);
+                $("#BlockID").removeAttr('disabled');
+                $("#BuildID").attr('disabled', 'disabled');
+            }
+        });
+        $("#Secim").change(function () {
+            $("#BuildID").val(0);
+            $("#BlockID").val(0);
+            var value = $(this).val();
+            if (value == 0) {
+                $("#BuildID").removeAttr('disabled');
+                $("#BlockID").attr('disabled', 'disabled');
+            }
+            else {
+                $("#BlockID").removeAttr('disabled');
+                $("#BuildID").attr('disabled', 'disabled');
+            }
+        });
+        $("#BuildID").change(function () {
+            var buildID = $(this).val();
+            if (buildID != 0) {
+                $("#FloorID").empty();
+                $.ajax({
+                    url: '/Room/GetFloorByBuildID',
+                    type: "GET",
+                    dataType: "json",
+                    data: { buildID: buildID },
+                    success: function (data) {
+                        $('#FloorID').empty();
+                        if (data != null) {
+                            $.each(data, function () {
+                                $('#FloorID').append('<option value=' + this.FloorID + '>' + this.Name + '</option>');
+                            });
+                        }
+                        else {
+                            $('#FloorID').append('<option value=' + 0 + '>' + "Seçiniz" + '</option>');
+                        }
+                    }
+                });
+            }
+            else {
+                $("#FloorID").empty();
+                $('#FloorID').append('<option value=' + 0 + '>' + "Seçiniz" + '</option>');
+            }
+        });
+        $("#BlockID").change(function () {
+            var blockID = $(this).val();
+            if (blockID != 0) {
+                $("#FloorID").empty();
+                $.ajax({
+                    url: '/Room/GetFloorByBlockID',
+                    type: "GET",
+                    dataType: "json",
+                    data: { blockID: blockID },
+                    success: function (data) {
+                        $('#FloorID').empty();
+                        if (data != null) {
+                            $.each(data, function () {
+                                $('#FloorID').append('<option value=' + this.FloorID + '>' + this.Name + '</option>');
+                            });
+                        }
+                        else {
+                            $('#FloorID').append('<option value=' + 0 + '>' + "Seçiniz" + '</option>');
+                        }
+                    }
+                });
+            }
+            else {
+                $("#FloorID").empty();
+                $('#FloorID').append('<option value=' + 0 + '>' + "Seçiniz" + '</option>');
+            }
+        });
+    </script>
 }

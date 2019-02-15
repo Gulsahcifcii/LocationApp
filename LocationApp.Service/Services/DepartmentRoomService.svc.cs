@@ -18,7 +18,7 @@ namespace LocationApp.Service.Services
         {
             var result = departmentRoomLogic.AddDepartmentRoom(new DepartmentRoomDto
             {
-                DepartmentID = departmentRoomID,
+                DepartmentID = departmentID,
                 DepartmentRoomID = departmentRoomID,
                 Other = other,
                 RoomID = roomID
@@ -39,7 +39,7 @@ namespace LocationApp.Service.Services
         {
             var result = departmentRoomLogic.SetDepartmentRoom(new DepartmentRoomDto
             {
-                DepartmentID = departmentRoomID,
+                DepartmentID = departmentID,
                 DepartmentRoomID = departmentRoomID,
                 Other = other,
                 RoomID = roomID

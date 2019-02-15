@@ -18,9 +18,9 @@ namespace LocationApp.Core.Core
         {
             try
             {
-                if (isThere(blockDto))
+                if (IsThere(blockDto))
                 {
-                    return new ResultHelper(false, 0, ResultHelper.UnSuccessMessage);
+                    return new ResultHelper(false, 0, ResultHelper.IsThereItem);
                 }
                 block item = new block();
                 item.BlockID = blockDto.BlockID;
@@ -97,21 +97,6 @@ namespace LocationApp.Core.Core
                 return new BlockDto();
             }
         }
-        public bool isThere(BlockDto blockDto)
-        {
-            using (UnitOfWork unitofWork = new UnitOfWork())
-            {
-                var item = unitofWork.GetRepository<block>().GetById(x => x.BuildID == blockDto.BuildID && x.Name == blockDto.Name);
-                if (item != null)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-        }
         public List<BlockDto> GetAllBlock()
         {
             try
@@ -157,7 +142,7 @@ namespace LocationApp.Core.Core
                 List<BlockDto> list = new List<BlockDto>();
                 using (UnitOfWork unitofWork = new UnitOfWork())
                 {
-                    List<block> collection = unitofWork.GetRepository<block>().Select(null, x=>x.BuildID==buildID).ToList();
+                    List<block> collection = unitofWork.GetRepository<block>().Select(null, x => x.BuildID == buildID).ToList();
                     foreach (var item in collection)
                     {
                         BlockDto blockDto = new BlockDto();
@@ -174,6 +159,21 @@ namespace LocationApp.Core.Core
             catch (Exception ex)
             {
                 return new List<BlockDto>();
+            }
+        }
+        public bool IsThere(BlockDto blockDto)
+        {
+            using (UnitOfWork unitofWork = new UnitOfWork())
+            {
+                var item = unitofWork.GetRepository<block>().GetById(x => x.BuildID == blockDto.BuildID && x.Name == blockDto.Name);
+                if (item != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
     }

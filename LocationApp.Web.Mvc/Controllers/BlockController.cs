@@ -64,6 +64,8 @@ namespace LocationApp.Web.Controllers
             var item = JsonConvert.DeserializeObject<List<BlockDto>>(blockService.GetAllBlock());
             return View(item);
         }
+
+        #region Dropdownlist
         void GetBuilds(int selectedValue)
         {
             var list = JsonConvert.DeserializeObject<List<BuildDto>>(buildService.GetAllBuild());
@@ -71,5 +73,6 @@ namespace LocationApp.Web.Controllers
             SelectList slist = new SelectList(list, "BuildID", "Name", selectedValue);
             ViewBag.BuildID = slist;
         }
+        #endregion
     }
 }

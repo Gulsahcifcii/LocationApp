@@ -32,7 +32,7 @@ namespace LocationApp.Web.Controllers
             if (result.Result)
                 return RedirectToAction("List");
             else
-                ViewBag.Message = Helper.GetResultMessage(result.Result,result.ResultDescription);
+                ViewBag.Message = Helper.GetResultMessage(result.Result, result.ResultDescription);
             return View();
         }
         [HttpGet]
@@ -57,19 +57,25 @@ namespace LocationApp.Web.Controllers
             if (result.Result)
                 return RedirectToAction("List");
             else
-                ViewBag.Message = Helper.GetResultMessage(result.Result,result.ResultDescription);
+                ViewBag.Message = Helper.GetResultMessage(result.Result, result.ResultDescription);
             return View();
         }
         public ActionResult List()
         {
             return View(JsonConvert.DeserializeObject<List<DepartmentDto>>(departmentService.GetAllDepartment()));
         }
+        [HttpGet]
+        public JsonResult GetSubUnit(int mainUnitID)
+        {
+            var data = JsonConvert.DeserializeObject<List<SubUnitDto>>(subUnitService.GetAllSubUnitWithByMainUnitID(mainUnitID));
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+        #region Dropdownlist
         void GetMainUnit(int selectedValue)
         {
             var list = JsonConvert.DeserializeObject<List<MainUnitDto>>(mainUnitService.GetAllMainUnit());
             list.Add(new MainUnitDto { MainUnitID = 0, Name = "Seçiniz" });
             SelectList slist = new SelectList(list, "MainUnitID", "Name", selectedValue);
-            
             ViewBag.MainUnitID = slist;
         }
         void GetSubUnits(int selectedValue)
@@ -79,11 +85,6 @@ namespace LocationApp.Web.Controllers
             SelectList slist = new SelectList(list, "SubUnitID", "Name", selectedValue);
             ViewBag.SubUnitID = slist;
         }
-        [HttpGet]
-        public JsonResult GetSubUnit(int mainUnitID)
-        {
-            var data = JsonConvert.DeserializeObject<List<SubUnitDto>>(subUnitService.GetAllSubUnitWithByMainUnitID(mainUnitID));
-            return Json(data, JsonRequestBehavior.AllowGet);
-        }
+        #endregion
     }
 }

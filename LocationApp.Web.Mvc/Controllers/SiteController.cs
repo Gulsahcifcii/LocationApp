@@ -84,6 +84,7 @@ namespace LocationApp.Web.Controllers
         {
             return View(JsonConvert.DeserializeObject<List<SiteDto>>(siteService.GetAllSite()));
         }
+        #region Dropdownlist
         void GetCampus(int selectedValue)
         {
             var list = JsonConvert.DeserializeObject<List<CampusDto>>(campusService.GetAllCampus());
@@ -96,5 +97,6 @@ namespace LocationApp.Web.Controllers
             SelectList slist = new SelectList(list, "SiteID", "Name", selectedValue);
             ViewBag.SiteID = slist;
         }
+        #endregion
     }
 }

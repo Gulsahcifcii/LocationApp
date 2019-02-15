@@ -18,6 +18,9 @@ namespace LocationApp.Core.Core
         {
             try
             {
+                if (IsThere(buildDto))
+                    return new ResultHelper(false, 0, ResultHelper.IsThereItem);
+
                 build item = new build();
                 item.SiteID = buildDto.SiteID;
                 item.BuildID = buildDto.BuildID;
@@ -36,7 +39,7 @@ namespace LocationApp.Core.Core
             }
             catch (Exception ex)
             {
-                return new ResultHelper(false,0, ResultHelper.UnSuccessMessage);
+                return new ResultHelper(false, 0, ResultHelper.UnSuccessMessage);
             }
         }
         public ResultHelper SetBuild(BuildDto buildDto)
@@ -113,25 +116,25 @@ namespace LocationApp.Core.Core
                 {
                     List<BuildDto> list = new List<BuildDto>();
                     var buildList = from b in unitofWork.GetRepository<build>().Select(null, null)
-                                join c in unitofWork.GetRepository<campu>().Select(null, null) on b.CampusID equals c.CampusID
-                                join s in unitofWork.GetRepository<site>().Select(null, null) on b.SiteID equals s.SiteID
-                                select new
-                                {
-                                    BID = b.BuildID,
-                                    BName = b.Name,
-                                    BAdress = b.Adress,
-                                    BGps = b.Gps,
-                                    BProperties = b.Properties,
-                                    BCID = b.CampusID,
-                                    CID = c.CampusID,
-                                    CName = c.Name,
-                                    CDesc = c.Description,
-                                    COther = c.Other,
-                                    SID = s.SiteID,
-                                    SName = s.Name,
-                                    SDesc = s.Description,
-                                    SGps = s.Gps
-                                };
+                                    join c in unitofWork.GetRepository<campu>().Select(null, null) on b.CampusID equals c.CampusID
+                                    join s in unitofWork.GetRepository<site>().Select(null, null) on b.SiteID equals s.SiteID
+                                    select new
+                                    {
+                                        BID = b.BuildID,
+                                        BName = b.Name,
+                                        BAdress = b.Adress,
+                                        BGps = b.Gps,
+                                        BProperties = b.Properties,
+                                        BCID = b.CampusID,
+                                        CID = c.CampusID,
+                                        CName = c.Name,
+                                        CDesc = c.Description,
+                                        COther = c.Other,
+                                        SID = s.SiteID,
+                                        SName = s.Name,
+                                        SDesc = s.Description,
+                                        SGps = s.Gps
+                                    };
                     foreach (var item in buildList)
                     {
                         BuildDto bDto = new BuildDto();
@@ -160,6 +163,21 @@ namespace LocationApp.Core.Core
             catch (Exception)
             {
                 return new List<BuildDto>();
+            }
+        }
+        public bool IsThere(BuildDto buildDto)
+        {
+            using (UnitOfWork unitofWork = new UnitOfWork())
+            {
+                var item = unitofWork.GetRepository<build>().GetById(x => x.Name == buildDto.Name);
+                if (item != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
     }

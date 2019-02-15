@@ -144,7 +144,6 @@ namespace LocationApp.Core.Core
                 return new List<FloorDto>();
             }
         }
-
         public List<FloorDto> GetAllFloorByBlockID(int blockID)
         {
             try
@@ -152,7 +151,7 @@ namespace LocationApp.Core.Core
                 List<FloorDto> list = new List<FloorDto>();
                 using (UnitOfWork unitofWork = new UnitOfWork())
                 {
-                    List<floor> collection = unitofWork.GetRepository<floor>().Select(null,null).Where(a => a.BlockID == blockID).ToList();
+                    List<floor> collection = unitofWork.GetRepository<floor>().Select(null, null).Where(a => a.BlockID == blockID).ToList();
                     foreach (var item in collection)
                     {
                         FloorDto fDto = new FloorDto();
@@ -186,7 +185,6 @@ namespace LocationApp.Core.Core
                 return new List<FloorDto>();
             }
         }
-
         public List<FloorDto> GetAllFloorByBuildID(int buildID)
         {
             try
@@ -194,7 +192,7 @@ namespace LocationApp.Core.Core
                 List<FloorDto> list = new List<FloorDto>();
                 using (UnitOfWork unitofWork = new UnitOfWork())
                 {
-                    List<floor> collection = unitofWork.GetRepository<floor>().Select(null,null).Where(a=>a.BuildID==buildID).ToList();
+                    List<floor> collection = unitofWork.GetRepository<floor>().Select(null, null).Where(a => a.BuildID == buildID).ToList();
                     foreach (var item in collection)
                     {
                         FloorDto fDto = new FloorDto();

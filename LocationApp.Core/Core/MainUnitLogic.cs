@@ -18,6 +18,9 @@ namespace LocationApp.Core.Core
         {
             try
             {
+                if (IsThere(mainUnitDto))
+                    return new ResultHelper(false, mainUnitDto.MainUnitID, ResultHelper.IsThereItem);
+
                 mainunit item = new mainunit();
                 item.MainUnitID = mainUnitDto.MainUnitID;
                 item.Name = mainUnitDto.Name;
@@ -109,6 +112,21 @@ namespace LocationApp.Core.Core
             catch (Exception ex)
             {
                 return new List<MainUnitDto>();
+            }
+        }
+        public bool IsThere(MainUnitDto mainUnitDto)
+        {
+            using (UnitOfWork unitofWork = new UnitOfWork())
+            {
+                var item = unitofWork.GetRepository<mainunit>().GetById(x => x.Name.ToUpper() == mainUnitDto.Name.ToUpper());
+                if (item != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
     }

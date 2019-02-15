@@ -18,7 +18,6 @@ namespace LocationApp.Web.Controllers
         readonly LocationApp.Service.Services.BuildService buildService = new Service.Services.BuildService();
         readonly LocationApp.Service.Services.CampusService campusService = new Service.Services.CampusService();
         readonly LocationApp.Service.Services.CampusService campusSiteService = new Service.Services.CampusService();
-
         readonly LocationApp.Service.Services.SiteService siteService = new Service.Services.SiteService();
         [HttpGet]
         public ActionResult Create()
@@ -68,6 +67,13 @@ namespace LocationApp.Web.Controllers
         {
             return View(JsonConvert.DeserializeObject<List<BuildDto>>(buildService.GetAllBuild()));
         }
+        [HttpGet]
+        public JsonResult GetSiteWithByCampusID(int campusID)
+        {
+            var data = JsonConvert.DeserializeObject<List<SiteDto>>(siteService.GetAllSiteWithCampus(campusID));
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+        #region Dropdownlist
         void GetSite(int selectedValue)
         {
             var list = JsonConvert.DeserializeObject<List<SiteDto>>(siteService.GetAllSiteWithCampus(selectedValue));
@@ -80,13 +86,7 @@ namespace LocationApp.Web.Controllers
             SelectList slist = new SelectList(list, "CampusID", "Name", selectedValue);
             ViewBag.CampusID = slist;
         }
-
-        [HttpGet]
-        public JsonResult GetSiteWithByCampusID(int campusID)
-        {
-            var data = JsonConvert.DeserializeObject<List<SiteDto>>(siteService.GetAllSiteWithCampus(campusID));
-            return Json(data, JsonRequestBehavior.AllowGet);
-        }
+        #endregion
 
     }
 }

@@ -18,6 +18,9 @@ namespace LocationApp.Core.Core
         {
             try
             {
+                if (IsThere(departmentDto))
+                    return new ResultHelper(false, departmentDto.DepartmentID, ResultHelper.IsThereItem);
+
                 department item = new department();
                 item.DepartmentID = departmentDto.DepartmentID;
                 item.Description = departmentDto.Description;
@@ -102,7 +105,7 @@ namespace LocationApp.Core.Core
         public List<DepartmentDto> GetAllDepartment()
         {
             try
-            {
+            {//TODO: Departman Çağırma Performans Çalışması
                 List<DepartmentDto> deplist = new List<DepartmentDto>();
                 using (var context = new locationAppEntities())
                 {
@@ -145,6 +148,21 @@ namespace LocationApp.Core.Core
             catch (Exception ex)
             {
                 return new List<DepartmentDto>();
+            }
+        }
+        public bool IsThere(DepartmentDto departmentDto)
+        {
+            using (UnitOfWork unitofWork = new UnitOfWork())
+            {
+                var item = unitofWork.GetRepository<department>().GetById(x => x.Name.ToUpper() == departmentDto.Name.ToUpper());
+                if (item != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
     }

@@ -16,7 +16,6 @@ namespace LocationApp.Web.Controllers
     {
         readonly LocationApp.Service.Services.SubUnitService subUnitService = new Service.Services.SubUnitService();
         readonly LocationApp.Service.Services.MainUnitService mainUnitService = new Service.Services.MainUnitService();
-
         [HttpGet]
         public ActionResult Create()
         {
@@ -63,11 +62,13 @@ namespace LocationApp.Web.Controllers
         {
             return View(JsonConvert.DeserializeObject<List<SubUnitDto>>(subUnitService.GetAllSubUnit()));
         }
+        #region Dropdownlist
         void GetMainUnit(int selectedValue)
         {
             var list = JsonConvert.DeserializeObject<List<MainUnitDto>>(mainUnitService.GetAllMainUnit());
             SelectList slist = new SelectList(list, "mainUnitID", "Name", selectedValue);
             ViewBag.MainUnitID = slist;
         }
+        #endregion
     }
 }

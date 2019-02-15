@@ -19,6 +19,9 @@ namespace LocationApp.Core.Core
         {
             try
             {
+                if (IsThere(roomTypeDto))
+                    return new ResultHelper(false, roomTypeDto.RoomTypeID, ResultHelper.IsThereItem);
+
                 roomtype item = new roomtype();
                 item.RoomTypeID = roomTypeDto.RoomTypeID;
                 item.Name = roomTypeDto.Name;
@@ -115,5 +118,21 @@ namespace LocationApp.Core.Core
                 return new List<RoomTypeDto>();
             }
         }
+        public bool IsThere(RoomTypeDto roomTypeDto)
+        {
+            using (UnitOfWork unitofWork = new UnitOfWork())
+            {
+                var item = unitofWork.GetRepository<roomtype>().GetById(x => x.Name.ToUpper() == roomTypeDto.Name.ToUpper());
+                if (item != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
     }
 }

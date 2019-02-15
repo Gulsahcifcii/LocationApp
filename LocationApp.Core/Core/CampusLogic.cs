@@ -18,10 +18,8 @@ namespace LocationApp.Core.Core
         {
             try
             {
-                #region ANY RECORD
-                if (isThere(campusDto))
-                    return new ResultHelper(false, campusDto.CampusID, ResultHelper.UnSuccessMessage);
-                #endregion
+                if (IsThere(campusDto))
+                    return new ResultHelper(false, campusDto.CampusID, ResultHelper.IsThereItem);
 
                 campu item = new campu();
                 item.Name = campusDto.Name;
@@ -101,7 +99,27 @@ namespace LocationApp.Core.Core
                 return new CampusDto();
             }
         }
-        public bool isThere(CampusDto campusDto)
+        public List<CampusDto> GetAllCampus()
+        {
+            try
+            {
+                List<CampusDto> list = new List<CampusDto>();
+                using (UnitOfWork unitofWork = new UnitOfWork())
+                {
+                    List<campu> collection = unitofWork.GetRepository<campu>().Select(null, null).ToList();
+                    foreach (var item in collection)
+                    {
+                        list.Add(new CampusDto { CampusID = item.CampusID, Description = item.Description, Name = item.Name, Other = item.Other });
+                    }
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+                return new List<CampusDto>();
+            }
+        }
+        public bool IsThere(CampusDto campusDto)
         {
             using (UnitOfWork unitofWork = new UnitOfWork())
             {
@@ -114,26 +132,6 @@ namespace LocationApp.Core.Core
                 {
                     return false;
                 }
-            }
-        }
-        public List<CampusDto> GetAllCampus()
-        {
-            try
-            {
-                List<CampusDto> list = new List<CampusDto>();
-                using (UnitOfWork unitofWork = new UnitOfWork())
-                {
-                    List<campu> collection = unitofWork.GetRepository<campu>().Select(null,null).ToList();
-                    foreach (var item in collection)
-                    {
-                        list.Add(new CampusDto { CampusID = item.CampusID, Description = item.Description, Name = item.Name, Other = item.Other });
-                    }
-                    return list;
-                }
-            }
-            catch (Exception ex)
-            {
-                return new List<CampusDto>();
             }
         }
     }

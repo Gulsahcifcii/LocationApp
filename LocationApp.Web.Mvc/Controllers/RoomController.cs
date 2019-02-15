@@ -110,7 +110,7 @@ namespace LocationApp.Web.Controllers
             var data = JsonConvert.DeserializeObject<List<SubUnitDto>>(floorService.GetAllFloorByBuildID(buildID));
             return Json(data, JsonRequestBehavior.AllowGet);
         }
-
+        #region Dropdownlist
         void GetAllBuild(int selectedValue)
         {
             var list = JsonConvert.DeserializeObject<List<BuildDto>>(buildService.GetAllBuild());
@@ -146,5 +146,6 @@ namespace LocationApp.Web.Controllers
             list.Insert(0, new DepartmentDto { DepartmentID = 0, Name = "Seçiniz" });
             ViewBag.DepartmentID = slist;
         }
+        #endregion
     }
 }

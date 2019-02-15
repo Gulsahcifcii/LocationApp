@@ -21,7 +21,8 @@ namespace LocationApp.Core.Helper
         public int ResultSet { get; set; }
         public string ResultDescription { get; set; }
 
-        public static  string SuccessMessage = "İşlem Başarılı !";
-        public static  string UnSuccessMessage = "İşlem Başarısız !";
+        public static string SuccessMessage = "İşlem Başarılı !";
+        public static string UnSuccessMessage = "İşlem Başarısız !";
+        public static string IsThereItem = "Sistemde mevcut !";
     }
 }

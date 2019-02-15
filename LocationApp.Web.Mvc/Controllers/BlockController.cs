@@ -13,7 +13,7 @@ using System.Web.Mvc;
 namespace LocationApp.Web.Controllers
 {
     public class BlockController : Controller
-    {
+    {//
         LocationApp.Service.Services.BlockService blockService = new Service.Services.BlockService();
         LocationApp.Service.Services.BuildService buildService = new Service.Services.BuildService();
         [HttpGet]

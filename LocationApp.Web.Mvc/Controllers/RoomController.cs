@@ -60,16 +60,23 @@ namespace LocationApp.Web.Controllers
             int blockID = 0;
             var item = JsonConvert.DeserializeObject<RoomDto>
                             (roomService.GetRoom(id.Value));
-            if (item.BuildDto != null)
-                buildID = item.BuildDto.BuildID;
-            if (item.BlockDto != null)
-                blockID = item.BlockDto.BlockID;
+            if (item.RoomID != 0)
+            {
+                if (item.BuildDto != null)
+                    buildID = item.BuildDto.BuildID;
+                if (item.BlockDto != null)
+                    blockID = item.BlockDto.BlockID;
 
-            GetAllBuild(buildID);
-            GetAllBlock(blockID);
-            GetAllRoomType(item.RoomTypeID);
-            GetAllFloor(item.FloorID);
-            GetAllDepartment(item.DepartmentDto.DepartmentID);
+                GetAllBuild(buildID);
+                GetAllBlock(blockID);
+                GetAllRoomType(item.RoomTypeID);
+                GetAllFloor(item.FloorID);
+                GetAllDepartment(item.DepartmentDto.DepartmentID);
+            }
+            else
+            {
+                return HttpNotFound();
+            }
             return View(item);
         }
         [HttpPost]

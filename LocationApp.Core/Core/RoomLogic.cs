@@ -92,12 +92,7 @@ namespace LocationApp.Core.Core
                     roomDto.Name = item.Name;
                     roomDto.Map = item.Map;
 
-                    var dpRoom = unitofWork.GetRepository<departmentroom>().GetById(x => x.RoomID == item.RoomID);
-                    roomDto.DepartmentRoomDto = new DepartmentRoomDto();
-                    roomDto.DepartmentRoomDto.DepartmentID = dpRoom.DepartmentID.Value;
-                    roomDto.DepartmentRoomDto.DepartmentRoomID = dpRoom.DepartmentRoomID;
-                    roomDto.DepartmentRoomDto.RoomID = dpRoom.RoomID.Value;
-
+                    //Oda kat bilgisi
                     var floor = unitofWork.GetRepository<floor>().GetById(x => x.FloorID == roomDto.FloorID);
                     if (floor.BuildID != 0)
                     {
@@ -114,9 +109,19 @@ namespace LocationApp.Core.Core
                         roomDto.BlockDto.Name = itemBlock.Name;
                     }
 
-                    var department = unitofWork.GetRepository<departmentroom>().GetById(x => x.RoomID == roomDto.RoomID);
+                    //DepartmaRoom İlişki Tablosu
+                    var departmentRoom = unitofWork.GetRepository<departmentroom>().GetById(x => x.RoomID == roomDto.RoomID);
+                    roomDto.DepartmentRoomDto = new DepartmentRoomDto();
+                    roomDto.DepartmentRoomDto.DepartmentRoomID = departmentRoom.DepartmentRoomID;
+                    roomDto.DepartmentRoomDto.DepartmentID = departmentRoom.DepartmentID.Value;
+                    roomDto.DepartmentRoomDto.RoomID = departmentRoom.RoomID.Value;
+                    //Departman Bilgileri
+                    var department = unitofWork.GetRepository<department>().GetById(x => x.DepartmentID == roomDto.DepartmentRoomDto.DepartmentID);
                     roomDto.DepartmentDto = new DepartmentDto();
-                    roomDto.DepartmentDto.DepartmentID = department.DepartmentID.Value;
+                    roomDto.DepartmentDto.DepartmentID = department.DepartmentID;
+                    roomDto.DepartmentDto.Name = department.Name;
+
+
                     return roomDto;
                 }
             }
@@ -161,17 +166,17 @@ namespace LocationApp.Core.Core
                         rDto.RoomTypeID = item.RTypeID.Value;
                         rDto.Name = item.Name;
                         rDto.Map = item.Map;
-                        //
+                        //Departman Oda İlişki
                         rDto.DepartmentRoomDto = new DepartmentRoomDto();
                         rDto.DepartmentRoomDto.DepartmentID = item.DPDepID.Value;
                         rDto.DepartmentRoomDto.DepartmentRoomID = item.DPRoomID.Value;
                         rDto.DepartmentRoomDto.RoomID = item.RoomID;
-                        //
+                        //Departman
                         rDto.DepartmentDto = new DepartmentDto();
                         rDto.DepartmentDto.DepartmentID = item.DepID;
                         rDto.DepartmentDto.Name = item.DName;
                         rDto.DepartmentDto.Other = item.Dother;
-                        //
+                        //Kat
                         rDto.FloorDto = new FloorDto();
                         rDto.FloorDto.FloorID = item.FloorID.Value;
                         rDto.FloorDto.Name = item.FName;
@@ -185,6 +190,5 @@ namespace LocationApp.Core.Core
                 return new List<RoomDto>();
             }
         }
-
     }
 }
